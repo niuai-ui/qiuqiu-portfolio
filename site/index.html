@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="湫湫的 Sims 4 模组汉化作品档案馆。按日期、作者与类别浏览汉化作品。">
+  <meta property="og:title" content="湫湫 Sims 汉化档案馆">
+  <meta property="og:description" content="把喜欢的玩法，认真带回中文世界。">
+  <meta property="og:image" content="images/og.jpg">
+  <title>湫湫 Sims 汉化档案馆</title>
+  <link rel="icon" href="images/favicon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="回到顶部"><span class="brand-mark">湫</span><span><b>湫湫</b><small>SIMS 汉化档案馆</small></span></a>
+    <nav><a href="#works">作品</a><a href="#authors">作者索引</a><a href="#about">关于</a></nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">QIUQIU'S LOCALIZATION ARCHIVE</p>
+        <h1>把喜欢的玩法，<br><em>认真带回中文世界。</em></h1>
+        <p class="lead">这里收录我汉化过的《模拟人生 4》模组。每份作品都按原作者、类别与发布日期整理，方便你寻找，也方便故事继续生长。</p>
+        <a class="primary" href="#works">浏览全部作品 <span>↘</span></a>
+      </div>
+      <div class="hero-art" aria-hidden="true"><div class="moon"></div><div class="archive-card"><span>ARCHIVE</span><b id="hero-count">—</b><small>LOCALIZED WORKS</small></div><i class="star s1">✦</i><i class="star s2">✦</i><i class="star s3">✧</i></div>
+    </section>
+
+    <section class="works-section" id="works">
+      <div class="section-head"><div><p class="eyebrow">THE COLLECTION</p><h2>汉化作品</h2></div><p id="result-count">正在读取档案…</p></div>
+      <div class="toolbar">
+        <label class="search"><span>⌕</span><input id="search" type="search" placeholder="搜索作品、作者或标签…"></label>
+        <div class="filter-group"><button class="filter active" data-category="全部">全部</button><div id="category-buttons"></div></div>
+        <select id="author-filter" aria-label="按作者筛选"><option value="全部">全部作者</option></select>
+        <select id="sort" aria-label="排序"><option value="newest">最新发布</option><option value="oldest">最早发布</option><option value="title">名称排序</option></select>
+      </div>
+      <div class="grid" id="work-grid" aria-live="polite"></div>
+      <div class="empty" id="empty" hidden><b>没有找到对应作品</b><span>试试更换关键词或筛选条件。</span></div>
+    </section>
+
+    <section class="authors" id="authors">
+      <div><p class="eyebrow">CREATORS INDEX</p><h2>从原作者出发，<br>认识每一种玩法。</h2></div>
+      <div class="author-list" id="author-list"></div>
+    </section>
+
+    <section class="about" id="about"><span class="brand-mark large">湫</span><div><p class="eyebrow">ABOUT QIUQIU</p><h2>汉化不只是翻译，<br>也是把一份创意好好介绍给你。</h2><p>我会持续整理新的汉化作品，也会为已有作品补充更新信息。感谢每位原作者带来的创意；下载与使用前，请留意版本和前置说明。</p></div></section>
+  </main>
+
+  <footer><span>© <span id="year"></span> 湫湫 Sims 汉化档案馆</span><span>Made with care for The Sims 4 community.</span></footer>
+
+  <dialog id="details"><button class="close" aria-label="关闭">×</button><div id="dialog-content"></div></dialog>
+  <noscript>此作品集需要启用 JavaScript 才能显示作品。</noscript>
+  <script src="app.js" defer></script>
+</body>
+</html>

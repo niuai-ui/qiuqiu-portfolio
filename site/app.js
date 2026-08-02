@@ -1,0 +1,48 @@
+const state={works:[],category:'全部',author:'全部',query:'',sort:'newest'};
+const $=selector=>document.querySelector(selector);
+const esc=value=>String(value??'').replace(/[&<>'"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
+const dateText=value=>value?value.replaceAll('-','.'):'日期待补充';
+
+function filtered(){
+  const q=state.query.toLowerCase();
+  const list=state.works.filter(work=>(state.category==='全部'||work.category===state.category)&&(state.author==='全部'||work.author===state.author)&&(!q||[work.title,work.englishTitle,work.author,work.category,...work.tags].join(' ').toLowerCase().includes(q)));
+  return list.sort((a,b)=>state.sort==='oldest'?a.date.localeCompare(b.date):state.sort==='title'?a.title.localeCompare(b.title,'zh-CN'):b.date.localeCompare(a.date));
+}
+
+function render(){
+  const works=filtered();
+  $('#result-count').textContent=`显示 ${works.length} / ${state.works.length} 份作品`;
+  $('#empty').hidden=works.length>0;
+  $('#work-grid').innerHTML=works.map(work=>`<article class="work-card" tabindex="0" data-id="${esc(work.id)}"><div class="cover"><img src="${esc(work.image)}" alt="${esc(work.title)}封面" loading="lazy"><span class="badge">${esc(work.category)}</span>${work.featured?'<span class="featured">✦</span>':''}</div><div class="card-meta"><span>${esc(work.author)}</span><time>${dateText(work.date)}</time></div><h3>${esc(work.title)}</h3><div class="english">${esc(work.englishTitle)}</div></article>`).join('');
+}
+
+function openDetails(id){
+  const work=state.works.find(item=>item.id===id);if(!work)return;
+  const download=work.download?`<a class="download" href="${esc(work.download)}" target="_blank" rel="noopener">前往百度网盘 ↗</a>`:'<span class="download disabled">下载链接待补充</span>';
+  const original=work.originalUrl?`<a class="original" href="${esc(work.originalUrl)}" target="_blank" rel="noopener">原作者页面 ↗</a>`:'';
+  $('#dialog-content').innerHTML=`<div class="detail-layout"><div class="detail-image"><img src="${esc(work.image)}" alt="${esc(work.title)}封面"></div><div class="detail-copy"><p class="eyebrow">${esc(work.category)} · ${dateText(work.date)}</p><h2>${esc(work.title)}</h2><div class="english">${esc(work.englishTitle)}</div><p class="detail-summary">${esc(work.summary)}</p><p class="detail-description">${esc(work.details)}</p><div class="facts"><div><small>原作者</small><b>${esc(work.author)}</b></div><div><small>版本</small><b>${esc(work.version||'请查看说明')}</b></div><div><small>前置说明</small><b>${esc(work.dependency||'无')}</b></div><div><small>发布日期</small><b>${dateText(work.date)}</b></div></div><div class="tags">${work.tags.map(tag=>`<span>${esc(tag)}</span>`).join('')}</div><div class="actions">${download}${original}${work.code?`<span class="code">提取码：${esc(work.code)}</span>`:''}</div></div></div>`;
+  $('#details').showModal();
+}
+
+function setupFilters(){
+  const categories=[...new Set(state.works.map(work=>work.category))].sort((a,b)=>a.localeCompare(b,'zh-CN'));
+  $('#category-buttons').innerHTML=categories.map(item=>`<button class="filter" data-category="${esc(item)}">${esc(item)}</button>`).join('');
+  const authors=[...new Set(state.works.map(work=>work.author))].sort();
+  $('#author-filter').innerHTML='<option value="全部">全部作者</option>'+authors.map(item=>`<option value="${esc(item)}">${esc(item)}</option>`).join('');
+  $('#author-list').innerHTML=authors.map(author=>{const count=state.works.filter(work=>work.author===author).length;return `<div class="author-row" data-author="${esc(author)}"><b>${esc(author)}</b><span>${count} 份作品</span><i>↗</i></div>`}).join('');
+}
+
+document.addEventListener('click',event=>{
+  const filter=event.target.closest('[data-category]');if(filter){state.category=filter.dataset.category;document.querySelectorAll('[data-category]').forEach(button=>button.classList.toggle('active',button===filter));render()}
+  const card=event.target.closest('.work-card');if(card)openDetails(card.dataset.id);
+  const author=event.target.closest('[data-author]');if(author){state.author=author.dataset.author;$('#author-filter').value=state.author;location.hash='works';render()}
+});
+document.addEventListener('keydown',event=>{const card=event.target.closest?.('.work-card');if(card&&(event.key==='Enter'||event.key===' ')){event.preventDefault();openDetails(card.dataset.id)}});
+$('#search').addEventListener('input',event=>{state.query=event.target.value.trim();render()});
+$('#author-filter').addEventListener('change',event=>{state.author=event.target.value;render()});
+$('#sort').addEventListener('change',event=>{state.sort=event.target.value;render()});
+$('.close').addEventListener('click',()=>$('#details').close());
+$('#details').addEventListener('click',event=>{if(event.target===$('#details'))$('#details').close()});
+
+fetch('data.json').then(response=>{if(!response.ok)throw new Error('读取失败');return response.json()}).then(works=>{state.works=works;$('#hero-count').textContent=works.length;setupFilters();render()}).catch(()=>{$('#result-count').textContent='作品数据读取失败，请稍后再试';$('#empty').hidden=false});
+$('#year').textContent=new Date().getFullYear();
