@@ -3,17 +3,27 @@ const $=selector=>document.querySelector(selector);
 const esc=value=>String(value??'').replace(/[&<>'"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
 const dateText=value=>value?value.replaceAll('-','.'):'日期待补充';
 
-// 已知前置依赖的外链：前置说明里出现对应短语时，渲染成可点击链接。
-const DEP_LINKS=[['Lot51 核心库','https://lot51.cc/mods/core-library'],['Lot51','https://lot51.cc/mods/core-library']];
+// 已知前置依赖外链：前置说明里出现对应短语（容错空格/中英写法）即渲染为可点击链接。
+// 新增前置只需在此追加一条 {re, url}，详情页会自动为任何用到该前置的作品挂上链接。
+const DEP_LINKS=[
+  {re:/Lot51\s*核心库/gi, url:'https://lot51.cc/mods/core-library'},
+  {re:/Lot51\s*Core\s*Library/gi, url:'https://lot51.cc/mods/core-library'},
+  {re:/XML\s*注入器/gi, url:'https://scumbumbomods.com/xml-injector'},
+  {re:/XML\s*Injector/gi, url:'https://scumbumbomods.com/xml-injector'},
+];
 function depHtml(text){
   const safe=esc(text||'');
   if(!safe)return '无需前置';
-  for(const [phrase,url] of DEP_LINKS){
-    if(safe.includes(phrase)){
-      return safe.replaceAll(phrase,`<a class="dep-link" href="${esc(url)}" target="_blank" rel="noopener">${phrase}</a>`);
-    }
+  const hits=[];
+  for(const {re,url} of DEP_LINKS){
+    re.lastIndex=0;let m;
+    while((m=re.exec(safe))!==null){hits.push({start:m.index,end:m.index+m[0].length,text:m[0],url});if(m[0].length===0)re.lastIndex++;}
   }
-  return safe;
+  if(!hits.length)return safe;
+  hits.sort((a,b)=>b.start-a.start);
+  let html=safe;
+  for(const h of hits){const link=`<a class="dep-link" href="${esc(h.url)}" target="_blank" rel="noopener">${h.text}</a>`;html=html.slice(0,h.start)+link+html.slice(h.end);}
+  return html;
 }
 
 function filtered(){
