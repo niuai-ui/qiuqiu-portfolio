@@ -39,6 +39,18 @@ def slug(value):
     return normalized or "work"
 
 
+def split_download(value):
+    """把“链接: URL 提取码: CODE”拆成网址和提取码，便于网页分别渲染。"""
+    raw = text(value)
+    if not raw:
+        return "", ""
+    url_match = re.search(r"https?://[^\s，,；;]+", raw)
+    url = url_match.group(0).rstrip("。.、") if url_match else ""
+    code_match = re.search(r"(?:提取码|密码|pwd)\s*[:：]?\s*([0-9A-Za-z]{4})", raw)
+    code = code_match.group(1) if code_match else ""
+    return url, code
+
+
 def load_works():
     workbook = load_workbook(WORKBOOK, data_only=False)
     if "作品信息" not in workbook.sheetnames:
@@ -65,6 +77,9 @@ def load_works():
         if work_id in ids:
             raise ValueError(f"第 {row_number} 行生成的作品标识重复：{work_id}")
         ids.add(work_id)
+        download_url, download_code = split_download(item.get("百度网盘链接整体"))
+        if text(item.get("百度网盘链接整体")) and not download_url:
+            raise ValueError(f"第 {row_number} 行的百度网盘单元格里找不到有效网址")
         cover = text(item.get("封面路径"))
         cover_file = CONTENT / cover
         if not cover_file.is_file():
@@ -85,7 +100,8 @@ def load_works():
             "placement": text(item.get("放置说明")) or "无需放第一层",
             "localization": "繁简汉化",
             "sourceImage": cover,
-            "download": text(item.get("百度网盘链接整体")),
+            "download": download_url,
+            "downloadCode": download_code,
             "category": text(item.get("类别")) or "其他",
         })
     works.sort(key=lambda work: (work["date"], work["title"]), reverse=True)

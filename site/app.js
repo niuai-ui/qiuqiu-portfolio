@@ -18,7 +18,7 @@ function render(){
 
 function openDetails(id){
   const work=state.works.find(item=>item.id===id);if(!work)return;
-  const download=work.download?`<a class="download" href="${esc(work.download)}" target="_blank" rel="noopener">前往百度网盘 →</a>`:'<span class="download disabled">下载链接待补充</span>';
+  const download=work.download?`<a class="download" href="${esc(work.download)}" target="_blank" rel="noopener">前往百度网盘 →</a>${work.downloadCode?`<button class="code" type="button" data-code="${esc(work.downloadCode)}" title="点击复制提取码">提取码 ${esc(work.downloadCode)}</button>`:''}`:'<span class="download disabled">下载链接待补充</span>';
   const author=work.originalUrl?`<a class="author-link" href="${esc(work.originalUrl)}" target="_blank" rel="noopener">${esc(work.author)} →</a>`:esc(work.author);
   $('#dialog-content').innerHTML=`<div class="detail-layout"><div class="detail-image"><img src="${esc(work.imageLarge||work.image)}" width="3" height="4" decoding="async" alt="${esc(work.title)}完整封面"></div><div class="detail-copy"><p class="eyebrow">${esc(work.category)} · ${dateText(work.date)}</p><h2>${esc(work.title)}</h2><div class="english">${esc(work.englishTitle)}</div><div class="facts"><div><small>原作者</small><b>${author}</b></div><div><small>汉化支持</small><b>${esc(work.localization||'繁简汉化')}</b></div><div><small>前置说明</small><b>${esc(work.dependency||'无需前置')}</b></div><div><small>放置说明</small><b>${esc(work.placement||'无需放第一层')}</b></div><div><small>汉化发布日期</small><b>${dateText(work.date)}</b></div><div><small>汉化更新日期</small><b>${dateText(work.updated)}</b></div></div><div class="actions">${download}</div></div></div>`;
   $('#details').showModal();
@@ -36,6 +36,7 @@ document.addEventListener('click',event=>{
   const filter=event.target.closest('[data-category]');if(filter){state.category=filter.dataset.category;document.querySelectorAll('[data-category]').forEach(button=>button.classList.toggle('active',button===filter));render();}
   const card=event.target.closest('.work-card');if(card)openDetails(card.dataset.id);
   const author=event.target.closest('[data-author]');if(author){state.author=author.dataset.author;$('#author-filter').value=state.author;location.hash='works';render();}
+  const code=event.target.closest('[data-code]');if(code){const value=code.dataset.code;navigator.clipboard?.writeText(value).then(()=>{const label=code.textContent;code.textContent='已复制 '+value;setTimeout(()=>{code.textContent=label;},1600);}).catch(()=>{});}
 });
 document.addEventListener('keydown',event=>{const card=event.target.closest?.('.work-card');if(card&&(event.key==='Enter'||event.key===' ')){event.preventDefault();openDetails(card.dataset.id);}});
 $('#search').addEventListener('input',event=>{state.query=event.target.value.trim();render();});
