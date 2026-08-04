@@ -84,7 +84,7 @@ def load_works():
             "dependency": text(item.get("前置说明")) or "无需前置",
             "placement": text(item.get("放置说明")) or "无需放第一层",
             "localization": "繁简汉化",
-            "image": cover,
+            "sourceImage": cover,
             "download": text(item.get("百度网盘链接整体")),
             "category": text(item.get("类别")) or "其他",
         })
@@ -92,15 +92,43 @@ def load_works():
     return works
 
 
+def build_responsive_covers(works):
+    output_dir = DIST / "images" / "covers"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    original_bytes = 0
+    optimized_bytes = 0
+    for work in works:
+        source = CONTENT / work.pop("sourceImage")
+        original_bytes += source.stat().st_size
+        with Image.open(source) as opened:
+            image = opened.convert("RGB")
+            generated = {}
+            for width in (480, 960):
+                resized = image.resize((width, width * 4 // 3), Image.Resampling.LANCZOS)
+                filename = f"{work['id']}-{width}.webp"
+                target = output_dir / filename
+                resized.save(target, "WEBP", quality=82, method=6, optimize=True)
+                optimized_bytes += target.stat().st_size
+                generated[width] = f"images/covers/{filename}"
+        work["imageSmall"] = generated[480]
+        work["imageLarge"] = generated[960]
+        work["image"] = generated[960]
+    return original_bytes, optimized_bytes
+
+
 def build():
     works = load_works()
     if DIST.exists():
         shutil.rmtree(DIST)
     shutil.copytree(SOURCE, DIST)
-    shutil.copytree(CONTENT / "images", DIST / "images")
+    (DIST / "images").mkdir(exist_ok=True)
+    for filename in ("favicon.png", "og.jpg"):
+        shutil.copy2(CONTENT / "images" / filename, DIST / "images" / filename)
+    original_bytes, optimized_bytes = build_responsive_covers(works)
     (DIST / "data.json").write_text(json.dumps(works, ensure_ascii=False, indent=2), encoding="utf-8")
     (DIST / ".nojekyll").write_text("", encoding="utf-8")
     print(f"网站已生成：{len(works)} 个已发布作品 → {DIST}")
+    print(f"封面体积：{original_bytes / 1024 / 1024:.2f} MB → {optimized_bytes / 1024 / 1024:.2f} MB（480/960 WebP 合计）")
 
 
 if __name__ == "__main__":
