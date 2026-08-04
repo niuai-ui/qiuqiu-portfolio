@@ -5,3 +5,10 @@
 .detail-image img{width:100%;height:auto;max-height:none;object-fit:contain;display:block}
 .author-link{text-decoration:underline;text-decoration-color:var(--apricot);text-underline-offset:4px}.author-link:hover{color:#8f5537}
 @media(max-width:760px){.detail-image{aspect-ratio:auto}}
+
+dialog{width:min(960px,calc(100% - 28px),135vh);max-height:90vh;overflow:hidden}
+.detail-layout{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch;aspect-ratio:3/2}
+.detail-image{width:100%;height:100%;aspect-ratio:3/4;overflow:hidden}
+.detail-image img{width:100%;height:100%;object-fit:contain}
+.detail-copy{width:100%;height:100%;aspect-ratio:3/4;overflow-y:auto;scrollbar-gutter:stable;padding:clamp(32px,4.5vw,54px)}
+@media(max-width:760px){dialog{width:min(calc(100% - 20px),520px);max-height:90vh;overflow:auto}.detail-layout{grid-template-columns:1fr;aspect-ratio:auto}.detail-image{height:auto;aspect-ratio:3/4}.detail-copy{height:auto;aspect-ratio:auto;overflow:visible}}
