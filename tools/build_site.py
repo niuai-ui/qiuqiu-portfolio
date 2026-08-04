@@ -14,7 +14,7 @@ CONTENT = ROOT / "content"
 DIST = ROOT / "dist"
 SOURCE = ROOT / "site"
 WORKBOOK = CONTENT / "作品信息.xlsx"
-REQUIRED = ["状态", "作品ID", "中文名称", "英文名称", "原作者", "类别", "发布日期", "一句话介绍", "详细介绍", "封面路径"]
+REQUIRED = ["状态", "作品ID", "中文名称", "英文名称", "原作者", "类别", "发布日期", "一句话介绍", "详细介绍", "封面路径", "放置说明", "是否需要前置", "前置名称/说明"]
 
 
 def text(value):
@@ -64,7 +64,7 @@ def load_works():
         with Image.open(cover_file) as image:
             ratio = image.width / image.height
             if not 0.70 <= ratio <= 0.80:
-                print(f"提醒：{cover} 不是标准 3:4 图片，页面会自动居中裁切")
+                print(f"提醒：{cover} 不是标准 3:4 图片，作品卡片会居中裁切，详情页仍会完整显示")
         gallery = split_list(item.get("介绍图片路径"))
         for gallery_path in gallery:
             if not (CONTENT / gallery_path).is_file():
@@ -79,7 +79,10 @@ def load_works():
             "date": iso_date(item.get("发布日期")),
             "updated": iso_date(item.get("更新时间")),
             "version": text(item.get("版本")),
-            "dependency": text(item.get("前置说明")),
+            "placement": text(item.get("放置说明")),
+            "dependencyRequired": text(item.get("是否需要前置")),
+            "dependency": text(item.get("前置名称/说明")),
+            "localization": "繁简汉化",
             "summary": text(item.get("一句话介绍")),
             "details": text(item.get("详细介绍")),
             "image": cover,
