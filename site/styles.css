@@ -4,6 +4,7 @@
 .detail-image{min-height:0;background:#d8d4ca;display:flex;align-items:flex-start;justify-content:center}
 .detail-image img{width:100%;height:auto;max-height:none;object-fit:contain;display:block}
 .author-link{text-decoration:underline;text-decoration-color:var(--apricot);text-underline-offset:4px}.author-link:hover{color:#8f5537}
+.dep-link{color:var(--apricot);text-decoration:underline;text-decoration-color:var(--apricot);text-underline-offset:3px;font-weight:700}.dep-link:hover{color:#8f5537}
 @media(max-width:760px){.detail-image{aspect-ratio:auto}}
 
 dialog{width:min(960px,calc(100% - 28px),135vh);max-height:90vh;overflow:hidden}

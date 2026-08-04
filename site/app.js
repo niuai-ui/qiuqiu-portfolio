@@ -3,6 +3,19 @@ const $=selector=>document.querySelector(selector);
 const esc=value=>String(value??'').replace(/[&<>'"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
 const dateText=value=>value?value.replaceAll('-','.'):'日期待补充';
 
+// 已知前置依赖的外链：前置说明里出现对应短语时，渲染成可点击链接。
+const DEP_LINKS=[['Lot51 核心库','https://lot51.cc/mods/core-library'],['Lot51','https://lot51.cc/mods/core-library']];
+function depHtml(text){
+  const safe=esc(text||'');
+  if(!safe)return '无需前置';
+  for(const [phrase,url] of DEP_LINKS){
+    if(safe.includes(phrase)){
+      return safe.replaceAll(phrase,`<a class="dep-link" href="${esc(url)}" target="_blank" rel="noopener">${phrase}</a>`);
+    }
+  }
+  return safe;
+}
+
 function filtered(){
   const q=state.query.toLowerCase();
   const list=state.works.filter(work=>(state.category==='全部'||work.category===state.category)&&(state.author==='全部'||work.author===state.author)&&(!q||[work.title,work.englishTitle,work.author,work.category].join(' ').toLowerCase().includes(q)));
@@ -20,7 +33,7 @@ function openDetails(id){
   const work=state.works.find(item=>item.id===id);if(!work)return;
   const download=work.download?`<a class="download" href="${esc(work.download)}" target="_blank" rel="noopener">前往百度网盘 →</a>${work.downloadCode?`<button class="code" type="button" data-code="${esc(work.downloadCode)}" title="点击复制提取码">提取码 ${esc(work.downloadCode)}</button>`:''}`:'<span class="download disabled">下载链接待补充</span>';
   const author=work.originalUrl?`<a class="author-link" href="${esc(work.originalUrl)}" target="_blank" rel="noopener">${esc(work.author)} →</a>`:esc(work.author);
-  $('#dialog-content').innerHTML=`<div class="detail-layout"><div class="detail-image"><img src="${esc(work.imageLarge||work.image)}" width="3" height="4" decoding="async" alt="${esc(work.title)}完整封面"></div><div class="detail-copy"><p class="eyebrow">${esc(work.category)} · ${dateText(work.date)}</p><h2>${esc(work.title)}</h2><div class="english">${esc(work.englishTitle)}</div><div class="facts"><div><small>原作者</small><b>${author}</b></div><div><small>汉化支持</small><b>${esc(work.localization||'繁简汉化')}</b></div><div><small>前置说明</small><b>${esc(work.dependency||'无需前置')}</b></div><div><small>放置说明</small><b>${esc(work.placement||'无需放第一层')}</b></div><div><small>汉化发布日期</small><b>${dateText(work.date)}</b></div><div><small>汉化更新日期</small><b>${dateText(work.updated)}</b></div></div><div class="actions">${download}</div></div></div>`;
+  $('#dialog-content').innerHTML=`<div class="detail-layout"><div class="detail-image"><img src="${esc(work.imageLarge||work.image)}" width="3" height="4" decoding="async" alt="${esc(work.title)}完整封面"></div><div class="detail-copy"><p class="eyebrow">${esc(work.category)} · ${dateText(work.date)}</p><h2>${esc(work.title)}</h2><div class="english">${esc(work.englishTitle)}</div><div class="facts"><div><small>原作者</small><b>${author}</b></div><div><small>汉化支持</small><b>${esc(work.localization||'繁简汉化')}</b></div><div><small>前置说明</small><b>${depHtml(work.dependency)}</b></div><div><small>放置说明</small><b>${esc(work.placement||'无需放第一层')}</b></div><div><small>汉化发布日期</small><b>${dateText(work.date)}</b></div><div><small>汉化更新日期</small><b>${dateText(work.updated)}</b></div></div><div class="actions">${download}</div></div></div>`;
   $('#details').showModal();
 }
 
