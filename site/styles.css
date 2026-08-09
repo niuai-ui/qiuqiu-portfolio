@@ -21,7 +21,7 @@ dialog{width:min(960px,calc(100% - 28px),135vh);max-height:90vh;overflow:hidden}
 .daily-group{display:flex;gap:16px;padding-right:16px}
 .daily-card{width:clamp(160px,15vw,220px);flex:0 0 auto}
 .daily-card h3{font-size:20px}
-.daily-track:hover,.daily-track:focus-within{animation-play-state:paused}
+.daily-track:hover{animation-play-state:paused}
 @keyframes daily-scroll{to{transform:translateX(-50%)}}
 
 @media(max-width:760px){
