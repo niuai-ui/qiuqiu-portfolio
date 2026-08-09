@@ -41,6 +41,36 @@ function filtered(){
   return list.sort((a,b)=>state.sort==='oldest'?a.date.localeCompare(b.date):state.sort==='title'?a.title.localeCompare(b.title,'zh-CN'):b.date.localeCompare(a.date));
 }
 
+function stableHash(value){
+  let hash=2166136261;
+  for(const char of value){hash^=char.codePointAt(0);hash=Math.imul(hash,16777619);}
+  return hash>>>0;
+}
+
+function dailyPicks(works,count=10){
+  if(!works.length)return [];
+  const ordered=[...works].sort((a,b)=>stableHash(a.id)-stableHash(b.id)||a.id.localeCompare(b.id));
+  const size=Math.min(count,ordered.length);
+  const chinaDay=Math.floor((Date.now()+8*60*60*1000)/86400000);
+  const start=(chinaDay*size)%ordered.length;
+  return Array.from({length:size},(_,index)=>ordered[(start+index)%ordered.length]);
+}
+
+function dailyCardHtml(work,isClone=false){
+  const tabIndex=isClone?'-1':'0';
+  return `<article class="work-card daily-card" tabindex="${tabIndex}" data-id="${esc(work.id)}"><div class="cover"><img src="${esc(work.imageSmall||work.image)}" srcset="${esc(work.imageSmall||work.image)} 480w, ${esc(work.imageLarge||work.image)} 960w" sizes="(max-width:760px) 64vw, 220px" width="3" height="4" alt="${esc(work.title)}&#x5C01;&#x9762;" loading="lazy" decoding="async"><span class="badge">${esc(work.category)}</span></div><div class="card-meta"><span>${esc(work.author)}</span><time>${dateText(work.date)}</time></div><h3>${esc(work.title)}</h3><div class="english">${esc(work.englishTitle)}</div></article>`;
+}
+
+function renderDailyPicks(){
+  const track=$('#daily-track');
+  if(!track)return;
+  const picks=dailyPicks(state.works);
+  if(!picks.length){track.closest('.daily-section').hidden=true;return;}
+  const cards=picks.map(work=>dailyCardHtml(work)).join('');
+  const clones=picks.map(work=>dailyCardHtml(work,true)).join('');
+  track.innerHTML=`<div class="daily-group">${cards}</div><div class="daily-group daily-clone" aria-hidden="true">${clones}</div>`;
+}
+
 function render(){
   const works=filtered();
   $('#result-count').textContent=`显示 ${works.length} / ${state.works.length} 份作品`;
@@ -59,6 +89,7 @@ function openDetails(id){
 }
 
 function setupFilters(){
+  renderDailyPicks();
   const categories=['人物特征','用地特征','职业','覆盖替换','游戏玩法','其他'];
   $('#category-buttons').innerHTML=categories.map(item=>`<button class="filter" data-category="${esc(item)}">${esc(item)}</button>`).join('');
   const authors=[...new Set(state.works.map(work=>work.author))].sort();
