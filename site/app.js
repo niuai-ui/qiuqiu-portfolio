@@ -85,7 +85,7 @@ function openDetails(id){
   const download=work.download?`<a class="download" href="${esc(work.download)}" target="_blank" rel="noopener">前往百度网盘 →</a>${work.downloadCode?`<button class="code" type="button" data-code="${esc(work.downloadCode)}" title="点击复制提取码">提取码 ${esc(work.downloadCode)}</button>`:''}`:'<span class="download disabled">下载链接待补充</span>';
   const author=work.originalUrl?`<a class="author-link" href="${esc(work.originalUrl)}" target="_blank" rel="noopener">${esc(work.author)} →</a>`:esc(work.author);
   $('#dialog-content').innerHTML=`<div class="detail-layout"><div class="detail-image"><img src="${esc(work.imageLarge||work.image)}" width="3" height="4" decoding="async" alt="${esc(work.title)}完整封面"></div><div class="detail-copy"><p class="eyebrow">${esc(work.category)} · ${dateText(work.date)}</p><h2>${esc(work.title)}</h2><div class="english">${esc(work.englishTitle)}</div><div class="facts"><div><small>原作者</small><b>${author}</b></div><div><small>汉化支持</small><b>${esc(work.localization||'繁简汉化')}</b></div><div><small>前置说明</small><b>${depHtml(work.dependency)}</b></div><div><small>放置说明</small><b>${esc(work.placement||'无需放第一层')}</b></div><div><small>汉化发布日期</small><b>${dateText(work.date)}</b></div><div><small>汉化更新日期</small><b>${dateText(work.updated)}</b></div></div><div class="actions">${download}</div></div></div>`;
-  if(!work.download){$('.actions .download').textContent='??????????????';}
+  if(!work.download){$('.actions .download').innerHTML='&#x5C0F;&#x7EA2;&#x4E66;&#x9996;&#x53D1;&#x4E2D;&#xFF0C;&#x4E0B;&#x8F7D;&#x94FE;&#x63A5;&#x5F85;&#x8865;&#x5145;';}
   $('#details').showModal();
 }
 
