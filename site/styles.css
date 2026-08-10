@@ -25,7 +25,7 @@ dialog{width:min(960px,calc(100% - 28px),135vh);max-height:90vh;overflow:hidden}
 @keyframes daily-scroll{to{transform:translateX(-50%)}}
 
 @media(max-width:760px){
-  .daily-section{padding:58px 14px}
+  .daily-section{display:none}
   .daily-section .section-head{display:block}
   .daily-section .section-head>p{line-height:1.7}
   .daily-viewport{overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-inline:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch}
