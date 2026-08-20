@@ -46,7 +46,7 @@ dialog{width:min(960px,calc(100% - 28px),135vh);max-height:90vh;overflow:hidden}
 .about{position:relative;overflow:hidden;isolation:isolate}
 .about::after{content:"";position:absolute;z-index:-1;inset:0 0 0 45%;background:url("images/decor/vintage-stationery.jpg") center/cover no-repeat;opacity:.1;mix-blend-mode:multiply;mask-image:linear-gradient(90deg,transparent,#000 35%)}
 
-/* 今日遇见：自动轮播使用 scrollLeft，悬停后滚轮可无缝接管。 */
+/* 今日遇见：默认自动轮播，悬停暂停，滚轮始终用于页面上下滚动。 */
 
 .daily-viewport{overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:none;scroll-behavior:auto;outline:none}
 .daily-viewport::-webkit-scrollbar{display:none}

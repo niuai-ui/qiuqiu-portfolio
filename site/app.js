@@ -69,27 +69,6 @@ function renderDailyPicks(){
   const cards=picks.map(work=>dailyCardHtml(work)).join('');
   const clones=picks.map(work=>dailyCardHtml(work,true)).join('');
   track.innerHTML=`<div class="daily-group">${cards}</div><div class="daily-group daily-clone" aria-hidden="true">${clones}</div>`;
-  setupDailyScroller();
-}
-
-function setupDailyScroller(){
-  const viewport=$('.daily-viewport');
-  const track=$('#daily-track');
-  if(!viewport||!track||viewport.dataset.scrollerReady)return;
-  viewport.dataset.scrollerReady='true';
-  const loopWidth=()=>track.scrollWidth/2;
-  const normalize=value=>{
-    const width=loopWidth();
-    if(!width)return 0;
-    return ((value%width)+width)%width;
-  };
-  viewport.addEventListener('wheel',event=>{
-    const raw=Math.abs(event.deltaX)>Math.abs(event.deltaY)?event.deltaX:event.deltaY;
-    if(!raw)return;
-    event.preventDefault();
-    const unit=event.deltaMode===1?16:event.deltaMode===2?viewport.clientWidth:1;
-    viewport.scrollLeft=normalize(viewport.scrollLeft+raw*unit);
-  },{passive:false});
 }
 function gridColumns(){
   return window.matchMedia('(max-width:760px)').matches?2:window.matchMedia('(max-width:1100px)').matches?3:6;
