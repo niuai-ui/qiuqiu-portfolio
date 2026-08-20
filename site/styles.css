@@ -21,7 +21,7 @@ dialog{width:min(960px,calc(100% - 28px),135vh);max-height:90vh;overflow:hidden}
 .daily-group{display:flex;gap:16px;padding-right:16px}
 .daily-card{width:clamp(160px,15vw,220px);flex:0 0 auto}
 .daily-card h3{font-size:20px}
-.daily-track:hover{animation-play-state:paused}
+.daily-viewport:hover .daily-track{animation-play-state:paused}
 @keyframes daily-scroll{to{transform:translateX(-50%)}}
 
 @media(max-width:760px){
@@ -51,7 +51,12 @@ dialog{width:min(960px,calc(100% - 28px),135vh);max-height:90vh;overflow:hidden}
 .daily-viewport{overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:none;scroll-behavior:auto;outline:none}
 .daily-viewport::-webkit-scrollbar{display:none}
 .daily-viewport:focus-visible{box-shadow:0 0 0 2px var(--apricot) inset}
-.daily-track{animation:none;transform:none}
+.daily-track{animation:daily-scroll 70s linear infinite}
+
+/* 桌面端每行 6 个作品；6 行即 36 个后再分页。 */
+.grid{grid-template-columns:repeat(6,minmax(0,1fr))}
+@media(max-width:1100px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.daily-track{animation:none}}
 
 
 @media(max-width:760px){.about::after{inset:30% 0 0 0;opacity:.07;mask-image:linear-gradient(180deg,transparent,#000 35%)}}

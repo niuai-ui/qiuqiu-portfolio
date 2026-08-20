@@ -72,42 +72,27 @@ function renderDailyPicks(){
   setupDailyScroller();
 }
 
-let dailyFrame=0;
 function setupDailyScroller(){
   const viewport=$('.daily-viewport');
   const track=$('#daily-track');
-  if(!viewport||!track)return;
-  cancelAnimationFrame(dailyFrame);
-
-  let hovering=false;
-  let lastTime=performance.now();
+  if(!viewport||!track||viewport.dataset.scrollerReady)return;
+  viewport.dataset.scrollerReady='true';
   const loopWidth=()=>track.scrollWidth/2;
   const normalize=value=>{
     const width=loopWidth();
     if(!width)return 0;
     return ((value%width)+width)%width;
   };
-  viewport.addEventListener('mouseenter',()=>{hovering=true;});
-  viewport.addEventListener('mouseleave',()=>{hovering=false;lastTime=performance.now();});
-
   viewport.addEventListener('wheel',event=>{
-    if(!hovering)return;
     const raw=Math.abs(event.deltaX)>Math.abs(event.deltaY)?event.deltaX:event.deltaY;
     if(!raw)return;
     event.preventDefault();
     const unit=event.deltaMode===1?16:event.deltaMode===2?viewport.clientWidth:1;
     viewport.scrollLeft=normalize(viewport.scrollLeft+raw*unit);
   },{passive:false});
-  const animate=time=>{
-    const elapsed=Math.min(time-lastTime,50);
-    lastTime=time;
-    if(!hovering)viewport.scrollLeft=normalize(viewport.scrollLeft+elapsed*.04);
-    dailyFrame=requestAnimationFrame(animate);
-  };
-  dailyFrame=requestAnimationFrame(animate);
 }
 function gridColumns(){
-  return window.matchMedia('(max-width:760px)').matches?2:window.matchMedia('(max-width:1100px)').matches?3:4;
+  return window.matchMedia('(max-width:760px)').matches?2:window.matchMedia('(max-width:1100px)').matches?3:6;
 }
 
 function render(){
@@ -119,7 +104,7 @@ function render(){
   const works=allWorks.slice(start,start+pageSize);
   $('#result-count').textContent=allWorks.length?`显示 ${start+1}–${start+works.length} / ${allWorks.length} 份作品`:`显示 0 / ${state.works.length} 份作品`;
   $('#empty').hidden=allWorks.length>0;
-  $('#work-grid').innerHTML=works.map(work=>`<article class="work-card" tabindex="0" data-id="${esc(work.id)}"><div class="cover"><img src="${esc(work.imageSmall||work.image)}" srcset="${esc(work.imageSmall||work.image)} 480w, ${esc(work.imageLarge||work.image)} 960w" sizes="(max-width:760px) 50vw, (max-width:1100px) 33vw, 25vw" width="3" height="4" alt="${esc(work.title)}封面" loading="lazy" decoding="async"><span class="badge">${esc(work.category)}</span></div><div class="card-meta"><span>${esc(work.author)}</span><time>${dateText(work.date)}</time></div><h3>${esc(work.title)}</h3><div class="english">${esc(work.englishTitle)}</div></article>`).join('');
+  $('#work-grid').innerHTML=works.map(work=>`<article class="work-card" tabindex="0" data-id="${esc(work.id)}"><div class="cover"><img src="${esc(work.imageSmall||work.image)}" srcset="${esc(work.imageSmall||work.image)} 480w, ${esc(work.imageLarge||work.image)} 960w" sizes="(max-width:760px) 50vw, (max-width:1100px) 33vw, 17vw" width="3" height="4" alt="${esc(work.title)}封面" loading="lazy" decoding="async"><span class="badge">${esc(work.category)}</span></div><div class="card-meta"><span>${esc(work.author)}</span><time>${dateText(work.date)}</time></div><h3>${esc(work.title)}</h3><div class="english">${esc(work.englishTitle)}</div></article>`).join('');
   renderPagination(pageCount);
 }
 
