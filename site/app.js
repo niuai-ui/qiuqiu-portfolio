@@ -1,4 +1,4 @@
-const state={works:[],category:'全部',author:'全部',query:'',sort:'newest'};
+const state={works:[],category:'全部',author:'全部',query:'',sort:'newest',page:1};
 const $=selector=>document.querySelector(selector);
 const esc=value=>String(value??'').replace(/[&<>'"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
 const dateText=value=>value?value.replaceAll('-','.'):'日期待补充';
@@ -69,13 +69,66 @@ function renderDailyPicks(){
   const cards=picks.map(work=>dailyCardHtml(work)).join('');
   const clones=picks.map(work=>dailyCardHtml(work,true)).join('');
   track.innerHTML=`<div class="daily-group">${cards}</div><div class="daily-group daily-clone" aria-hidden="true">${clones}</div>`;
+  setupDailyScroller();
+}
+
+let dailyFrame=0;
+function setupDailyScroller(){
+  const viewport=$('.daily-viewport');
+  const track=$('#daily-track');
+  if(!viewport||!track)return;
+  cancelAnimationFrame(dailyFrame);
+
+  let hovering=false;
+  let lastTime=performance.now();
+  const loopWidth=()=>track.scrollWidth/2;
+  const normalize=value=>{
+    const width=loopWidth();
+    if(!width)return 0;
+    return ((value%width)+width)%width;
+  };
+  viewport.addEventListener('mouseenter',()=>{hovering=true;});
+  viewport.addEventListener('mouseleave',()=>{hovering=false;lastTime=performance.now();});
+
+  viewport.addEventListener('wheel',event=>{
+    if(!hovering)return;
+    const raw=Math.abs(event.deltaX)>Math.abs(event.deltaY)?event.deltaX:event.deltaY;
+    if(!raw)return;
+    event.preventDefault();
+    const unit=event.deltaMode===1?16:event.deltaMode===2?viewport.clientWidth:1;
+    viewport.scrollLeft=normalize(viewport.scrollLeft+raw*unit);
+  },{passive:false});
+  const animate=time=>{
+    const elapsed=Math.min(time-lastTime,50);
+    lastTime=time;
+    if(!hovering)viewport.scrollLeft=normalize(viewport.scrollLeft+elapsed*.04);
+    dailyFrame=requestAnimationFrame(animate);
+  };
+  dailyFrame=requestAnimationFrame(animate);
+}
+function gridColumns(){
+  return window.matchMedia('(max-width:760px)').matches?2:window.matchMedia('(max-width:1100px)').matches?3:4;
 }
 
 function render(){
-  const works=filtered();
-  $('#result-count').textContent=`显示 ${works.length} / ${state.works.length} 份作品`;
-  $('#empty').hidden=works.length>0;
+  const allWorks=filtered();
+  const pageSize=gridColumns()*6;
+  const pageCount=Math.max(1,Math.ceil(allWorks.length/pageSize));
+  state.page=Math.min(state.page,pageCount);
+  const start=(state.page-1)*pageSize;
+  const works=allWorks.slice(start,start+pageSize);
+  $('#result-count').textContent=allWorks.length?`显示 ${start+1}–${start+works.length} / ${allWorks.length} 份作品`:`显示 0 / ${state.works.length} 份作品`;
+  $('#empty').hidden=allWorks.length>0;
   $('#work-grid').innerHTML=works.map(work=>`<article class="work-card" tabindex="0" data-id="${esc(work.id)}"><div class="cover"><img src="${esc(work.imageSmall||work.image)}" srcset="${esc(work.imageSmall||work.image)} 480w, ${esc(work.imageLarge||work.image)} 960w" sizes="(max-width:760px) 50vw, (max-width:1100px) 33vw, 25vw" width="3" height="4" alt="${esc(work.title)}封面" loading="lazy" decoding="async"><span class="badge">${esc(work.category)}</span></div><div class="card-meta"><span>${esc(work.author)}</span><time>${dateText(work.date)}</time></div><h3>${esc(work.title)}</h3><div class="english">${esc(work.englishTitle)}</div></article>`).join('');
+  renderPagination(pageCount);
+}
+
+function renderPagination(pageCount){
+  const pagination=$('#pagination');
+  pagination.hidden=pageCount<=1;
+  if(pageCount<=1){pagination.innerHTML='';return;}
+  const pages=Array.from({length:pageCount},(_,index)=>index+1);
+  pagination.innerHTML=`<button type="button" data-page="${state.page-1}" ${state.page===1?'disabled':''} aria-label="上一页">←</button>${pages.map(page=>`<button type="button" data-page="${page}" class="${page===state.page?'active':''}" ${page===state.page?'aria-current="page"':''}>${page}</button>`).join('')}<button type="button" data-page="${state.page+1}" ${state.page===pageCount?'disabled':''} aria-label="下一页">→</button>`;
 }
 
 function openDetails(id){
@@ -99,18 +152,21 @@ function setupFilters(){
 }
 
 document.addEventListener('click',event=>{
+  const pageButton=event.target.closest('[data-page]');if(pageButton&&!pageButton.disabled){state.page=Number(pageButton.dataset.page);render();$('#works').scrollIntoView({behavior:'smooth',block:'start'});return;}
   const download=event.target.closest('.download[href]');if(download){track('download_click',state.currentWork);}
-  const filter=event.target.closest('[data-category]');if(filter){state.category=filter.dataset.category;document.querySelectorAll('[data-category]').forEach(button=>button.classList.toggle('active',button===filter));render();}
+  const filter=event.target.closest('[data-category]');if(filter){state.category=filter.dataset.category;state.page=1;document.querySelectorAll('[data-category]').forEach(button=>button.classList.toggle('active',button===filter));render();}
   const card=event.target.closest('.work-card');if(card)openDetails(card.dataset.id);
-  const author=event.target.closest('[data-author]');if(author){state.author=author.dataset.author;$('#author-filter').value=state.author;location.hash='works';render();}
+  const author=event.target.closest('[data-author]');if(author){state.author=author.dataset.author;state.page=1;$('#author-filter').value=state.author;location.hash='works';render();}
   const code=event.target.closest('[data-code]');if(code){const value=code.dataset.code;navigator.clipboard?.writeText(value).then(()=>{const label=code.textContent;code.textContent='已复制 '+value;setTimeout(()=>{code.textContent=label;},1600);}).catch(()=>{});}
 });
 document.addEventListener('keydown',event=>{const card=event.target.closest?.('.work-card');if(card&&(event.key==='Enter'||event.key===' ')){event.preventDefault();openDetails(card.dataset.id);}});
-$('#search').addEventListener('input',event=>{state.query=event.target.value.trim();render();});
-$('#author-filter').addEventListener('change',event=>{state.author=event.target.value;render();});
-$('#sort').addEventListener('change',event=>{state.sort=event.target.value;render();});
+$('#search').addEventListener('input',event=>{state.query=event.target.value.trim();state.page=1;render();});
+$('#author-filter').addEventListener('change',event=>{state.author=event.target.value;state.page=1;render();});
+$('#sort').addEventListener('change',event=>{state.sort=event.target.value;state.page=1;render();});
 $('.close').addEventListener('click',()=>$('#details').close());
 $('#details').addEventListener('click',event=>{if(event.target===$('#details'))$('#details').close();});
 
 fetch('data.json').then(response=>{if(!response.ok)throw new Error('读取失败');return response.json();}).then(works=>{state.works=works;$('#hero-count').textContent=works.length;setupFilters();render();}).catch(()=>{$('#result-count').textContent='作品数据读取失败，请稍后再试';$('#empty').hidden=false;});
 $('#year').textContent=new Date().getFullYear();
+let lastGridColumns=gridColumns();
+window.addEventListener('resize',()=>{const columns=gridColumns();if(columns!==lastGridColumns){lastGridColumns=columns;state.page=1;render();}});

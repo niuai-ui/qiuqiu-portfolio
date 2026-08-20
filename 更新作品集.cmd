@@ -12,12 +12,12 @@ if not exist "%GIT%" (
   set "GIT=git"
 )
 echo 正在检查作品集文件...
-if not exist "content\作品信息.xlsx" (
-  echo [错误] 找不到 content\作品信息.xlsx
+if not exist "作品信息.xlsx" (
+  echo [错误] 找不到作品信息.xlsx
   pause
   exit /b 1
 )
-"%GIT%" add -- "content/作品信息.xlsx" "content/images" "site/app.js" "site/styles.css" "tools/build_site.py" "更新作品集.cmd"
+"%GIT%" add -- "作品信息.xlsx" "content/images" "site/app.js" "site/styles.css" "tools/build_site.py" "更新作品集.cmd" "README.md" "AGENTS.md"
 if errorlevel 1 (
   echo [错误] 文件暂存失败，请确认 Excel 已保存并关闭，然后把此窗口截图发给 Codex。
   pause

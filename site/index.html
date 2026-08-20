@@ -21,7 +21,7 @@
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="#top" aria-label="回到顶部"><span class="brand-mark">湫</span><span><b>湫湫</b><small>SIMS 汉化档案馆</small></span></a>
+    <a class="brand" href="#top" aria-label="回到顶部"><span class="brand-seal" aria-hidden="true"><img src="images/decor/archive-brand.png" alt=""></span><span><b>湫湫</b><small>SIMS 汉化档案馆</small></span></a>
     <nav><a href="#works">作品</a><a href="#authors">作者索引</a><a href="#about">关于</a></nav>
   </header>
 
@@ -41,7 +41,7 @@
         <div><p class="eyebrow">DAILY DISCOVERY</p><h2 id="daily-title">&#x4ECA;&#x65E5;&#x968F;&#x673A;&#x9047;&#x89C1;</h2></div>
         <p>&#x6BCF;&#x5929;&#x6362;&#x4E00;&#x6279;&#xFF0C;&#x6BCF;&#x4EFD;&#x4F5C;&#x54C1;&#x90FD;&#x6709;&#x88AB;&#x770B;&#x89C1;&#x7684;&#x673A;&#x4F1A;&#x3002;</p>
       </div>
-      <div class="daily-viewport" aria-label="&#x4ECA;&#x65E5;&#x968F;&#x673A;&#x5C55;&#x793A;&#x7684;10&#x4E2A;&#x6A21;&#x7EC4;">
+      <div class="daily-viewport" tabindex="0" aria-label="&#x4ECA;&#x65E5;&#x968F;&#x673A;&#x5C55;&#x793A;&#x7684;10&#x4E2A;&#x6A21;&#x7EC4;&#xFF0C;&#x53EF;&#x4F7F;&#x7528;&#x9F20;&#x6807;&#x6EDA;&#x8F6E;&#x6A2A;&#x5411;&#x6D4F;&#x89C8;">
         <div class="daily-track" id="daily-track"></div>
       </div>
     </section>
@@ -56,6 +56,7 @@
       </div>
       <div class="grid" id="work-grid" aria-live="polite"></div>
       <div class="empty" id="empty" hidden><b>没有找到对应作品</b><span>试试更换关键词或筛选条件。</span></div>
+      <nav class="pagination" id="pagination" aria-label="作品分页" hidden></nav>
     </section>
 
     <section class="authors" id="authors">

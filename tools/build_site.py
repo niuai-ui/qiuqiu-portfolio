@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CONTENT = ROOT / "content"
 DIST = ROOT / "dist"
 SOURCE = ROOT / "site"
-WORKBOOK = CONTENT / "作品信息.xlsx"
+WORKBOOK = ROOT / "作品信息.xlsx"
 REQUIRED = [
     "状态", "模组英文名", "模组中文名", "原作者名字", "原作者网址链接",
     "汉化发布日期", "汉化更新日期", "前置说明", "放置说明", "封面路径",

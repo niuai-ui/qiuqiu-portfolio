@@ -35,4 +35,33 @@ dialog{width:min(960px,calc(100% - 28px),135vh);max-height:90vh;overflow:hidden}
   .daily-clone{display:none}
   .daily-card{width:min(64vw,240px);scroll-snap-align:start}
 }
-@media(prefers-reduced-motion:reduce){.daily-track{animation:none}.daily-viewport{overflow-x:auto}.daily-clone{display:none}}
+@media(prefers-reduced-motion:reduce){.daily-viewport{overflow-x:auto}}
+
+/* 复古档案馆装饰：使用用户提供的品牌素材，保持内容区克制可读。 */
+
+
+
+
+
+.about{position:relative;overflow:hidden;isolation:isolate}
+.about::after{content:"";position:absolute;z-index:-1;inset:0 0 0 45%;background:url("images/decor/vintage-stationery.jpg") center/cover no-repeat;opacity:.1;mix-blend-mode:multiply;mask-image:linear-gradient(90deg,transparent,#000 35%)}
+
+/* 今日遇见：自动轮播使用 scrollLeft，悬停后滚轮可无缝接管。 */
+
+.daily-viewport{overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:none;scroll-behavior:auto;outline:none}
+.daily-viewport::-webkit-scrollbar{display:none}
+.daily-viewport:focus-visible{box-shadow:0 0 0 2px var(--apricot) inset}
+.daily-track{animation:none;transform:none}
+
+
+@media(max-width:760px){.about::after{inset:30% 0 0 0;opacity:.07;mask-image:linear-gradient(180deg,transparent,#000 35%)}}
+/* 顶部导航使用档案馆圆章；首屏不重复圆形装饰。 */
+.brand-seal{position:relative;width:64px;height:58px;overflow:hidden;flex:0 0 auto;filter:drop-shadow(0 3px 7px rgba(0,0,0,.3))}
+.brand-seal img{position:absolute;width:170px;height:auto;max-width:none;left:-14px;top:-69px}
+
+@media(max-width:760px){.brand-seal{width:54px;height:50px}.brand-seal img{width:144px;left:-12px;top:-58px}}
+.pagination{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:52px}
+.pagination[hidden]{display:none}
+.pagination button{min-width:42px;height:42px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.pagination button:hover,.pagination button.active{background:var(--forest);color:var(--paper)}
+.pagination button:disabled{opacity:.35;cursor:not-allowed;background:transparent;color:var(--ink)}

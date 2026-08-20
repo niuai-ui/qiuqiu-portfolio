@@ -1,6 +1,6 @@
 # 湫湫 Sims 汉化档案馆
 
-这是一个完全静态、托管于 GitHub Pages 的个人汉化作品集。网站内容以 `content/作品信息.xlsx` 为唯一数据源，由 `tools/build_site.py` 生成。
+这是一个完全静态、托管于 GitHub Pages 的个人汉化作品集。网站内容以项目最外层的 `作品信息.xlsx` 为唯一数据源，由 `tools/build_site.py` 生成。
 
 ## Excel 固定结构
 
