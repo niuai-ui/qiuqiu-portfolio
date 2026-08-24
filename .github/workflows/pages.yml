@@ -17,14 +17,20 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
           cache: pip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
       - run: pip install -r requirements.txt
+      - run: python -m compileall -q tools
       - run: python tools/build_site.py
+      - run: node --check site/app.js
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -34,6 +40,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     needs: build
     steps:
       - name: 发布

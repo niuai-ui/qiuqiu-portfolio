@@ -71,7 +71,8 @@ function renderDailyPicks(){
   track.innerHTML=`<div class="daily-group">${cards}</div><div class="daily-group daily-clone" aria-hidden="true">${clones}</div>`;
 }
 function gridColumns(){
-  return window.matchMedia('(max-width:760px)').matches?2:window.matchMedia('(max-width:1100px)').matches?3:6;
+  const columns=Number.parseInt(getComputedStyle($('#work-grid')).getPropertyValue('--grid-columns'),10);
+  return Number.isFinite(columns)&&columns>0?columns:6;
 }
 
 function render(){
@@ -112,7 +113,7 @@ function setupFilters(){
   $('#category-buttons').innerHTML=categories.map(item=>`<button class="filter" data-category="${esc(item)}">${esc(item)}</button>`).join('');
   const authors=[...new Set(state.works.map(work=>work.author))].sort();
   $('#author-filter').innerHTML='<option value="全部">全部作者</option>'+authors.map(item=>`<option value="${esc(item)}">${esc(item)}</option>`).join('');
-  $('#author-list').innerHTML=authors.map(author=>{const count=state.works.filter(work=>work.author===author).length;return `<div class="author-row" data-author="${esc(author)}"><b>${esc(author)}</b><span>${count} 份作品</span><i>→</i></div>`}).join('');
+  $('#author-list').innerHTML=authors.map(author=>{const count=state.works.filter(work=>work.author===author).length;return `<button class="author-row" type="button" data-author="${esc(author)}"><b>${esc(author)}</b><span>${count} 份作品</span><i aria-hidden="true">→</i></button>`}).join('');
 }
 
 document.addEventListener('click',event=>{
