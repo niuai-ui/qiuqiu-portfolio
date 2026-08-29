@@ -17,6 +17,7 @@
 
 ```text
 python -m pip install -r requirements.txt
-python tools/check_sync.py
 python tools/preflight.py
 ```
+
+`preflight.py` 已包含日志同步、Excel、封面、构建和 JavaScript 检查。只想快速比较日志目录与 Excel 时，可单独运行 `python tools/check_sync.py`。

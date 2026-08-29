@@ -3,15 +3,24 @@ from __future__ import annotations
 import argparse
 import json
 import time
+from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
-API_URL = "https://api.github.com/repos/niuai-ui/qiuqiu-portfolio/actions/runs?per_page=10"
+API_URL = "https://api.github.com/repos/niuai-ui/qiuqiu-portfolio/actions/workflows/pages.yml/runs"
 
 
-def fetch_runs() -> list[dict]:
-    request = Request(API_URL, headers={"Accept": "application/vnd.github+json", "User-Agent": "qiuqiu-portfolio-publisher"})
+def fetch_run(commit_sha: str) -> dict | None:
+    query = urlencode({"head_sha": commit_sha, "per_page": 1})
+    request = Request(
+        f"{API_URL}?{query}",
+        headers={
+            "Accept": "application/vnd.github+json",
+            "User-Agent": "qiuqiu-portfolio-publisher",
+        },
+    )
     with urlopen(request, timeout=20) as response:
-        return json.load(response).get("workflow_runs", [])
+        runs = json.load(response).get("workflow_runs", [])
+    return runs[0] if runs else None
 
 
 def wait_for_pages(commit_sha: str, timeout_seconds: int = 360) -> None:
@@ -19,12 +28,11 @@ def wait_for_pages(commit_sha: str, timeout_seconds: int = 360) -> None:
     last_status = ""
     while time.monotonic() < deadline:
         try:
-            runs = fetch_runs()
+            run = fetch_run(commit_sha)
         except Exception as error:
             print(f"暂时无法查询 GitHub Actions：{error}，10 秒后重试…")
             time.sleep(10)
             continue
-        run = next((item for item in runs if item.get("head_sha") == commit_sha and item.get("name") == "发布作品集到 GitHub Pages"), None)
         if run:
             status = f"{run.get('status')} / {run.get('conclusion') or '等待结果'}"
             if status != last_status:

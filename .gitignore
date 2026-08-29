@@ -2,3 +2,4 @@ dist/
 ~$*.xlsx
 *.inspect.ndjson
 __pycache__/
+.workbuddy/

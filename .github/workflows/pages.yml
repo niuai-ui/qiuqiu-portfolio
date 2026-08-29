@@ -27,10 +27,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - run: pip install -r requirements.txt
-      - run: python -m compileall -q tools
-      - run: python tools/build_site.py
-      - run: node --check site/app.js
+      - name: 安装构建依赖
+        run: pip install --disable-pip-version-check -r requirements.txt
+      - name: 校验并构建
+        run: python tools/preflight.py --skip-sync
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
