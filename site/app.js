@@ -38,7 +38,7 @@ function depHtml(text){
 function filtered(){
   const q=state.query.toLowerCase();
   const list=state.works.filter(work=>(state.category==='全部'||work.category===state.category)&&(state.author==='全部'||work.author===state.author)&&(!q||[work.title,work.englishTitle,work.author,work.category].join(' ').toLowerCase().includes(q)));
-  return list.sort((a,b)=>state.sort==='oldest'?a.date.localeCompare(b.date):state.sort==='title'?a.title.localeCompare(b.title,'zh-CN'):b.date.localeCompare(a.date));
+  return list.sort((a,b)=>state.sort==='oldest'?a.date.localeCompare(b.date):state.sort==='title'?a.title.localeCompare(b.title,'zh-CN'):state.sort==='updated'?b.updated.localeCompare(a.updated):b.date.localeCompare(a.date));
 }
 
 function stableHash(value){
