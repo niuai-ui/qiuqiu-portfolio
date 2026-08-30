@@ -13,6 +13,7 @@ dialog{width:min(960px,calc(100% - 28px),135vh);max-height:90vh;overflow:hidden}
 .detail-image img{width:100%;height:100%;object-fit:contain}
 .detail-copy{width:100%;height:100%;aspect-ratio:3/4;overflow-y:auto;scrollbar-gutter:stable;padding:clamp(32px,4.5vw,54px)}
 @media(max-width:760px){dialog{width:min(calc(100% - 20px),520px);max-height:90vh;overflow:auto}.detail-layout{grid-template-columns:1fr;aspect-ratio:auto}.detail-image{height:auto;aspect-ratio:3/4}.detail-copy{height:auto;aspect-ratio:auto;overflow:visible}}
+.original.disabled{opacity:.45;cursor:not-allowed}
 
 .daily-section{padding:80px clamp(20px,6vw,92px);overflow:hidden;background:#e5ded2;border-bottom:1px solid var(--line)}
 .daily-section .section-head{margin-bottom:28px}

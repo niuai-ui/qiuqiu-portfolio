@@ -18,8 +18,8 @@ SOURCE = ROOT / "site"
 WORKBOOK = ROOT / "作品信息.xlsx"
 REQUIRED = [
     "状态", "模组英文名", "模组中文名", "原作者名字", "原作者网址链接",
-    "汉化发布日期", "汉化更新日期", "前置说明", "放置说明", "封面路径",
-    "百度网盘链接整体", "类别",
+    "模组本体链接", "汉化发布日期", "汉化更新日期", "前置说明", "放置说明",
+    "封面路径", "百度网盘链接整体", "类别",
 ]
 ALLOWED_STATUSES = {"已发布", "草稿", "下架"}
 ALLOWED_CATEGORIES = {"人物特征", "用地特征", "职业", "覆盖替换", "游戏玩法", "其他"}
@@ -52,6 +52,51 @@ def require_http_url(value, row_number, field_name):
     return url
 
 
+def optional_http_url(value, row_number, field_name):
+    url = text(value)
+    return require_http_url(url, row_number, field_name) if url else ""
+
+
+def color_signature(color):
+    return (color.type, color.rgb, color.indexed, color.auto, color.theme, color.tint)
+
+
+def side_signature(side):
+    if side is None:
+        return (None, None)
+    return (side.style, color_signature(side.color) if side.color else None)
+
+
+def cell_format_signature(cell):
+    """比较用户可见格式，避免把内部重复样式编号当成格式错误。"""
+    font_color = color_signature(cell.font.color) if cell.font.color else None
+    return (
+        cell.font.name, cell.font.sz, cell.font.bold, cell.font.italic, font_color,
+        cell.fill.fill_type, color_signature(cell.fill.fgColor), color_signature(cell.fill.bgColor),
+        side_signature(cell.border.left), side_signature(cell.border.right),
+        side_signature(cell.border.top), side_signature(cell.border.bottom),
+        cell.alignment.horizontal or "general", cell.alignment.vertical, cell.alignment.wrap_text,
+        cell.number_format,
+    )
+
+
+def validate_sheet_formatting(sheet):
+    if sheet.max_row < 2:
+        return
+    reference = [cell_format_signature(cell) for cell in sheet[2]]
+    reference_height = sheet.row_dimensions[2].height
+    bad_rows = []
+    for row_number, cells in enumerate(sheet.iter_rows(min_row=2), start=2):
+        if not any(cell.value is not None for cell in cells):
+            continue
+        if [cell_format_signature(cell) for cell in cells] != reference:
+            bad_rows.append(f"第 {row_number} 行单元格格式")
+        if sheet.row_dimensions[row_number].height != reference_height:
+            bad_rows.append(f"第 {row_number} 行行高")
+    if bad_rows:
+        raise ValueError("Excel 数据行格式必须与第 2 行一致（含行高 36）：" + "、".join(bad_rows))
+
+
 def slug(value):
     normalized = unicodedata.normalize("NFKD", value).encode("ascii", "ignore").decode("ascii")
     normalized = re.sub(r"[^a-zA-Z0-9]+", "-", normalized).strip("-").lower()
@@ -78,10 +123,11 @@ def load_works():
     headers = [text(cell.value) for cell in sheet[1]]
     if headers != REQUIRED:
         raise ValueError(
-            "Excel 必须严格使用 12 个固定字段并保持规定顺序。\n"
+            "Excel 必须严格使用 13 个固定字段并保持规定顺序。\n"
             f"应为：{'、'.join(REQUIRED)}\n"
             f"实际：{'、'.join(headers)}"
         )
+    validate_sheet_formatting(sheet)
     positions = {name: index for index, name in enumerate(headers)}
     works, ids = [], set()
     for row_number, cells in enumerate(sheet.iter_rows(min_row=2, values_only=True), start=2):
@@ -103,6 +149,7 @@ def load_works():
         english = text(item.get("模组英文名"))
         author_name = text(item.get("原作者名字"))
         original_url = require_http_url(item.get("原作者网址链接"), row_number, "原作者网址链接")
+        mod_url = optional_http_url(item.get("模组本体链接"), row_number, "模组本体链接")
         release_date = require_date(item.get("汉化发布日期"), row_number, "汉化发布日期")
         updated_date = require_date(item.get("汉化更新日期"), row_number, "汉化更新日期")
         if updated_date < release_date:
@@ -142,6 +189,7 @@ def load_works():
             "englishTitle": english,
             "author": author_name or "未知作者",
             "originalUrl": original_url,
+            "modUrl": mod_url,
             "date": iso_date(release_date),
             "updated": iso_date(updated_date),
             "dependency": text(item.get("前置说明")),
