@@ -99,10 +99,15 @@ dialog{width:min(960px,calc(100% - 28px),135vh);max-height:90vh;overflow:hidden}
 .update-day time b{font-family:Georgia,serif;font-size:18px}
 .update-day time span{font-size:10px;color:var(--muted)}
 .update-counts{display:flex;gap:8px;flex-wrap:wrap;margin:9px 0 5px;font-size:10px;color:var(--muted)}
-.update-preview{display:flex;flex-flow:row wrap;align-content:flex-start;gap:3px 9px;max-height:42px;overflow:hidden;font-size:12px;line-height:1.45}
-.update-preview .update-work-link,.calendar-more{display:inline-block;width:auto;max-width:100%;flex:0 0 auto;font-size:12px;line-height:1.45}
+.update-preview{display:flex;flex-flow:row wrap;align-content:flex-start;gap:2px;max-height:42px;overflow:hidden;font-size:12px;line-height:1.45}
+.update-preview .update-work-link,.calendar-more{display:inline-block;width:auto;max-width:100%;flex:0 0 auto;padding:1px 4px;border:1px solid rgba(16,20,19,.2);border-radius:2px;background:rgba(255,255,255,.38);font-size:12px;line-height:1.25}
+.update-preview .calendar-chip-new{border-color:var(--apricot);background:rgba(217,154,114,.13)}
+.update-preview .calendar-chip-mod{border-color:var(--moss);background:rgba(120,157,142,.13)}
+.update-preview .calendar-chip-translation{border-color:#a77fc0;background:rgba(167,127,192,.13)}
+.update-preview .calendar-chip-mixed{border-color:var(--moss);background:linear-gradient(135deg,rgba(120,157,142,.14) 0 50%,rgba(167,127,192,.14) 50% 100%);box-shadow:inset 0 -2px 0 #a77fc0}
+.update-preview .update-work-link:hover,.update-preview .update-work-link:focus-visible{background:var(--forest);border-color:var(--forest);color:var(--paper);text-decoration:none;outline:none}
 .update-preview [hidden]{display:none!important}
-.calendar-more{padding:0;border:0;background:transparent;color:var(--apricot);font-weight:700;cursor:pointer}
+.calendar-more{border-style:dashed;color:#8f5537;font-weight:700;cursor:pointer}
 .update-preview span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .update-work-link{display:block;max-width:100%;padding:0;border:0;background:transparent;color:inherit;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
 .update-work-link:hover{text-decoration:underline;text-decoration-color:var(--apricot);text-underline-offset:3px;color:#8f5537}
