@@ -60,8 +60,13 @@
         <span><i class="event-dot event-mod"></i>模组本体更新</span>
         <span><i class="event-dot event-translation"></i>汉化文件更新</span>
       </div>
+      <div class="calendar-toolbar">
+        <button type="button" id="month-prev" aria-label="查看上个月">← 上个月</button>
+        <strong id="calendar-month" aria-live="polite"></strong>
+        <button type="button" id="month-next" aria-label="查看下个月">下个月 →</button>
+      </div>
+      <div class="calendar-weekdays" aria-hidden="true"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
       <div class="updates-board" id="updates-board"></div>
-      <button class="updates-toggle" id="updates-toggle" type="button" hidden>查看全部更新</button>
     </section>
 
     <section class="works-section" id="works">

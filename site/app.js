@@ -1,4 +1,4 @@
-const state={works:[],category:'全部',author:'全部',query:'',sort:'launched',page:1,showAllUpdates:false,galleryIndex:0,galleryImages:[]};
+const state={works:[],category:'全部',author:'全部',query:'',sort:'launched',page:1,updateMonthIndex:0,galleryIndex:0,galleryImages:[]};
 const $=selector=>document.querySelector(selector);
 const esc=value=>String(value??'').replace(/[&<>'"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
 const dateText=value=>value?value.replaceAll('-','.'):'日期待补充';
@@ -67,19 +67,47 @@ function updateEvents(){
   return [...byDate.entries()].sort((a,b)=>b[0].localeCompare(a[0]));
 }
 
+function calendarMonths(groups){
+  if(!groups.length)return [];
+  const [maxYear,maxMonth]=groups[0][0].slice(0,7).split('-').map(Number);
+  const [minYear,minMonth]=groups.at(-1)[0].slice(0,7).split('-').map(Number);
+  const months=[];
+  let year=maxYear,month=maxMonth;
+  while(year>minYear||(year===minYear&&month>=minMonth)){
+    months.push(`${year}-${String(month).padStart(2,'0')}`);
+    month-=1;
+    if(month===0){month=12;year-=1;}
+  }
+  return months;
+}
+
 function renderUpdates(){
   const board=$('#updates-board');
   if(!board)return;
   const groups=updateEvents();
-  const visible=state.showAllUpdates?groups:groups.slice(0,12);
-  board.innerHTML=visible.map(([date,events])=>{
+  const months=calendarMonths(groups);
+  state.updateMonthIndex=Math.min(state.updateMonthIndex,Math.max(0,months.length-1));
+  const selected=months[state.updateMonthIndex];
+  if(!selected){board.innerHTML='';return;}
+  const [year,month]=selected.split('-').map(Number);
+  const eventsByDate=new Map(groups);
+  const firstWeekday=new Date(Date.UTC(year,month-1,1)).getUTCDay();
+  const daysInMonth=new Date(Date.UTC(year,month,0)).getUTCDate();
+  const cells=[];
+  for(let index=0;index<42;index++){
+    const day=index-firstWeekday+1;
+    if(day<1||day>daysInMonth){cells.push('<div class="update-day is-empty" aria-hidden="true"></div>');continue;}
+    const date=`${selected}-${String(day).padStart(2,'0')}`;
+    const events=eventsByDate.get(date)||[];
+    if(!events.length){cells.push(`<article class="update-day no-updates"><time datetime="${date}"><b>${day}</b></time></article>`);continue;}
     const counts=Object.keys(EVENT_TYPES).map(type=>({type,count:events.filter(event=>event.type===type).length})).filter(item=>item.count);
     const detail=events.map(event=>`${EVENT_TYPES[event.type].label}｜${event.work.title}：${event.detail}`).join('\n');
-    return `<article class="update-day" tabindex="0" title="${esc(detail)}"><time datetime="${esc(date)}"><b>${dateText(date)}</b><span>${events.length} 项动态</span></time><div class="update-counts">${counts.map(item=>`<span><i class="event-dot ${EVENT_TYPES[item.type].className}"></i>${EVENT_TYPES[item.type].label} ${item.count}</span>`).join('')}</div><div class="update-preview">${events.slice(0,2).map(event=>`<button type="button" class="update-work-link" data-update-work="${esc(event.work.id)}">${esc(event.work.title)}</button>`).join('')}${events.length>2?`<small>另有 ${events.length-2} 项</small>`:''}</div><div class="update-detail"><strong>${dateText(date)} · 具体内容</strong>${events.map(event=>`<p><i class="event-dot ${EVENT_TYPES[event.type].className}"></i><button type="button" class="update-work-link" data-update-work="${esc(event.work.id)}">${esc(event.work.title)} →</button><span>${esc(event.detail)}</span></p>`).join('')}</div></article>`;
-  }).join('');
-  const toggle=$('#updates-toggle');
-  toggle.hidden=groups.length<=12;
-  toggle.textContent=state.showAllUpdates?'收起较早更新':'查看全部更新';
+    cells.push(`<article class="update-day has-events" tabindex="0" title="${esc(detail)}"><time datetime="${date}"><b>${day}</b><span>${events.length} 项</span></time><div class="update-counts">${counts.map(item=>`<span title="${EVENT_TYPES[item.type].label}"><i class="event-dot ${EVENT_TYPES[item.type].className}"></i>${item.count}</span>`).join('')}</div><div class="update-preview">${events.slice(0,2).map(event=>`<button type="button" class="update-work-link" data-update-work="${esc(event.work.id)}">${esc(event.work.title)}</button>`).join('')}${events.length>2?`<small>另有 ${events.length-2} 项</small>`:''}</div><div class="update-detail"><strong>${dateText(date)} · 具体内容</strong>${events.map(event=>`<p><i class="event-dot ${EVENT_TYPES[event.type].className}"></i><button type="button" class="update-work-link" data-update-work="${esc(event.work.id)}">${esc(event.work.title)} →</button><span>${esc(event.detail)}</span></p>`).join('')}</div></article>`);
+  }
+  board.innerHTML=cells.join('');
+  $('#calendar-month').textContent=`${year}年${month}月`;
+  $('#month-prev').disabled=state.updateMonthIndex>=months.length-1;
+  $('#month-next').disabled=state.updateMonthIndex===0;
 }
 
 function stableHash(value){
@@ -187,7 +215,8 @@ document.addEventListener('keydown',event=>{if($('#details').open&&(event.key===
 $('#search').addEventListener('input',event=>{state.query=event.target.value.trim();state.page=1;render();});
 $('#author-filter').addEventListener('change',event=>{state.author=event.target.value;state.page=1;render();});
 $('#sort').addEventListener('change',event=>{state.sort=event.target.value;state.page=1;render();});
-$('#updates-toggle').addEventListener('click',()=>{state.showAllUpdates=!state.showAllUpdates;renderUpdates();});
+$('#month-prev').addEventListener('click',()=>{state.updateMonthIndex+=1;renderUpdates();});
+$('#month-next').addEventListener('click',()=>{state.updateMonthIndex-=1;renderUpdates();});
 $('.close').addEventListener('click',()=>$('#details').close());
 $('#details').addEventListener('click',event=>{if(event.target===$('#details'))$('#details').close();});
 
