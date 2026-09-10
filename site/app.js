@@ -86,6 +86,8 @@ function renderUpdates(){
   if(!board)return;
   const groups=updateEvents();
   const months=calendarMonths(groups);
+  const maxDailyWorks=Math.max(1,...groups.map(([,events])=>new Set(events.map(event=>event.work.id)).size));
+  board.style.setProperty('--calendar-row-height',`${Math.max(124,68+maxDailyWorks*13)}px`);
   state.updateMonthIndex=Math.min(state.updateMonthIndex,Math.max(0,months.length-1));
   const selected=months[state.updateMonthIndex];
   if(!selected){board.innerHTML='';return;}
@@ -101,8 +103,9 @@ function renderUpdates(){
     const events=eventsByDate.get(date)||[];
     if(!events.length){cells.push(`<article class="update-day no-updates"><time datetime="${date}"><b>${day}</b></time></article>`);continue;}
     const counts=Object.keys(EVENT_TYPES).map(type=>({type,count:events.filter(event=>event.type===type).length})).filter(item=>item.count);
+    const dayWorks=[...new Map(events.map(event=>[event.work.id,event.work])).values()];
     const detail=events.map(event=>`${EVENT_TYPES[event.type].label}｜${event.work.title}：${event.detail}`).join('\n');
-    cells.push(`<article class="update-day has-events" tabindex="0" title="${esc(detail)}"><time datetime="${date}"><b>${day}</b><span>${events.length} 项</span></time><div class="update-counts">${counts.map(item=>`<span title="${EVENT_TYPES[item.type].label}"><i class="event-dot ${EVENT_TYPES[item.type].className}"></i>${item.count}</span>`).join('')}</div><div class="update-preview">${events.slice(0,2).map(event=>`<button type="button" class="update-work-link" data-update-work="${esc(event.work.id)}">${esc(event.work.title)}</button>`).join('')}${events.length>2?`<small>另有 ${events.length-2} 项</small>`:''}</div><div class="update-detail"><strong>${dateText(date)} · 具体内容</strong>${events.map(event=>`<p><i class="event-dot ${EVENT_TYPES[event.type].className}"></i><button type="button" class="update-work-link" data-update-work="${esc(event.work.id)}">${esc(event.work.title)} →</button><span>${esc(event.detail)}</span></p>`).join('')}</div></article>`);
+    cells.push(`<article class="update-day has-events" tabindex="0" title="${esc(detail)}"><time datetime="${date}"><b>${day}</b><span>${dayWorks.length} 项</span></time><div class="update-counts">${counts.map(item=>`<span title="${EVENT_TYPES[item.type].label}"><i class="event-dot ${EVENT_TYPES[item.type].className}"></i>${item.count}</span>`).join('')}</div><div class="update-preview">${dayWorks.map(work=>`<button type="button" class="update-work-link" data-update-work="${esc(work.id)}">${esc(work.title)}</button>`).join('')}</div><div class="update-detail"><strong>${dateText(date)} · 具体内容</strong>${events.map(event=>`<p><i class="event-dot ${EVENT_TYPES[event.type].className}"></i><button type="button" class="update-work-link" data-update-work="${esc(event.work.id)}">${esc(event.work.title)} →</button><span>${esc(event.detail)}</span></p>`).join('')}</div></article>`);
   }
   board.innerHTML=cells.join('');
   $('#calendar-month').textContent=`${year}年${month}月`;
