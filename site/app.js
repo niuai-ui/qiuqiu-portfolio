@@ -106,8 +106,7 @@ function renderUpdates(){
       const chipType=types.includes('new')?'new':types.includes('mod')&&types.includes('translation')?'mixed':types[0];
       return {work,chipType};
     });
-    const detail=events.map(event=>`${EVENT_TYPES[event.type].label}｜${event.work.title}：${event.detail}`).join('\n');
-    cells.push(`<article class="update-day has-events" tabindex="0" title="${esc(detail)}"><time datetime="${date}"><b>${day}</b><span>${dayWorks.length} 项</span></time><div class="update-counts">${counts.map(item=>`<span title="${EVENT_TYPES[item.type].label}"><i class="event-dot ${EVENT_TYPES[item.type].className}"></i>${item.count}</span>`).join('')}</div><div class="update-preview">${dayWorks.map(item=>`<button type="button" class="update-work-link calendar-chip-${item.chipType}" data-update-work="${esc(item.work.id)}">${esc(item.work.title)}</button>`).join('')}<button type="button" class="calendar-more" data-calendar-more hidden>更多</button></div><div class="update-detail"><strong>${dateText(date)} · 具体内容</strong>${events.map(event=>`<p><i class="event-dot ${EVENT_TYPES[event.type].className}"></i><button type="button" class="update-work-link" data-update-work="${esc(event.work.id)}">${esc(event.work.title)} →</button><span>${esc(event.detail)}</span></p>`).join('')}</div></article>`);
+    cells.push(`<article class="update-day has-events"><time datetime="${date}"><b>${day}</b><span>${dayWorks.length} 项</span></time><div class="update-counts">${counts.map(item=>`<span title="${EVENT_TYPES[item.type].label}"><i class="event-dot ${EVENT_TYPES[item.type].className}"></i>${item.count}</span>`).join('')}</div><div class="update-preview">${dayWorks.map(item=>`<button type="button" class="update-work-link calendar-chip-${item.chipType}" data-update-work="${esc(item.work.id)}">${esc(item.work.title)}</button>`).join('')}<button type="button" class="calendar-more" data-calendar-more aria-haspopup="dialog" aria-controls="calendar-overflow" aria-expanded="false" hidden>更多</button></div></article>`);
   }
   board.innerHTML=cells.join('');
   $('#calendar-month').textContent=`${year}年${month}月`;
@@ -122,6 +121,7 @@ function fitCalendarPreviews(){
     const more=preview.querySelector('[data-calendar-more]');
     entries.forEach(entry=>entry.hidden=false);
     more.hidden=true;
+    more.setAttribute('aria-expanded','false');
     const top=preview.getBoundingClientRect().top;
     const maxBottom=top+42;
     let hiddenCount=0;
@@ -137,6 +137,25 @@ function fitCalendarPreviews(){
       more.textContent=`更多 +${hiddenCount}`;
     }
   });
+}
+
+function openCalendarOverflow(day){
+  const dialog=$('#calendar-overflow');
+  const date=day.querySelector('time')?.dateTime||'';
+  const entries=[...day.querySelectorAll('.update-preview [data-update-work]')];
+  $('#calendar-overflow-date').textContent=dateText(date);
+  $('#calendar-overflow-chips').innerHTML=entries.map(entry=>{
+    const typeClass=[...entry.classList].find(className=>className.startsWith('calendar-chip-'))||'';
+    return `<button type="button" class="update-work-link ${typeClass}" data-update-work="${esc(entry.dataset.updateWork)}">${esc(entry.textContent)}</button>`;
+  }).join('');
+  day.querySelector('[data-calendar-more]')?.setAttribute('aria-expanded','true');
+  if(!dialog.open)dialog.showModal();
+}
+
+function closeCalendarOverflow(){
+  const dialog=$('#calendar-overflow');
+  if(dialog.open)dialog.close();
+  document.querySelectorAll('[data-calendar-more]').forEach(button=>button.setAttribute('aria-expanded','false'));
 }
 
 function stableHash(value){
@@ -232,8 +251,8 @@ function setupFilters(){
 
 document.addEventListener('click',event=>{
   const pageButton=event.target.closest('[data-page]');if(pageButton&&!pageButton.disabled){state.page=Number(pageButton.dataset.page);render();$('#works').scrollIntoView({behavior:'smooth',block:'start'});return;}
-  const updateWork=event.target.closest('[data-update-work]');if(updateWork){event.stopPropagation();openDetails(updateWork.dataset.updateWork);return;}
-  const calendarMore=event.target.closest('[data-calendar-more]');if(calendarMore){event.stopPropagation();calendarMore.closest('.update-day').focus();return;}
+  const updateWork=event.target.closest('[data-update-work]');if(updateWork){event.stopPropagation();closeCalendarOverflow();openDetails(updateWork.dataset.updateWork);return;}
+  const calendarMore=event.target.closest('[data-calendar-more]');if(calendarMore){event.stopPropagation();openCalendarOverflow(calendarMore.closest('.update-day'));return;}
   const download=event.target.closest('.download[href]');if(download){track('download_click',state.currentWork);}
   const filter=event.target.closest('[data-category]');if(filter){state.category=filter.dataset.category;state.page=1;document.querySelectorAll('[data-category]').forEach(button=>button.classList.toggle('active',button===filter));render();}
   const card=event.target.closest('.work-card');if(card)openDetails(card.dataset.id);
@@ -249,6 +268,8 @@ $('#month-prev').addEventListener('click',()=>{state.updateMonthIndex+=1;renderU
 $('#month-next').addEventListener('click',()=>{state.updateMonthIndex-=1;renderUpdates();});
 $('.close').addEventListener('click',()=>$('#details').close());
 $('#details').addEventListener('click',event=>{if(event.target===$('#details'))$('#details').close();});
+$('#calendar-overflow-close').addEventListener('click',closeCalendarOverflow);
+$('#calendar-overflow').addEventListener('click',event=>{if(event.target===$('#calendar-overflow'))closeCalendarOverflow();});
 
 fetch('data.json').then(response=>{if(!response.ok)throw new Error('读取失败');return response.json();}).then(works=>{state.works=works;$('#hero-count').textContent=works.length;setupFilters();render();}).catch(()=>{$('#result-count').textContent='作品数据读取失败，请稍后再试';$('#empty').hidden=false;});
 $('#year').textContent=new Date().getFullYear();

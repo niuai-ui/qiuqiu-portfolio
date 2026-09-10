@@ -53,7 +53,7 @@
     <section class="updates-section" id="updates" aria-labelledby="updates-title">
       <div class="section-head">
         <div><p class="eyebrow">UPDATE CALENDAR</p><h2 id="updates-title">上新与更新日历</h2></div>
-        <p>每一天发生了什么，一眼就能看清；悬停或聚焦可查看具体作品。</p>
+        <p>点击作品名可直接查看模组；名称较多时，点击“更多”查看当日全部作品。</p>
       </div>
       <div class="update-legend" aria-label="更新类型">
         <span><i class="event-dot event-new"></i>新模组上新</span>
@@ -65,8 +65,10 @@
         <strong id="calendar-month" aria-live="polite"></strong>
         <button type="button" id="month-next" aria-label="查看下个月">下个月 →</button>
       </div>
-      <div class="calendar-weekdays" aria-hidden="true"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
-      <div class="updates-board" id="updates-board"></div>
+      <div class="calendar-viewport">
+        <div class="calendar-weekdays" aria-hidden="true"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
+        <div class="updates-board" id="updates-board"></div>
+      </div>
     </section>
 
     <section class="works-section" id="works">
@@ -93,6 +95,12 @@
   <footer><span>© <span id="year"></span> 湫湫 Sims 汉化档案馆</span><span>Made with care for The Sims 4 community.</span></footer>
 
   <dialog id="details"><button class="close" aria-label="关闭">×</button><div id="dialog-content"></div></dialog>
+  <dialog id="calendar-overflow" class="calendar-overflow-dialog" aria-labelledby="calendar-overflow-title">
+    <button type="button" id="calendar-overflow-close" class="calendar-overflow-close" aria-label="关闭">×</button>
+    <p class="eyebrow" id="calendar-overflow-date"></p>
+    <h3 id="calendar-overflow-title">当日全部更新</h3>
+    <div class="update-preview calendar-overflow-chips" id="calendar-overflow-chips"></div>
+  </dialog>
   <noscript>此作品集需要启用 JavaScript 才能显示作品。</noscript>
   <script src="app.js" defer></script>
 </body>
