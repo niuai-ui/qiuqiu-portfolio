@@ -1,11 +1,12 @@
 from __future__ import annotations
 
 import argparse
-import compileall
 import shutil
 import subprocess
 import sys
 from pathlib import Path
+
+sys.dont_write_bytecode = True
 
 from build_site import ROOT, build
 from check_sync import check_sync
@@ -21,8 +22,8 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    if not compileall.compile_dir(ROOT / "tools", quiet=1):
-        raise RuntimeError("tools 目录存在 Python 语法错误")
+    for source in sorted((ROOT / "tools").glob("*.py")):
+        compile(source.read_bytes(), str(source), "exec")
     if not args.skip_sync:
         check_sync()
         check_gallery_sync()

@@ -17,6 +17,7 @@
 
 ```text
 python -m pip install -r requirements.txt
+python tools/sync_gallery.py
 python tools/preflight.py
 ```
 

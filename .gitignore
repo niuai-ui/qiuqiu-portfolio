@@ -3,3 +3,6 @@ dist/
 *.inspect.ndjson
 __pycache__/
 .workbuddy/
+.codex-artifact/
+outputs/
+tools/node_modules/
