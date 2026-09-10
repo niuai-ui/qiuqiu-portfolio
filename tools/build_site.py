@@ -18,7 +18,7 @@ SOURCE = ROOT / "site"
 WORKBOOK = ROOT / "作品信息.xlsx"
 REQUIRED = [
     "状态", "模组英文名", "模组中文名", "原作者名字", "原作者网址链接",
-    "模组本体链接", "汉化发布日期", "汉化更新日期", "前置说明", "放置说明",
+    "模组本体链接", "模组更新日期", "汉化更新日期", "前置说明", "放置说明",
     "封面路径", "百度网盘链接整体", "类别",
 ]
 ALLOWED_STATUSES = {"已发布", "草稿", "下架"}
@@ -141,7 +141,7 @@ def load_works():
             continue
         required_fields = [
             "模组英文名", "模组中文名", "原作者名字", "原作者网址链接",
-            "汉化发布日期", "汉化更新日期", "前置说明", "放置说明", "封面路径", "类别",
+            "模组更新日期", "汉化更新日期", "前置说明", "放置说明", "封面路径", "类别",
         ]
         missing_values = [name for name in required_fields if not text(item.get(name))]
         if missing_values:
@@ -150,10 +150,8 @@ def load_works():
         author_name = text(item.get("原作者名字"))
         original_url = require_http_url(item.get("原作者网址链接"), row_number, "原作者网址链接")
         mod_url = optional_http_url(item.get("模组本体链接"), row_number, "模组本体链接")
-        release_date = require_date(item.get("汉化发布日期"), row_number, "汉化发布日期")
-        updated_date = require_date(item.get("汉化更新日期"), row_number, "汉化更新日期")
-        if updated_date < release_date:
-            raise ValueError(f"第 {row_number} 行的汉化更新日期不能早于汉化发布日期")
+        mod_updated_date = require_date(item.get("模组更新日期"), row_number, "模组更新日期")
+        translation_updated_date = require_date(item.get("汉化更新日期"), row_number, "汉化更新日期")
         placement = text(item.get("放置说明"))
         if placement not in ALLOWED_PLACEMENTS:
             raise ValueError(f"第 {row_number} 行的放置说明无效：{placement}")
@@ -190,8 +188,8 @@ def load_works():
             "author": author_name or "未知作者",
             "originalUrl": original_url,
             "modUrl": mod_url,
-            "date": iso_date(release_date),
-            "updated": iso_date(updated_date),
+            "modUpdated": iso_date(mod_updated_date),
+            "translationUpdated": iso_date(translation_updated_date),
             "dependency": text(item.get("前置说明")),
             "placement": placement,
             "localization": "繁简汉化",
@@ -200,7 +198,7 @@ def load_works():
             "downloadCode": download_code,
             "category": category,
         })
-    works.sort(key=lambda work: (work["date"], work["title"]), reverse=True)
+    works.sort(key=lambda work: (work["modUpdated"], work["title"]), reverse=True)
     return works
 
 
