@@ -9,6 +9,7 @@ from pathlib import Path
 
 from build_site import ROOT, build
 from check_sync import check_sync
+from sync_gallery import check_gallery_sync
 
 
 def main() -> None:
@@ -24,6 +25,7 @@ def main() -> None:
         raise RuntimeError("tools 目录存在 Python 语法错误")
     if not args.skip_sync:
         check_sync()
+        check_gallery_sync()
     build()
     node = shutil.which("node")
     if not node:
@@ -34,7 +36,7 @@ def main() -> None:
     subprocess.run([node, "--check", str(ROOT / "site" / "app.js")], check=True)
     checks = "Excel、封面、网站构建和 JavaScript"
     if not args.skip_sync:
-        checks = f"同步、{checks}"
+        checks = f"日志与介绍图同步、{checks}"
     print(f"发布前检查全部通过：{checks} 均正常")
 
 

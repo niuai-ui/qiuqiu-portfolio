@@ -19,7 +19,7 @@ WORKBOOK = ROOT / "作品信息.xlsx"
 REQUIRED = [
     "状态", "模组英文名", "模组中文名", "原作者名字", "原作者网址链接",
     "模组本体链接", "模组更新日期", "汉化更新日期", "前置说明", "放置说明",
-    "封面路径", "百度网盘链接整体", "类别",
+    "封面路径", "百度网盘链接整体", "类别", "上新日期",
 ]
 ALLOWED_STATUSES = {"已发布", "草稿", "下架"}
 ALLOWED_CATEGORIES = {"人物特征", "用地特征", "职业", "覆盖替换", "游戏玩法", "其他"}
@@ -123,7 +123,7 @@ def load_works():
     headers = [text(cell.value) for cell in sheet[1]]
     if headers != REQUIRED:
         raise ValueError(
-            "Excel 必须严格使用 13 个固定字段并保持规定顺序。\n"
+            "Excel 必须严格使用 14 个固定字段并保持规定顺序。\n"
             f"应为：{'、'.join(REQUIRED)}\n"
             f"实际：{'、'.join(headers)}"
         )
@@ -141,7 +141,7 @@ def load_works():
             continue
         required_fields = [
             "模组英文名", "模组中文名", "原作者名字", "原作者网址链接",
-            "模组更新日期", "汉化更新日期", "前置说明", "放置说明", "封面路径", "类别",
+            "模组更新日期", "汉化更新日期", "前置说明", "放置说明", "封面路径", "类别", "上新日期",
         ]
         missing_values = [name for name in required_fields if not text(item.get(name))]
         if missing_values:
@@ -152,6 +152,7 @@ def load_works():
         mod_url = optional_http_url(item.get("模组本体链接"), row_number, "模组本体链接")
         mod_updated_date = require_date(item.get("模组更新日期"), row_number, "模组更新日期")
         translation_updated_date = require_date(item.get("汉化更新日期"), row_number, "汉化更新日期")
+        launched_date = require_date(item.get("上新日期"), row_number, "上新日期")
         placement = text(item.get("放置说明"))
         if placement not in ALLOWED_PLACEMENTS:
             raise ValueError(f"第 {row_number} 行的放置说明无效：{placement}")
@@ -190,6 +191,7 @@ def load_works():
             "modUrl": mod_url,
             "modUpdated": iso_date(mod_updated_date),
             "translationUpdated": iso_date(translation_updated_date),
+            "launched": iso_date(launched_date),
             "dependency": text(item.get("前置说明")),
             "placement": placement,
             "localization": "繁简汉化",
@@ -198,8 +200,26 @@ def load_works():
             "downloadCode": download_code,
             "category": category,
         })
-    works.sort(key=lambda work: (work["modUpdated"], work["title"]), reverse=True)
+    works.sort(key=lambda work: (work["launched"], work["title"]), reverse=True)
     return works
+
+
+def attach_galleries(works):
+    from sync_gallery import validate_committed_gallery
+
+    manifest = validate_committed_gallery()
+    work_ids = {work["id"] for work in works}
+    missing = sorted(work_ids - manifest.keys())
+    extra = sorted(manifest.keys() - work_ids)
+    if missing or extra:
+        details = []
+        if missing:
+            details.append("缺少：" + "、".join(missing))
+        if extra:
+            details.append("多余：" + "、".join(extra))
+        raise ValueError("介绍图清单与已发布作品不一致（" + "；".join(details) + "）")
+    for work in works:
+        work["gallery"] = [f"gallery/{item['file']}" for item in manifest[work["id"]]]
 
 
 def build_responsive_covers(works):
@@ -228,6 +248,7 @@ def build_responsive_covers(works):
 
 def build():
     works = load_works()
+    attach_galleries(works)
     expected_dist = ROOT / "dist"
     if DIST != expected_dist or DIST.parent != ROOT:
         raise RuntimeError(f"拒绝清理异常输出目录：{DIST}")
@@ -237,6 +258,8 @@ def build():
     (DIST / "images").mkdir(exist_ok=True)
     for filename in ("favicon.png", "og.jpg"):
         shutil.copy2(CONTENT / "images" / filename, DIST / "images" / filename)
+    shutil.copytree(CONTENT / "gallery", DIST / "gallery")
+    (DIST / "gallery" / "manifest.json").unlink()
     original_bytes, optimized_bytes = build_responsive_covers(works)
     (DIST / "data.json").write_text(json.dumps(works, ensure_ascii=False, indent=2), encoding="utf-8")
     (DIST / ".nojekyll").write_text("", encoding="utf-8")

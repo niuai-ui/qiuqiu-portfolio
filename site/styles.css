@@ -71,3 +71,45 @@ dialog{width:min(960px,calc(100% - 28px),135vh);max-height:90vh;overflow:hidden}
 .pagination button:disabled{opacity:.35;cursor:not-allowed;background:transparent;color:var(--ink)}
 .author-row{width:100%;border:0;background:transparent;color:inherit;text-align:left;font:inherit}
 .author-row:focus-visible,.work-card:focus-visible,.filter:focus-visible,.pagination button:focus-visible,.close:focus-visible,.code:focus-visible,a:focus-visible{outline:3px solid var(--apricot);outline-offset:3px}
+
+/* 上新与更新日历 */
+.updates-section{padding:90px clamp(20px,6vw,92px);background:#f4eee3;border-bottom:1px solid var(--line);overflow:visible}
+.updates-section .section-head h2{font-family:Georgia,"Noto Serif SC",serif;font-size:clamp(36px,4.2vw,58px);line-height:1.2;margin:0;font-weight:500}
+.updates-section .section-head>p{max-width:430px;line-height:1.7;text-align:right}
+.update-legend{display:flex;gap:22px;flex-wrap:wrap;padding:14px 0 22px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+.update-legend span,.update-counts span{display:inline-flex;align-items:center;gap:7px}
+.event-dot{display:inline-block;width:9px;height:9px;border-radius:50%;flex:0 0 auto}
+.event-new{background:var(--apricot)}
+.event-mod{background:var(--moss)}
+.event-translation{background:var(--night)}
+.updates-board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.update-day{position:relative;min-height:176px;padding:18px;border:1px solid var(--line);background:rgba(255,255,255,.35);transition:transform .2s ease,background .2s ease,border-color .2s ease;outline:none}
+.update-day:hover,.update-day:focus-visible{z-index:5;transform:translateY(-3px);background:#fffaf1;border-color:var(--apricot)}
+.update-day time{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding-bottom:13px;border-bottom:1px solid var(--line)}
+.update-day time b{font-family:Georgia,serif;font-size:21px}
+.update-day time span{font-size:10px;color:var(--muted)}
+.update-counts{display:flex;gap:10px;flex-wrap:wrap;margin:13px 0;font-size:10px;color:var(--muted)}
+.update-preview{display:flex;flex-direction:column;gap:5px;font-size:12px}
+.update-preview span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.update-preview small{color:var(--muted)}
+.update-detail{display:none;position:absolute;z-index:10;top:calc(100% + 8px);left:0;width:100%;padding:16px;background:var(--night);color:var(--paper);box-shadow:0 16px 35px #0005;text-align:left}
+.update-day:hover .update-detail,.update-day:focus .update-detail{display:block}
+.update-detail>strong{display:block;margin-bottom:11px;color:var(--apricot);font-size:12px}
+.update-detail p{display:grid;grid-template-columns:auto 1fr;gap:3px 8px;margin:10px 0;font-size:11px;line-height:1.5}
+.update-detail p .event-dot{grid-row:1/3;margin-top:4px}
+.update-detail p b{font-size:12px}
+.update-detail p span{grid-column:2;color:#b9c4bf}
+.updates-toggle{display:block;margin:26px auto 0;padding:11px 18px;border:1px solid var(--night);background:transparent;color:var(--night);cursor:pointer}
+.updates-toggle:hover{background:var(--night);color:var(--paper)}
+
+/* 详情介绍图画廊 */
+.detail-gallery{position:relative;background:#171c1a}
+.detail-gallery img{transition:opacity .18s ease}
+.gallery-nav{position:absolute;z-index:2;top:50%;transform:translateY(-50%);width:42px;height:42px;border:1px solid rgba(255,255,255,.55);border-radius:50%;background:rgba(16,20,19,.78);color:#fff;cursor:pointer}
+.gallery-nav:hover{background:var(--apricot);color:var(--night)}
+.gallery-prev{left:14px}.gallery-next{right:14px}
+.gallery-count{position:absolute;z-index:2;left:50%;bottom:14px;transform:translateX(-50%);padding:6px 10px;border-radius:20px;background:rgba(16,20,19,.78);color:#fff;font-size:11px;letter-spacing:.08em}
+
+@media(max-width:1020px){.updates-board{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:760px){.updates-section{padding-block:66px}.updates-section .section-head{display:block}.updates-section .section-head>p{text-align:left}.updates-board{grid-template-columns:repeat(2,minmax(0,1fr))}.update-detail{position:fixed;left:16px;right:16px;bottom:16px;top:auto;width:auto}.gallery-nav{width:38px;height:38px}}
+@media(max-width:450px){.updates-board{grid-template-columns:1fr}.update-day{min-height:155px}}

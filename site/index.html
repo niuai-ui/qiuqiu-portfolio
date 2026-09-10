@@ -26,7 +26,7 @@
 <body>
   <header class="topbar">
     <a class="brand" href="#top" aria-label="回到顶部"><span class="brand-seal" aria-hidden="true"><img src="images/decor/archive-brand.png" alt=""></span><span><b>湫湫</b><small>SIMS 汉化档案馆</small></span></a>
-    <nav><a href="#works">作品</a><a href="#authors">作者索引</a><a href="#about">关于</a></nav>
+    <nav><a href="#updates">更新日历</a><a href="#works">作品</a><a href="#authors">作者索引</a><a href="#about">关于</a></nav>
   </header>
 
   <main id="top">
@@ -50,13 +50,27 @@
       </div>
     </section>
 
+    <section class="updates-section" id="updates" aria-labelledby="updates-title">
+      <div class="section-head">
+        <div><p class="eyebrow">UPDATE CALENDAR</p><h2 id="updates-title">上新与更新日历</h2></div>
+        <p>每一天发生了什么，一眼就能看清；悬停或聚焦可查看具体作品。</p>
+      </div>
+      <div class="update-legend" aria-label="更新类型">
+        <span><i class="event-dot event-new"></i>新模组上新</span>
+        <span><i class="event-dot event-mod"></i>模组本体更新</span>
+        <span><i class="event-dot event-translation"></i>汉化文件更新</span>
+      </div>
+      <div class="updates-board" id="updates-board"></div>
+      <button class="updates-toggle" id="updates-toggle" type="button" hidden>查看全部更新</button>
+    </section>
+
     <section class="works-section" id="works">
       <div class="section-head"><div><p class="eyebrow">THE COLLECTION</p><h2>汉化作品</h2></div><p id="result-count">正在读取档案…</p></div>
       <div class="toolbar">
         <label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" aria-label="搜索作品、作者或标签" placeholder="搜索作品、作者或标签…"></label>
         <div class="filter-group"><button class="filter active" data-category="全部">全部</button><div id="category-buttons"></div></div>
         <select id="author-filter" aria-label="按作者筛选"><option value="全部">全部作者</option></select>
-        <select id="sort" aria-label="排序"><option value="newest">模组最近更新</option><option value="oldest">模组最早更新</option><option value="title">名称排序</option><option value="updated">汉化最近更新</option></select>
+        <select id="sort" aria-label="排序"><option value="launched">新模组上新</option><option value="mod-updated">模组最近更新</option><option value="translation-updated">汉化最近更新</option><option value="title">名称排序</option></select>
       </div>
       <div class="grid" id="work-grid" aria-live="polite"></div>
       <div class="empty" id="empty" hidden><b>没有找到对应作品</b><span>试试更换关键词或筛选条件。</span></div>

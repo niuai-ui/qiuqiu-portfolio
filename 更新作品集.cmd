@@ -68,6 +68,14 @@ if /I not "%~1"=="--check-only" (
   )
 )
 
+echo 正在同步模组介绍图...
+%PYTHON% "tools\sync_gallery.py"
+if errorlevel 1 (
+  echo [错误] 模组介绍图同步失败，没有提交或上传任何内容。
+  pause
+  exit /b 1
+)
+
 echo 正在执行发布前完整检查...
 %PYTHON% "tools\preflight.py"
 if errorlevel 1 (
@@ -80,7 +88,7 @@ if /I "%~1"=="--check-only" (
   exit /b 0
 )
 
-"%GIT%" add -- "作品信息.xlsx" "content/images" "site" "tools" ".github/workflows/pages.yml" "requirements.txt" ".gitignore" "README.md" "AGENTS.md" "更新作品集.cmd"
+"%GIT%" add -- "作品信息.xlsx" "content/images" "content/gallery" "site" "tools" ".github/workflows/pages.yml" "requirements.txt" ".gitignore" "README.md" "AGENTS.md" "更新作品集.cmd"
 if errorlevel 1 (
   echo [错误] 文件暂存失败，请确认 Excel 已保存并关闭。
   pause
