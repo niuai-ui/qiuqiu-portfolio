@@ -75,7 +75,7 @@ function renderUpdates(){
   board.innerHTML=visible.map(([date,events])=>{
     const counts=Object.keys(EVENT_TYPES).map(type=>({type,count:events.filter(event=>event.type===type).length})).filter(item=>item.count);
     const detail=events.map(event=>`${EVENT_TYPES[event.type].label}｜${event.work.title}：${event.detail}`).join('\n');
-    return `<article class="update-day" tabindex="0" title="${esc(detail)}"><time datetime="${esc(date)}"><b>${dateText(date)}</b><span>${events.length} 项动态</span></time><div class="update-counts">${counts.map(item=>`<span><i class="event-dot ${EVENT_TYPES[item.type].className}"></i>${EVENT_TYPES[item.type].label} ${item.count}</span>`).join('')}</div><div class="update-preview">${events.slice(0,2).map(event=>`<span>${esc(event.work.title)}</span>`).join('')}${events.length>2?`<small>另有 ${events.length-2} 项</small>`:''}</div><div class="update-detail" aria-hidden="true"><strong>${dateText(date)} · 具体内容</strong>${events.map(event=>`<p><i class="event-dot ${EVENT_TYPES[event.type].className}"></i><b>${esc(event.work.title)}</b><span>${esc(event.detail)}</span></p>`).join('')}</div></article>`;
+    return `<article class="update-day" tabindex="0" title="${esc(detail)}"><time datetime="${esc(date)}"><b>${dateText(date)}</b><span>${events.length} 项动态</span></time><div class="update-counts">${counts.map(item=>`<span><i class="event-dot ${EVENT_TYPES[item.type].className}"></i>${EVENT_TYPES[item.type].label} ${item.count}</span>`).join('')}</div><div class="update-preview">${events.slice(0,2).map(event=>`<button type="button" class="update-work-link" data-update-work="${esc(event.work.id)}">${esc(event.work.title)}</button>`).join('')}${events.length>2?`<small>另有 ${events.length-2} 项</small>`:''}</div><div class="update-detail"><strong>${dateText(date)} · 具体内容</strong>${events.map(event=>`<p><i class="event-dot ${EVENT_TYPES[event.type].className}"></i><button type="button" class="update-work-link" data-update-work="${esc(event.work.id)}">${esc(event.work.title)} →</button><span>${esc(event.detail)}</span></p>`).join('')}</div></article>`;
   }).join('');
   const toggle=$('#updates-toggle');
   toggle.hidden=groups.length<=12;
@@ -175,6 +175,7 @@ function setupFilters(){
 
 document.addEventListener('click',event=>{
   const pageButton=event.target.closest('[data-page]');if(pageButton&&!pageButton.disabled){state.page=Number(pageButton.dataset.page);render();$('#works').scrollIntoView({behavior:'smooth',block:'start'});return;}
+  const updateWork=event.target.closest('[data-update-work]');if(updateWork){event.stopPropagation();openDetails(updateWork.dataset.updateWork);return;}
   const download=event.target.closest('.download[href]');if(download){track('download_click',state.currentWork);}
   const filter=event.target.closest('[data-category]');if(filter){state.category=filter.dataset.category;state.page=1;document.querySelectorAll('[data-category]').forEach(button=>button.classList.toggle('active',button===filter));render();}
   const card=event.target.closest('.work-card');if(card)openDetails(card.dataset.id);
