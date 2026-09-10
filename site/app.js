@@ -86,8 +86,6 @@ function renderUpdates(){
   if(!board)return;
   const groups=updateEvents();
   const months=calendarMonths(groups);
-  const maxDailyWorks=Math.max(1,...groups.map(([,events])=>new Set(events.map(event=>event.work.id)).size));
-  board.style.setProperty('--calendar-row-height',`${Math.max(124,68+maxDailyWorks*13)}px`);
   state.updateMonthIndex=Math.min(state.updateMonthIndex,Math.max(0,months.length-1));
   const selected=months[state.updateMonthIndex];
   if(!selected){board.innerHTML='';return;}
@@ -105,12 +103,36 @@ function renderUpdates(){
     const counts=Object.keys(EVENT_TYPES).map(type=>({type,count:events.filter(event=>event.type===type).length})).filter(item=>item.count);
     const dayWorks=[...new Map(events.map(event=>[event.work.id,event.work])).values()];
     const detail=events.map(event=>`${EVENT_TYPES[event.type].label}｜${event.work.title}：${event.detail}`).join('\n');
-    cells.push(`<article class="update-day has-events" tabindex="0" title="${esc(detail)}"><time datetime="${date}"><b>${day}</b><span>${dayWorks.length} 项</span></time><div class="update-counts">${counts.map(item=>`<span title="${EVENT_TYPES[item.type].label}"><i class="event-dot ${EVENT_TYPES[item.type].className}"></i>${item.count}</span>`).join('')}</div><div class="update-preview">${dayWorks.map(work=>`<button type="button" class="update-work-link" data-update-work="${esc(work.id)}">${esc(work.title)}</button>`).join('')}</div><div class="update-detail"><strong>${dateText(date)} · 具体内容</strong>${events.map(event=>`<p><i class="event-dot ${EVENT_TYPES[event.type].className}"></i><button type="button" class="update-work-link" data-update-work="${esc(event.work.id)}">${esc(event.work.title)} →</button><span>${esc(event.detail)}</span></p>`).join('')}</div></article>`);
+    cells.push(`<article class="update-day has-events" tabindex="0" title="${esc(detail)}"><time datetime="${date}"><b>${day}</b><span>${dayWorks.length} 项</span></time><div class="update-counts">${counts.map(item=>`<span title="${EVENT_TYPES[item.type].label}"><i class="event-dot ${EVENT_TYPES[item.type].className}"></i>${item.count}</span>`).join('')}</div><div class="update-preview">${dayWorks.map(work=>`<button type="button" class="update-work-link" data-update-work="${esc(work.id)}">${esc(work.title)}</button>`).join('')}<button type="button" class="calendar-more" data-calendar-more hidden>更多</button></div><div class="update-detail"><strong>${dateText(date)} · 具体内容</strong>${events.map(event=>`<p><i class="event-dot ${EVENT_TYPES[event.type].className}"></i><button type="button" class="update-work-link" data-update-work="${esc(event.work.id)}">${esc(event.work.title)} →</button><span>${esc(event.detail)}</span></p>`).join('')}</div></article>`);
   }
   board.innerHTML=cells.join('');
   $('#calendar-month').textContent=`${year}年${month}月`;
   $('#month-prev').disabled=state.updateMonthIndex>=months.length-1;
   $('#month-next').disabled=state.updateMonthIndex===0;
+  requestAnimationFrame(fitCalendarPreviews);
+}
+
+function fitCalendarPreviews(){
+  document.querySelectorAll('.update-preview').forEach(preview=>{
+    const entries=[...preview.querySelectorAll('[data-update-work]')];
+    const more=preview.querySelector('[data-calendar-more]');
+    entries.forEach(entry=>entry.hidden=false);
+    more.hidden=true;
+    const top=preview.getBoundingClientRect().top;
+    const maxBottom=top+42;
+    let hiddenCount=0;
+    entries.forEach(entry=>{if(entry.getBoundingClientRect().bottom>maxBottom){entry.hidden=true;hiddenCount+=1;}});
+    if(!hiddenCount)return;
+    more.hidden=false;
+    more.textContent=`更多 +${hiddenCount}`;
+    while(more.getBoundingClientRect().bottom>maxBottom){
+      const lastVisible=entries.findLast(entry=>!entry.hidden);
+      if(!lastVisible)break;
+      lastVisible.hidden=true;
+      hiddenCount+=1;
+      more.textContent=`更多 +${hiddenCount}`;
+    }
+  });
 }
 
 function stableHash(value){
@@ -207,6 +229,7 @@ function setupFilters(){
 document.addEventListener('click',event=>{
   const pageButton=event.target.closest('[data-page]');if(pageButton&&!pageButton.disabled){state.page=Number(pageButton.dataset.page);render();$('#works').scrollIntoView({behavior:'smooth',block:'start'});return;}
   const updateWork=event.target.closest('[data-update-work]');if(updateWork){event.stopPropagation();openDetails(updateWork.dataset.updateWork);return;}
+  const calendarMore=event.target.closest('[data-calendar-more]');if(calendarMore){event.stopPropagation();calendarMore.closest('.update-day').focus();return;}
   const download=event.target.closest('.download[href]');if(download){track('download_click',state.currentWork);}
   const filter=event.target.closest('[data-category]');if(filter){state.category=filter.dataset.category;state.page=1;document.querySelectorAll('[data-category]').forEach(button=>button.classList.toggle('active',button===filter));render();}
   const card=event.target.closest('.work-card');if(card)openDetails(card.dataset.id);
