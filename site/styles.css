@@ -81,7 +81,7 @@ dialog{width:min(960px,calc(100% - 28px),135vh);max-height:90vh;overflow:hidden}
 .event-dot{display:inline-block;width:9px;height:9px;border-radius:50%;flex:0 0 auto}
 .event-new{background:var(--apricot)}
 .event-mod{background:var(--moss)}
-.event-translation{background:var(--night)}
+.event-translation{background:#a77fc0}
 .updates-board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .update-day{position:relative;min-height:176px;padding:18px;border:1px solid var(--line);background:rgba(255,255,255,.35);transition:transform .2s ease,background .2s ease,border-color .2s ease;outline:none}
 .update-day:hover,.update-day:focus-visible{z-index:5;transform:translateY(-3px);background:#fffaf1;border-color:var(--apricot)}
@@ -103,7 +103,7 @@ dialog{width:min(960px,calc(100% - 28px),135vh);max-height:90vh;overflow:hidden}
 .updates-toggle:hover{background:var(--night);color:var(--paper)}
 
 /* 详情介绍图画廊 */
-.detail-gallery{position:relative;background:#171c1a}
+.detail-gallery{position:relative;background:#fff}
 .detail-gallery img{transition:opacity .18s ease}
 .gallery-nav{position:absolute;z-index:2;top:50%;transform:translateY(-50%);width:42px;height:42px;border:1px solid rgba(255,255,255,.55);border-radius:50%;background:rgba(16,20,19,.78);color:#fff;cursor:pointer}
 .gallery-nav:hover{background:var(--apricot);color:var(--night)}
