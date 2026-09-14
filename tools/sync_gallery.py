@@ -4,8 +4,10 @@ import argparse
 import hashlib
 import json
 import re
-import shutil
+import sys
 from pathlib import Path
+
+sys.dont_write_bytecode = True
 
 from PIL import Image, ImageOps
 

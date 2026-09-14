@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import re
 import shutil
+import sys
 import unicodedata
 from datetime import date, datetime
 from pathlib import Path
@@ -10,6 +11,8 @@ from urllib.parse import urlparse
 
 from openpyxl import load_workbook
 from PIL import Image
+
+sys.dont_write_bytecode = True
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTENT = ROOT / "content"
