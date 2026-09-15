@@ -4,7 +4,7 @@
 .detail-image{min-height:0;background:#d8d4ca;display:flex;align-items:flex-start;justify-content:center}
 .detail-image img{width:100%;height:auto;max-height:none;object-fit:contain;display:block}
 .author-link{text-decoration:underline;text-decoration-color:var(--apricot);text-underline-offset:4px}.author-link:hover{color:#8f5537}
-.dep-link{color:var(--apricot);text-decoration:underline;text-decoration-color:var(--apricot);text-underline-offset:3px;font-weight:700}.dep-link:hover{color:#8f5537}
+.dep-link{color:var(--apricot);text-decoration:underline;text-decoration-color:var(--apricot);text-underline-offset:3px;font-weight:700}.dep-link:hover{color:#8f5537}.dep-list{display:flex;flex-direction:column;align-items:flex-start;gap:5px}.dep-list .dep-link{display:inline-flex;padding:3px 7px;border:1px solid rgba(217,154,114,.5);border-radius:999px;background:rgba(217,154,114,.1);font-size:12px;line-height:1.35;text-decoration:none}
 @media(max-width:760px){.detail-image{aspect-ratio:auto}}
 
 dialog{width:min(960px,calc(100% - 28px),135vh);max-height:90vh;overflow:hidden}
@@ -123,6 +123,7 @@ dialog{width:min(960px,calc(100% - 28px),135vh);max-height:90vh;overflow:hidden}
 /* 详情介绍图画廊 */
 .detail-gallery{position:relative;background:#fff}
 .detail-gallery img{transition:opacity .18s ease}
+.detail-gallery img.trim-right-edge{width:auto;max-width:100%;clip-path:inset(0 1px 0 0)}
 .gallery-nav{position:absolute;z-index:2;top:50%;transform:translateY(-50%);width:42px;height:42px;border:1px solid rgba(255,255,255,.55);border-radius:50%;background:rgba(16,20,19,.78);color:#fff;cursor:pointer}
 .gallery-nav:hover{background:var(--apricot);color:var(--night)}
 .gallery-prev{left:14px}.gallery-next{right:14px}

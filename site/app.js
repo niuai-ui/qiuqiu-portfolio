@@ -21,8 +21,17 @@ const DEP_LINKS=[
   {re:/XML\s*Injector/gi, url:'https://scumbumbomods.com/xml-injector'},
 ];
 function depHtml(text){
-  const safe=esc(text||'');
-  if(!safe)return '无需前置';
+  const raw=String(text||'').trim();
+  if(!raw)return '无需前置';
+  const parts=raw.split(/\s*[、，,；;]\s*/).filter(Boolean);
+  if(parts.length>1){
+    const links=parts.map(part=>{
+      const dependency=DEP_LINKS.find(({re})=>{re.lastIndex=0;const match=re.exec(part);return match?.index===0&&match[0].length===part.length;});
+      return dependency?`<a class="dep-link" href="${esc(dependency.url)}" target="_blank" rel="noopener">${esc(part)}</a>`:'';
+    });
+    if(links.every(Boolean))return `<span class="dep-list">${links.join('')}</span>`;
+  }
+  const safe=esc(raw);
   const hits=[];
   for(const {re,url} of DEP_LINKS){
     re.lastIndex=0;let m;
@@ -233,6 +242,7 @@ function moveGallery(step){
   state.galleryIndex=(state.galleryIndex+step+state.galleryImages.length)%state.galleryImages.length;
   const image=$('#gallery-image');
   image.src=state.galleryImages[state.galleryIndex];
+  image.classList.toggle('trim-right-edge',state.galleryIndex===1);
   image.alt=`${state.currentWork.title}${state.galleryIndex===0?'封面':`介绍图 ${state.galleryIndex}`}`;
   $('.gallery-count').textContent=`${state.galleryIndex+1} / ${state.galleryImages.length}`;
   const next=state.galleryImages[(state.galleryIndex+1)%state.galleryImages.length];
