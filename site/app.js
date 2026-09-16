@@ -210,6 +210,18 @@ function renderPagination(pageCount){
   pagination.innerHTML=`<button type="button" data-page="${state.page-1}" ${state.page===1?'disabled':''} aria-label="上一页">←</button>${pages.map(page=>`<button type="button" data-page="${page}" class="${page===state.page?'active':''}" ${page===state.page?'aria-current="page"':''}>${page}</button>`).join('')}<button type="button" data-page="${state.page+1}" ${state.page===pageCount?'disabled':''} aria-label="下一页">→</button>`;
 }
 
+function fitDetailTitle(){
+  const title=$('.detail-copy h2');
+  if(!title)return;
+  title.style.removeProperty('font-size');
+  const maxSize=parseFloat(getComputedStyle(title).fontSize);
+  const minSize=window.matchMedia('(max-width:760px)').matches?22:28;
+  if(title.scrollWidth>title.clientWidth){
+    const fitted=Math.max(minSize,Math.floor(maxSize*title.clientWidth/title.scrollWidth*10)/10);
+    title.style.fontSize=`${fitted}px`;
+  }
+}
+
 function openDetails(id){
   const work=state.works.find(item=>item.id===id);if(!work)return;
   track('mod_open',work);
@@ -223,6 +235,7 @@ function openDetails(id){
   $('#dialog-content').innerHTML=`<div class="detail-layout"><div class="detail-image detail-gallery"><img id="gallery-image" src="${esc(state.galleryImages[0])}" decoding="async" alt="${esc(work.title)}封面"><span class="gallery-count">1 / ${state.galleryImages.length}</span>${galleryControls}</div><div class="detail-copy"><p class="eyebrow">${esc(work.category)} · ${dateText(work.launched)}</p><h2>${esc(work.title)}</h2><div class="english">${esc(work.englishTitle)}</div><div class="facts"><div><small>原作者</small><b>${author}</b></div><div><small>汉化支持</small><b>${esc(work.localization||'繁简汉化')}</b></div><div><small>前置说明</small><b>${depHtml(work.dependency)}</b></div><div><small>放置说明</small><b>${esc(work.placement||'无需放第一层')}</b></div><div><small>上新日期</small><b>${dateText(work.launched)}</b></div><div><small>模组更新日期</small><b>${dateText(work.modUpdated)}</b></div><div><small>汉化更新日期</small><b>${dateText(work.translationUpdated)}</b></div></div><div class="actions" aria-label="相关链接"><div class="action-entry action-entry-original"><div class="action-label"><strong>模组本体</strong></div>${modLink}</div><div class="action-entry action-entry-download"><div class="action-label"><strong>汉化文件</strong><span>百度网盘下载</span></div><div class="action-controls">${download}</div></div></div></div></div>`;
   if(!work.download){$('.actions .download').innerHTML='&#x5C0F;&#x7EA2;&#x4E66;&#x9996;&#x53D1;&#x4E2D;&#xFF0C;&#x4E0B;&#x8F7D;&#x94FE;&#x63A5;&#x5F85;&#x8865;&#x5145;';}
   $('#details').showModal();
+  requestAnimationFrame(()=>{fitDetailTitle();document.fonts?.ready.then(fitDetailTitle);});
 }
 
 function moveGallery(step){
@@ -259,6 +272,7 @@ document.addEventListener('click',event=>{
   const gallery=event.target.closest('[data-gallery-step]');if(gallery){event.stopPropagation();moveGallery(Number(gallery.dataset.galleryStep));}
 });
 document.addEventListener('keydown',event=>{if($('#details').open&&(event.key==='ArrowLeft'||event.key==='ArrowRight')){event.preventDefault();moveGallery(event.key==='ArrowLeft'?-1:1);return;}const card=event.target.closest?.('.work-card');if(card&&(event.key==='Enter'||event.key===' ')){event.preventDefault();openDetails(card.dataset.id);}});
+window.addEventListener('resize',()=>{if($('#details').open)fitDetailTitle();});
 $('#search').addEventListener('input',event=>{state.query=event.target.value.trim();state.page=1;render();});
 $('#author-filter').addEventListener('change',event=>{state.author=event.target.value;state.page=1;render();});
 $('#sort').addEventListener('change',event=>{state.sort=event.target.value;state.page=1;render();});
