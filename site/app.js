@@ -22,26 +22,14 @@ const DEP_LINKS=[
 ];
 function depHtml(text){
   const raw=String(text||'').trim();
-  if(!raw)return '无需前置';
+  if(!raw||raw==='无需前置')return '无需前置';
   const parts=raw.split(/\s*[、，,；;]\s*/).filter(Boolean);
-  if(parts.length>1){
-    const links=parts.map(part=>{
-      const dependency=DEP_LINKS.find(({re})=>{re.lastIndex=0;const match=re.exec(part);return match?.index===0&&match[0].length===part.length;});
-      return dependency?`<a class="dep-link" href="${esc(dependency.url)}" target="_blank" rel="noopener">${esc(part)}</a>`:'';
-    });
-    if(links.every(Boolean))return `<span class="dep-list">${links.join('')}</span>`;
-  }
-  const safe=esc(raw);
-  const hits=[];
-  for(const {re,url} of DEP_LINKS){
-    re.lastIndex=0;let m;
-    while((m=re.exec(safe))!==null){hits.push({start:m.index,end:m.index+m[0].length,text:m[0],url});if(m[0].length===0)re.lastIndex++;}
-  }
-  if(!hits.length)return safe;
-  hits.sort((a,b)=>b.start-a.start);
-  let html=safe;
-  for(const h of hits){const link=`<a class="dep-link" href="${esc(h.url)}" target="_blank" rel="noopener">${h.text}</a>`;html=html.slice(0,h.start)+link+html.slice(h.end);}
-  return html;
+  const chips=parts.map(part=>{
+    const dependency=DEP_LINKS.find(({re})=>{re.lastIndex=0;const match=re.exec(part);return match?.index===0&&match[0].length===part.length;});
+    if(dependency)return `<a class="dep-chip dep-link" href="${esc(dependency.url)}" target="_blank" rel="noopener">${esc(part)}</a>`;
+    return `<span class="dep-chip">${esc(part)}</span>`;
+  });
+  return `<span class="dep-list">${chips.join('')}</span>`;
 }
 
 function filtered(){
