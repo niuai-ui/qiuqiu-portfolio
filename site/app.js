@@ -20,6 +20,7 @@ const DEP_LINKS=[
   {re:/XML\s*注入器/gi, url:'https://scumbumbomods.com/xml-injector'},
   {re:/XML\s*Injector/gi, url:'https://scumbumbomods.com/xml-injector'},
 ];
+const GALLERY_EDGE_TRIMS=new Set(['rbk-pregnancyoverhaul-v1-2:1']);
 function depHtml(text){
   const raw=String(text||'').trim();
   if(!raw||raw==='无需前置')return '无需前置';
@@ -243,7 +244,8 @@ function moveGallery(step){
   state.galleryIndex=(state.galleryIndex+step+state.galleryImages.length)%state.galleryImages.length;
   const image=$('#gallery-image');
   image.src=state.galleryImages[state.galleryIndex];
-  image.classList.toggle('trim-right-edge',state.galleryIndex===1);
+  const trimKey=`${state.currentWork.id}:${state.galleryIndex}`;
+  image.classList.toggle('trim-right-edge',GALLERY_EDGE_TRIMS.has(trimKey));
   image.alt=`${state.currentWork.title}${state.galleryIndex===0?'封面':`介绍图 ${state.galleryIndex}`}`;
   $('.gallery-count').textContent=`${state.galleryIndex+1} / ${state.galleryImages.length}`;
   const next=state.galleryImages[(state.galleryIndex+1)%state.galleryImages.length];
