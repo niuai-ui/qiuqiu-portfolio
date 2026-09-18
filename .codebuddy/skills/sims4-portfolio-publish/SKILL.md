@@ -16,7 +16,7 @@ agent_created: true
 
 ## 权威边界
 
-- `CODEBUDDY.md` 是 WorkBuddy 入口，项目内 `AGENTS.md` 是完整权威规则；本 Skill 只补充执行方法，不复制整套业务规范。
+- 项目根目录的 `AGENTS.md` 是 Codex 与 WorkBuddy 共用且唯一的项目规则入口；本 Skill 只补充执行方法，不复制整套业务规范。
 - 开始工作前必须完整读取 `AGENTS.md`；只有整体 review、工作流迭代或批量审查才需要再读取项目长期笔记和最近 3～5 份日期日志。
 - WorkBuddy 不得更新或新建 Skill；发现缺口时只写“工作流问题反馈”。后续由 Codex 优先更新本 Skill，不得为同一网站另建近义或重复 Skill；确需新建时必须先获得用户明确同意。
 - 一次性任务事实写入项目近期日志；长期项目规则写入 `AGENTS.md`；只有经 Codex review 后确认能跨多次任务稳定复用的 WorkBuddy 执行方法才写入本 Skill。
@@ -54,7 +54,7 @@ agent_created: true
 
 ## 发布链路
 
-WorkBuddy/Codex 直接执行以下链路；`更新作品集.cmd` 只作为人工备用入口：
+WorkBuddy/Codex 直接执行以下链路：
 
 1. 确认工作区与暂存区状态，区分用户原有修改和本次修改。
 2. 运行 `python tools/sync_gallery.py`。
@@ -69,7 +69,6 @@ WorkBuddy/Codex 直接执行以下链路；`更新作品集.cmd` 只作为人工
 ## WorkBuddy 本机执行
 
 - WorkBuddy 使用 `C:\Users\Administrator\.workbuddy\binaries\python\envs\default\Scripts\python.exe`；Git 可使用 `C:\Program Files\Git\cmd\git.exe`。
-- `更新作品集.cmd` 带有 `pause`，自动化任务应逐条执行等效发布链路。
 - WorkBuddy 的 safe-delete 钩子可能拦截 `build_site.py` 对旧 `dist/` 的清理。仅在确认目标是本项目的 `dist` 后，才可运行项目脚本 `python tools/purge_dist.py "E:\模拟人生4 湫湫Sims日志作品集网站\dist"`，然后重新运行完整预检。
 - `tools/purge_dist.py` 必须拒绝任何非 `E:\模拟人生4 湫湫Sims日志作品集网站\dist` 目标，并拒绝递归处理符号链接、目录联接点或其他重解析点。不得复制它去清理其他目录。
 - 线上数量与字段核对使用 Python `urllib` 或等效程序化请求，并给 `data.json` 添加时间戳查询参数绕过 CDN 缓存。
