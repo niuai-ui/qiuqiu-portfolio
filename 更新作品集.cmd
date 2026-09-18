@@ -15,8 +15,11 @@ if not exist "%GIT%" (
   set "GIT=git"
 )
 
+set "WORKBUDDY_PYTHON=%USERPROFILE%\.workbuddy\binaries\python\envs\default\Scripts\python.exe"
 set "BUNDLED_PYTHON=%USERPROFILE%\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe"
-if exist "%BUNDLED_PYTHON%" (
+if exist "%WORKBUDDY_PYTHON%" (
+  set PYTHON="%WORKBUDDY_PYTHON%"
+) else if exist "%BUNDLED_PYTHON%" (
   set PYTHON="%BUNDLED_PYTHON%"
 ) else (
   py -3 --version >nul 2>&1
@@ -89,7 +92,7 @@ if /I "%~1"=="--check-only" (
   exit /b 0
 )
 
-"%GIT%" add -- "作品信息.xlsx" "content/images" "content/gallery" "site" "tools" ".github/workflows/pages.yml" "requirements.txt" ".gitignore" "README.md" "AGENTS.md" "更新作品集.cmd"
+"%GIT%" add -- "作品信息.xlsx" "content/images" "content/gallery" "site" "tools" ".codebuddy/skills" ".github/workflows/pages.yml" "requirements.txt" ".gitignore" "README.md" "AGENTS.md" "CODEBUDDY.md" "更新作品集.cmd"
 if errorlevel 1 (
   echo [错误] 文件暂存失败，请确认 Excel 已保存并关闭。
   pause

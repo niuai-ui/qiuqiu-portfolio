@@ -16,10 +16,10 @@ agent_created: true
 
 ## 权威边界
 
-- 项目内 `AGENTS.md` 是唯一权威规则；本 Skill 只补充 WorkBuddy 的执行环境和可复用操作，不复制整套项目规范。
-- 开始工作前先读取 `AGENTS.md`、项目 `.workbuddy/memory/MEMORY.md` 和最近 3～5 份日期日志，并与当前文件、Git 和命令结果交叉验证。
-- 已有同用途 Skill 时只更新现有 Skill。不得为同一网站另建近义或重复 Skill；创建新 Skill 必须先获得用户明确同意。
-- 一次性任务事实写入项目近期日志；长期项目规则写入 `AGENTS.md`；只有跨多次任务仍稳定复用的 WorkBuddy 执行方法才写入本 Skill。
+- `CODEBUDDY.md` 是 WorkBuddy 入口，项目内 `AGENTS.md` 是完整权威规则；本 Skill 只补充执行方法，不复制整套业务规范。
+- 开始工作前必须完整读取 `AGENTS.md`；只有整体 review、工作流迭代或批量审查才需要再读取项目长期笔记和最近 3～5 份日期日志。
+- WorkBuddy 不得更新或新建 Skill；发现缺口时只写“工作流问题反馈”。后续由 Codex 优先更新本 Skill，不得为同一网站另建近义或重复 Skill；确需新建时必须先获得用户明确同意。
+- 一次性任务事实写入项目近期日志；长期项目规则写入 `AGENTS.md`；只有经 Codex review 后确认能跨多次任务稳定复用的 WorkBuddy 执行方法才写入本 Skill。
 - 本项目专用 Skill 只能位于 `.codebuddy/skills/`，专用辅助脚本只能位于项目 `tools/`；不得在 WorkBuddy 用户级目录保存本项目副本。
 
 ## Skill 选择与候选记录
@@ -54,7 +54,7 @@ agent_created: true
 
 ## 发布链路
 
-顺序与 `更新作品集.cmd` 等效：
+WorkBuddy/Codex 直接执行以下链路；`更新作品集.cmd` 只作为人工备用入口：
 
 1. 确认工作区与暂存区状态，区分用户原有修改和本次修改。
 2. 运行 `python tools/sync_gallery.py`。
