@@ -14,6 +14,10 @@
 - 网站发布已有唯一的 WorkBuddy 用户级 Skill：`~/.workbuddy/skills/sims4-portfolio-publish/`。新窗口必须优先复用或更新这一份，不得为相同用途创建近义、改名或重复 Skill。
 - 只有确实会跨多次任务稳定复用、且不适合放入项目规则或脚本的 WorkBuddy 专用操作方法，才可以考虑写入 Skill；创建新的项目相关 Skill 前必须先盘点现有 Skill，并获得用户明确同意。
 - Skill 不能覆盖 `AGENTS.md`。两者不一致时以当前项目文件、用户最新要求和 `AGENTS.md` 为准，并及时修正旧 Skill，避免双份规则继续漂移。
+- WorkBuddy 开始任务前必须先列出或检索 `~/.workbuddy/skills`，按任务明确选择已有 Skill，并在使用前读取其完整 `SKILL.md`。不得把“尚未检索”误判为“没有 Skill”，也不得因一时找不到入口就现场新建。
+- 现有 Skill 引导：网站上新、资料修改、网盘更新和发布使用 `sims4-portfolio-publish`；作者作品库扫描、补图、去重和维护使用 `sims4-author-curator`；CurseForge 文件取得使用 `curseforge-file-download`；用户明确要求清理模组文件时使用 `sims4-mod-cleanup`；用户明确要求拍平 Mods 目录时使用 `sims4-mods-flatten`；`agent-browser-core` 只作为网页自动化基础能力，不替代上述业务 Skill。
+- 如果遇到现有 Skill 无法覆盖、但可能值得固化的新需求，WorkBuddy 不得立即创建 Skill；应在当天 `.workbuddy/memory/YYYY-MM-DD.md` 追加“Skill 候选需求”，记录：任务场景、遇到的坑或重复次数、已检索的现有 Skill、现有 Skill 不适用原因、建议固化的边界、相关文件或命令证据。
+- 后续整体 review 或工作流优化时，Codex 必须检查近期日志中的“Skill 候选需求”，并统一判断应当写入 `AGENTS.md`、修补项目 `tools/` 脚本、更新已有 Skill、仅保留为经验记录，还是确需新建 Skill。只有最后一种情况才向用户说明理由并取得同意后创建。
 
 ## Excel 固定结构
 
