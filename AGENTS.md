@@ -10,9 +10,10 @@
 
 ## WorkBuddy Skill 管理
 
-- 本项目的长期业务规则只维护在 `AGENTS.md`；近期任务事实写入 `.workbuddy/memory`。不得为了重复保存已有项目规则而频繁生成用户级 Skill。
-- 网站发布已有唯一的 WorkBuddy 用户级 Skill：`~/.workbuddy/skills/sims4-portfolio-publish/`。新窗口必须优先复用或更新这一份，不得为相同用途创建近义、改名或重复 Skill。
-- 只有确实会跨多次任务稳定复用、且不适合放入项目规则或脚本的 WorkBuddy 专用操作方法，才可以考虑写入 Skill；创建新的项目相关 Skill 前必须先盘点现有 Skill，并获得用户明确同意。
+- 本项目的长期业务规则只维护在 `AGENTS.md`；近期任务事实写入 `.workbuddy/memory`。不得为了重复保存已有项目规则而频繁生成 Skill。
+- 网站发布已有唯一的项目级 WorkBuddy Skill：`.codebuddy/skills/sims4-portfolio-publish/`。新窗口必须优先复用这一份，不得为相同用途创建近义、改名或重复 Skill。
+- 项目专用 Skill 只允许存放在本项目 `.codebuddy/skills/` 并随 Git 管理；项目专用辅助脚本放在项目 `tools/`。不得把本项目专用 Skill 或脚本写入 WorkBuddy 用户级目录。用户级 Skill 只保留真正跨项目通用的能力。
+- 只有确实会跨多次任务稳定复用、且不适合放入项目规则或脚本的 WorkBuddy 专用操作方法，才可以考虑写入 Skill；创建新的项目相关 Skill 前必须先盘点现有项目级 Skill，并获得用户明确同意。批准后也必须创建在 `.codebuddy/skills/`，不得创建为用户级 Skill。
 - Skill 不能覆盖 `AGENTS.md`。两者不一致时以当前项目文件、用户最新要求和 `AGENTS.md` 为准，并及时修正旧 Skill，避免双份规则继续漂移。
 - WorkBuddy 在本项目中是规则执行与问题反馈端。每次任务必须先完整读取并严格遵守 `AGENTS.md`；网站上新、资料修改、网盘更新、画廊同步和发布统一使用现有 `sims4-portfolio-publish`，并在使用前读取其完整 `SKILL.md`。
 - 对这个个人作品集网站，默认直接相关的 WorkBuddy 项目 Skill 只有 `sims4-portfolio-publish`。`sims4-author-curator`、`curseforge-file-download`、`sims4-mod-cleanup`、`sims4-mods-flatten` 和 `agent-browser-core` 属于其他或上游工作流，不得因为同在用户级 Skill 目录就自动带入本项目；只有用户明确提出相应范围的任务时才可另行使用。
