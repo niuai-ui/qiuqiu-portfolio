@@ -62,6 +62,18 @@
       "sha256": "18d099758dd9209c7d03233553aab5cfdde19d402d362cf517f7d7546c38553e"
     }
   ],
+  "jayesims-camefromgenerationalmoney": [
+    {
+      "file": "jayesims-camefromgenerationalmoney/01-bf963762160b.webp",
+      "source": "QQ - JayESims - CameFromGenerationalMoney - 含着金汤匙_01.png",
+      "sha256": "bf963762160b2baf5d85b8480f4772294d3fac8ccd7dbcfcda1a51e72d3747e5"
+    },
+    {
+      "file": "jayesims-camefromgenerationalmoney/02-914e8a001341.webp",
+      "source": "QQ - JayESims - CameFromGenerationalMoney - 含着金汤匙_02.png",
+      "sha256": "914e8a0013414200527ff78f1c7a2d365e60a0556bf2958480b3bb901fdd2b71"
+    }
+  ],
   "jayesims-casual-convos": [
     {
       "file": "jayesims-casual-convos/01-18cd11967cbe.webp",
@@ -168,6 +180,18 @@
       "file": "jayesims-lovesbeingsingle/02-2849a894f6b4.webp",
       "source": "QQ - JayESims - LovesBeingSingle - 热爱单身_02.png",
       "sha256": "2849a894f6b45e02b3826b1546975164a83d204af460f43c8887596acd232d8c"
+    }
+  ],
+  "jayesims-make-it-clap": [
+    {
+      "file": "jayesims-make-it-clap/01-f5d18936a688.webp",
+      "source": "QQ - JayESims - Make It Clap - 屁股摇起来_01.png",
+      "sha256": "f5d18936a68805a15ed6c55836d1fd40c097befe1801321d1edc888b6468e9f7"
+    },
+    {
+      "file": "jayesims-make-it-clap/02-4f9bfcca646f.webp",
+      "source": "QQ - JayESims - Make It Clap - 屁股摇起来_02.png",
+      "sha256": "4f9bfcca646f3483c9a3a2a710148b21371f64822136ff239da3004625b68f73"
     }
   ],
   "jayesims-once-upon-a-side-chick": [
@@ -549,6 +573,18 @@
       "file": "rbk-pregnancyoverhaul-v1-2/02-5948eb22e728.webp",
       "source": "RBK - PregnancyOverhaul_v1.2 - 怀孕大修_02.png",
       "sha256": "5948eb22e728664ce02e899d1aa71d7ebe2836a12c66541f4b96b8304dd77a76"
+    }
+  ],
+  "wicked-pixxel-can-t-buy-love-v2": [
+    {
+      "file": "wicked-pixxel-can-t-buy-love-v2/01-805284fb1c75.webp",
+      "source": "QQ - WICKED PIXXEL - Can't Buy Love v2 - 花钱买爱情_01.png",
+      "sha256": "805284fb1c75ba113b09a68637135d9876d395ff9fb571ff12a944269d4a824a"
+    },
+    {
+      "file": "wicked-pixxel-can-t-buy-love-v2/02-e5f253dede3d.webp",
+      "source": "QQ - WICKED PIXXEL - Can't Buy Love v2 - 花钱买爱情_02.png",
+      "sha256": "e5f253dede3d0e17574554e854104b4fe43fa31643d0644bf2581a8d67fe29c7"
     }
   ],
   "wicked-pixxel-sexy-gigs-v21-2": [
