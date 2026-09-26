@@ -38,6 +38,18 @@
       "sha256": "91becec769d555f13db7fdf131837dac133169f5ca9c00c2a9257d2b373ab161"
     }
   ],
+  "avathepit-death-by-childbirth-cf": [
+    {
+      "file": "avathepit-death-by-childbirth-cf/01-c788204dfad2.webp",
+      "source": "QQ - AvathePit - Death by Childbirth_CF - 分娩致死_01.png",
+      "sha256": "c788204dfad24cc6dcfda776510996109322e1b093755533c4d6a2a43cb20e71"
+    },
+    {
+      "file": "avathepit-death-by-childbirth-cf/02-ad03459adb4d.webp",
+      "source": "QQ - AvathePit - Death by Childbirth_CF - 分娩致死_02.png",
+      "sha256": "ad03459adb4d65617a1383b4201e9ed1a1990d3073a66e057a64a32b99bcb7e6"
+    }
+  ],
   "jayesims-brosgonedeep": [
     {
       "file": "jayesims-brosgonedeep/01-1ec6f642f9e7.webp",
@@ -228,6 +240,40 @@
       "file": "jayesims-teen-mom-reality/02-847dd668ce9a.webp",
       "source": "QQ - JayESims - TeenMomReality - 年轻妈妈实录_02.png",
       "sha256": "847dd668ce9a2d906e59ff9bf18811860eb2159684757c4ba82b501584d8631e"
+    }
+  ],
+  "jayesims-the-luxury-estate-lot-trait-mod": [
+    {
+      "file": "jayesims-the-luxury-estate-lot-trait-mod/01-92a5785f277f.webp",
+      "source": "QQ - JayESims - The Luxury Estate Lot Trait Mod - 豪华庄园_01.png",
+      "sha256": "92a5785f277f5bcfe8291cf35bf7431821541eae75fc85631cceb64d201a9b91"
+    },
+    {
+      "file": "jayesims-the-luxury-estate-lot-trait-mod/02-2cc6aa83104a.webp",
+      "source": "QQ - JayESims - The Luxury Estate Lot Trait Mod - 豪华庄园_02.png",
+      "sha256": "2cc6aa83104a78219f4d44041425d4ab3c2eaf3a0d6cd1a8559440ba9408d0fc"
+    },
+    {
+      "file": "jayesims-the-luxury-estate-lot-trait-mod/03-2dd1af5ee909.webp",
+      "source": "QQ - JayESims - The Luxury Estate Lot Trait Mod - 豪华庄园_03.png",
+      "sha256": "2dd1af5ee909776156f925f7ce7f04e77f721882e858d79448f0678b65dc446d"
+    }
+  ],
+  "jayesims-the-sneaky-link-energy": [
+    {
+      "file": "jayesims-the-sneaky-link-energy/01-6bd9bd2b4823.webp",
+      "source": "QQ - JayESims - The Sneaky Link Energy - 地下情人_01.png",
+      "sha256": "6bd9bd2b482300739b35085e00da3fc6f028e93f86374bd3401e749f67e763f6"
+    },
+    {
+      "file": "jayesims-the-sneaky-link-energy/02-eaf44ef0f22e.webp",
+      "source": "QQ - JayESims - The Sneaky Link Energy - 地下情人_02.png",
+      "sha256": "eaf44ef0f22e886d26514d5661917da42584887848d5816ee70b9a00fb879b98"
+    },
+    {
+      "file": "jayesims-the-sneaky-link-energy/03-2b257785fefb.webp",
+      "source": "QQ - JayESims - The Sneaky Link Energy - 地下情人_03.png",
+      "sha256": "2b257785fefbf26ab9f84c95839be0e1f44b0080a1e9bddbf56ab91a3367ce5e"
     }
   ],
   "jayesims-xoxogossipgirlrichtearumors": [
