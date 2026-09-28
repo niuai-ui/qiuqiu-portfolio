@@ -50,6 +50,8 @@ def expected_manifest(log_root: Path) -> dict[str, list[dict[str, str]]]:
     for folder in source_folders(log_root):
         author, english_name = parse_folder_name(folder.name)
         work_id = slug(f"{author}-{english_name}")
+        if work_id in manifest:
+            raise ValueError(f"日志源存在重复作品标识：{work_id}（{folder}）")
         items = []
         for index, source in enumerate(source_gallery(folder), start=1):
             digest = file_hash(source)

@@ -1,78 +1,36 @@
 ---
 name: sims4-portfolio-publish
-description: 维护并发布“湫湫 Sims 日志”汉化作品集网站（GitHub Pages），包括新增作品、更新作品信息或百度网盘链接、执行完整预检、提交推送、等待 Pages 部署并核对线上数据。触发词：更新百度网盘、补网盘链接、更新作品集、发布作品集、上新模组、portfolio publish。
+description: 维护并发布“湫湫 Sims 日志”汉化作品集网站（GitHub Pages），包括新增作品、更新资料或网盘链接、预检、提交推送、等待 Pages 部署并核对线上数据。触发词：更新百度网盘、补网盘链接、更新作品集、发布作品集、上新模组、portfolio publish。
 agent_created: true
 ---
 
 # 湫湫 Sims 汉化档案馆发布
 
 项目根：`E:\模拟人生4 湫湫Sims日志作品集网站`
-
-项目级 Skill：`.codebuddy/skills/sims4-portfolio-publish/`
-
 仓库：`https://github.com/niuai-ui/qiuqiu-portfolio.git`（`main`）
-
 线上：`https://niuai-ui.github.io/qiuqiu-portfolio/`
 
-## 权威边界
+## 执行入口
 
-- 项目根目录的 `AGENTS.md` 是 Codex 与 WorkBuddy 共用且唯一的项目规则入口；本 Skill 只补充执行方法，不复制整套业务规范。
-- 开始工作前必须完整读取 `AGENTS.md`；只有整体 review、工作流迭代或批量审查才需要再读取项目长期笔记和最近 3～5 份日期日志。
-- WorkBuddy 不得更新或新建 Skill；发现缺口时只写“工作流问题反馈”。后续由 Codex 优先更新本 Skill，不得为同一网站另建近义或重复 Skill；确需新建时必须先获得用户明确同意。
-- 一次性任务事实写入项目近期日志；长期项目规则写入 `AGENTS.md`；只有经 Codex review 后确认能跨多次任务稳定复用的 WorkBuddy 执行方法才写入本 Skill。
-- 本项目专用 Skill 只能位于 `.codebuddy/skills/`，专用辅助脚本只能位于项目 `tools/`；不得在 WorkBuddy 用户级目录保存本项目副本。
+- 开始前完整读取项目根目录的 `AGENTS.md`；业务规则、职责边界和发布门槛均以它为准。本 Skill 只记录执行方法。
+- 整体 review、工作流迭代或批量审查时，按 `AGENTS.md` 读取长期笔记、最近日期日志和工作流问题反馈。
+- 本 Skill 覆盖网站上新、Excel 修改、画廊同步、预检及发布。WorkBuddy 遇到规则缺口或 Skill 候选，按 `AGENTS.md` 的模板写入当天项目日志，由 Codex 后续评审。
+- 一次性任务事实写入日期日志；经评审确认长期有效的业务规则写入 `AGENTS.md`，可重复使用的执行方法才写入本 Skill。
 
-## Skill 选择与候选记录
+## 数据操作
 
-- 本 Skill 覆盖网站上新、Excel 资料修改、网盘链接更新、画廊同步、完整预检、提交推送和部署核对。属于这些范围时直接使用本 Skill，不得因为新窗口或触发词不同而另建发布 Skill。
-- 本项目默认只使用本 Skill。用户级目录中的作者整理、下载、模组清理、目录拍平或浏览器基础 Skill 不属于网站发布流程，除非用户明确把任务范围扩展到对应工作流，否则不得自动调用。
-- WorkBuddy 只负责严格执行 `AGENTS.md` 和本 Skill，不得自行修改 `AGENTS.md`、本 Skill、其他 Skill，或以“优化”为由改写与当前业务任务无关的工作流脚本。
-- 如果执行中发现流程缺陷、重复坑、规则歧义、工具故障或可能需要 Skill 的需求，只在当天项目日志 `.workbuddy/memory/YYYY-MM-DD.md` 追加以下反馈，不得现场创建或修改 Skill：
+- 按 `AGENTS.md` 的当前源目录与 Excel 双向核对，按英文名和中文名定位记录，写入后回读修改值、格式与行高。修改范围以本次任务为准。
+- 新作品的类别依据作者说明或用户确认；无法判断时询问用户，不能按作者或相似作品批量猜测。
+- 补链接或处理“日期为今天”等表述时，按 `AGENTS.md` 区分三个日期；表述有冲突或歧义时先澄清，不自行改写用户明确提到的字段。
 
-  ```text
-  ## 工作流问题反馈：<简短名称>
-  - 当前任务：
-  - 已遵循的规则或 Skill：
-  - 问题与复现条件：
-  - 临时处理及其风险：
-  - 对结果的影响：
-  - 相关文件、命令或错误证据：
-  - 建议整改方向：
-  - 是否属于 Skill 候选：是 / 否 / 不确定
-  ```
+## 发布执行
 
-- 后续由 Codex 在整体 review 中统一评估并整改。WorkBuddy 的日志反馈不构成修改规则、绕开安全措施或创建 Skill 的授权；无法在现有规则内安全完成时应停止相关操作并向用户说明。
+逐项执行 `AGENTS.md` 第 2 节：检查并同步 Git、修改目标、同步画廊、完整预检、精确暂存、提交推送、等待 Pages、线上核对和确认工作区状态。任一检查失败时停止提交或推送。
 
-## 数据编辑原则
-
-- `作品信息.xlsx` 是网站唯一数据源；工作表固定 14 列，字段、类别、图片和同步规则全部遵循 `AGENTS.md`。
-- 三个日期彼此独立：原版更新只改“模组更新日期”，汉化文件变化才改“汉化更新日期”，“上新日期”创建后永不改变。只补链接时三个日期都不动。
-- 百度网盘列格式为 `链接: <url> 提取码: <code>`；源目录没有地址时留空，不得编造。
-- 按“模组英文名 + 模组中文名”定位 Excel 行，不能依赖记忆中的行号。写入后回读核对值、单元格格式和 36 行高。
-- 现有记录的类别不得因重新同步而自行变化。用户已确认 `LovesBeingSingle / 热爱单身` 为“人物特征”；不得恢复成“游戏玩法”。新作品类别不明确时询问用户，不能按作者或相似作品批量猜测。
-- 新增作品时从一个现有标准数据行完整复制格式；封面、介绍图、前置和放置说明均按 `AGENTS.md` 从日志源目录提取。
-
-## 发布链路
-
-WorkBuddy/Codex 直接执行以下链路：
-
-1. 确认工作区与暂存区状态，区分用户原有修改和本次修改。
-2. 运行 `python tools/sync_gallery.py`。
-3. 运行 `python tools/preflight.py`；任何检查失败都不得提交或推送。
-4. 只暂存本次实际改动的精确文件路径，不使用 `git add .`，也不笼统暂存整个 `content`、`site` 或 `tools` 目录。
-5. 用 `git diff --cached --name-status` 和 `git diff --cached --check` 核对暂存内容，再提交并推送 `main`。
-6. 使用 `git rev-parse HEAD` 取得完整 40 位 SHA，运行 `python tools/wait_for_pages.py <完整 SHA>`。
-7. Pages 成功后，用带时间戳参数的程序化请求读取线上 `data.json`，核对目标条目和字段；未验证成功不得声称已经发布完成。
-
-`dist/`、临时预览、备份和 `outputs/` 均不得提交。
-
-## WorkBuddy 本机执行
-
-- WorkBuddy 使用 `C:\Users\Administrator\.workbuddy\binaries\python\envs\default\Scripts\python.exe`；Git 可使用 `C:\Program Files\Git\cmd\git.exe`。
-- WorkBuddy 的 safe-delete 钩子可能拦截 `build_site.py` 对旧 `dist/` 的清理。仅在确认目标是本项目的 `dist` 后，才可运行项目脚本 `python tools/purge_dist.py "E:\模拟人生4 湫湫Sims日志作品集网站\dist"`，然后重新运行完整预检。
-- `tools/purge_dist.py` 必须拒绝任何非 `E:\模拟人生4 湫湫Sims日志作品集网站\dist` 目标，并拒绝递归处理符号链接、目录联接点或其他重解析点。不得复制它去清理其他目录。
-- 线上数量与字段核对使用 Python `urllib` 或等效程序化请求，并给 `data.json` 添加时间戳查询参数绕过 CDN 缓存。
+- WorkBuddy 可使用 `C:\Users\Administrator\.workbuddy\binaries\python\envs\default\Scripts\python.exe`；Git 可使用 `C:\Program Files\Git\cmd\git.exe`。
+- 仅在旧 `dist/` 被 safe-delete 钩子误拦截、且确认路径是本项目输出目录时，运行 `python tools/purge_dist.py "E:\模拟人生4 湫湫Sims日志作品集网站\dist"`，随后重新运行完整预检。该脚本拒绝其他目标及重解析点。
+- 线上数据使用 Python `urllib` 或等效程序化请求，给 `data.json` 加时间戳查询参数，核对目标字段与总数。不要只依据浏览器缓存或网页抓取摘要判定成功。
 
 ## 交付口径
 
-向用户说明：实际修改内容、哪些日期没有变化、预检结果、提交 SHA、Pages 工作流结果和线上核对结论。未推送或部署未成功时，不得表述为“已发布”。
+说明实际改动、日期保持情况、预检结果、完整提交 SHA、Pages 结果和线上核对结论。只有 Pages 成功且线上数据正确后，才能称为“已发布”。

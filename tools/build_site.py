@@ -88,6 +88,8 @@ def validate_sheet_formatting(sheet):
         return
     reference = [cell_format_signature(cell) for cell in sheet[2]]
     reference_height = sheet.row_dimensions[2].height
+    if reference_height != 36:
+        raise ValueError(f"Excel 第 2 行行高必须为 36，实际为 {reference_height}")
     bad_rows = []
     for row_number, cells in enumerate(sheet.iter_rows(min_row=2), start=2):
         if not any(cell.value is not None for cell in cells):
@@ -111,10 +113,13 @@ def split_download(value):
     raw = text(value)
     if not raw:
         return "", ""
-    url_match = re.search(r"https?://[^\s，,；;]+", raw)
-    url = url_match.group(0).rstrip("。.、") if url_match else ""
-    code_match = re.search(r"(?:提取码|密码|pwd)\s*[:：]?\s*([0-9A-Za-z]{4})", raw)
-    code = code_match.group(1) if code_match else ""
+    match = re.fullmatch(r"(?:链接:\s*)?(https?://\S+)\s+提取码:\s*([0-9A-Za-z]{4})", raw)
+    if not match:
+        raise ValueError("百度网盘单元格必须包含有效网址和 4 位提取码")
+    url, code = match.groups()
+    parsed = urlparse(url)
+    if not parsed.netloc:
+        raise ValueError("百度网盘单元格中的网址无效")
     return url, code
 
 
@@ -166,9 +171,10 @@ def load_works():
         if work_id in ids:
             raise ValueError(f"第 {row_number} 行生成的作品标识重复：{work_id}")
         ids.add(work_id)
-        download_url, download_code = split_download(item.get("百度网盘链接整体"))
-        if text(item.get("百度网盘链接整体")) and not download_url:
-            raise ValueError(f"第 {row_number} 行的百度网盘单元格里找不到有效网址")
+        try:
+            download_url, download_code = split_download(item.get("百度网盘链接整体"))
+        except ValueError as error:
+            raise ValueError(f"第 {row_number} 行的{error}") from error
         cover = text(item.get("封面路径"))
         cover_path = Path(cover)
         if (
