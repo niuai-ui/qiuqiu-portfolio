@@ -11,6 +11,45 @@
       "sha256": "f7c17333e9785c0b64b9573c306b2cfc503c40f77dead39978b418771b94636a"
     }
   ],
+  "andirz-pso-purchasemedicine-v-4-2-3": [
+    {
+      "file": "andirz-pso-purchasemedicine-v-4-2-3/01-fffd96206208.webp",
+      "source": "QQ - Andirz - PSO_PurchaseMedicine_v.4.2.3 - 购买药品_01.png",
+      "sha256": "fffd96206208563fe0661c8d7dc959e38630d035558fef5ec21704ed1e4837be"
+    },
+    {
+      "file": "andirz-pso-purchasemedicine-v-4-2-3/02-a6ed741078d3.webp",
+      "source": "QQ - Andirz - PSO_PurchaseMedicine_v.4.2.3 - 购买药品_02.png",
+      "sha256": "a6ed741078d3fb7021f809c8da665fcc8c93ac1e645b49dce75a91bf06c5cada"
+    },
+    {
+      "file": "andirz-pso-purchasemedicine-v-4-2-3/03-6a4ffe1928ea.webp",
+      "source": "QQ - Andirz - PSO_PurchaseMedicine_v.4.2.3 - 购买药品_03.png",
+      "sha256": "6a4ffe1928ea1898d3c4c20785edb2447e14fb7874740a9c849b6f9bf8672d6e"
+    },
+    {
+      "file": "andirz-pso-purchasemedicine-v-4-2-3/04-165a5237e771.webp",
+      "source": "QQ - Andirz - PSO_PurchaseMedicine_v.4.2.3 - 购买药品_04.png",
+      "sha256": "165a5237e771f5334141f786f293815cafdc1c5fff916af46d3846fdd6b896ea"
+    }
+  ],
+  "andirz-pso-simsimonlinestore-v-5-7-0": [
+    {
+      "file": "andirz-pso-simsimonlinestore-v-5-7-0/01-d984f36ecdf9.webp",
+      "source": "QQ - Andirz - PSO_SimSimOnlineStore_v.5.7.0 - SimSim 在线商店_01.png",
+      "sha256": "d984f36ecdf904a626e7d714cf5df809e5f3fc0f7766fe5a275c99e6971d63c0"
+    },
+    {
+      "file": "andirz-pso-simsimonlinestore-v-5-7-0/02-a32635f501cd.webp",
+      "source": "QQ - Andirz - PSO_SimSimOnlineStore_v.5.7.0 - SimSim 在线商店_02.png",
+      "sha256": "a32635f501cdbe864f7e89b502e9c74973b1e8d09334dc73be5b1a80dd4abccb"
+    },
+    {
+      "file": "andirz-pso-simsimonlinestore-v-5-7-0/03-fc8a00825300.webp",
+      "source": "QQ - Andirz - PSO_SimSimOnlineStore_v.5.7.0 - SimSim 在线商店_03.png",
+      "sha256": "fc8a008253004d77b519d99e634147bbcf89ad007527f0be0ca5a45e8c984415"
+    }
+  ],
   "avathepit-aristocracy-royalty-and-mistress-careers-4-9-2": [
     {
       "file": "avathepit-aristocracy-royalty-and-mistress-careers-4-9-2/01-574cfd937702.webp",
@@ -631,6 +670,23 @@
       "file": "wicked-pixxel-can-t-buy-love-v2/02-e5f253dede3d.webp",
       "source": "QQ - WICKED PIXXEL - Can't Buy Love v2 - 花钱买爱情_02.png",
       "sha256": "e5f253dede3d0e17574554e854104b4fe43fa31643d0644bf2581a8d67fe29c7"
+    }
+  ],
+  "wicked-pixxel-dark-emotions-trait-v2": [
+    {
+      "file": "wicked-pixxel-dark-emotions-trait-v2/01-9d7ee104d9cd.webp",
+      "source": "QQ - WICKED PIXXEL - Dark Emotions Trait v2 - 黑暗情绪_01.png",
+      "sha256": "9d7ee104d9cd7d13ec4e0bd1ed47fc46d20c1e1f17bd73fe35726d95f452b3e2"
+    },
+    {
+      "file": "wicked-pixxel-dark-emotions-trait-v2/02-7a57fc2a39b0.webp",
+      "source": "QQ - WICKED PIXXEL - Dark Emotions Trait v2 - 黑暗情绪_02.png",
+      "sha256": "7a57fc2a39b0326f11e4205edf3a197ea2ce30ea8e16cc15efc97f89f2181349"
+    },
+    {
+      "file": "wicked-pixxel-dark-emotions-trait-v2/03-e8224118c90f.webp",
+      "source": "QQ - WICKED PIXXEL - Dark Emotions Trait v2 - 黑暗情绪_03.png",
+      "sha256": "e8224118c90f6a0bf1544d283f262368d47c20dcddd0386c97d7b4a39eb4579f"
     }
   ],
   "wicked-pixxel-sexy-gigs-v21-2": [
