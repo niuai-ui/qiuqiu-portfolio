@@ -17,8 +17,9 @@ const track=(eventName,work)=>{
 const DEP_LINKS=[
   {re:/Lot51\s*核心库/gi, url:'https://lot51.cc/mods/core-library'},
   {re:/Lot51\s*Core\s*Library/gi, url:'https://lot51.cc/mods/core-library'},
-  {re:/XML\s*注入器/gi, url:'https://scumbumbomods.com/xml-injector'},
   {re:/XML\s*Injector/gi, url:'https://scumbumbomods.com/xml-injector'},
+  {re:/智能核心脚本/gi, url:'https://www.curseforge.com/sims4/mods/smart-core-script'},
+  {re:/P\.S\.O\s*通用套装/gi, url:'https://www.curseforge.com/sims4/mods/pso-common-package'},
 ];
 const GALLERY_EDGE_TRIMS=new Set(['rbk-pregnancyoverhaul-v1-2:1']);
 function depHtml(text){
