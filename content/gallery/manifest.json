@@ -461,6 +461,23 @@
       "sha256": "db4a3754039e3b8e3a47fe2a28cb0ced14dd2237afeb7d56e05cc2abc962ad78"
     }
   ],
+  "klimter-judgmentaltrait": [
+    {
+      "file": "klimter-judgmentaltrait/01-f82d648a9abd.webp",
+      "source": "QQ - klimter - JudgmentalTrait - 评头论足_01.png",
+      "sha256": "f82d648a9abd9925eab2eae820941cedc80d81c3ba6c9621b4f417cc7526b616"
+    },
+    {
+      "file": "klimter-judgmentaltrait/02-cfbe6914edb1.webp",
+      "source": "QQ - klimter - JudgmentalTrait - 评头论足_02.png",
+      "sha256": "cfbe6914edb1f95d248051af66976f9def61d2d80201b5a4779d114f97f5ec79"
+    },
+    {
+      "file": "klimter-judgmentaltrait/03-5a288e2f2e6a.webp",
+      "source": "QQ - klimter - JudgmentalTrait - 评头论足_03.png",
+      "sha256": "5a288e2f2e6a50ecba61fda97be1d905f9a779559e15a67bd1fecb849825cc79"
+    }
+  ],
   "klimter-malicioustrait": [
     {
       "file": "klimter-malicioustrait/01-ddb8134cc51b.webp",
@@ -687,6 +704,40 @@
       "file": "wicked-pixxel-dark-emotions-trait-v2/03-e8224118c90f.webp",
       "source": "QQ - WICKED PIXXEL - Dark Emotions Trait v2 - 黑暗情绪_03.png",
       "sha256": "e8224118c90f6a0bf1544d283f262368d47c20dcddd0386c97d7b4a39eb4579f"
+    }
+  ],
+  "wicked-pixxel-exquisite-taste-trait-v2": [
+    {
+      "file": "wicked-pixxel-exquisite-taste-trait-v2/01-33cf5f1fc1f2.webp",
+      "source": "QQ - WICKED PIXXEL - Exquisite Taste Trait v2 - 极致品味_01.png",
+      "sha256": "33cf5f1fc1f20d0118501bd1a1d3dfacbee3bd277ccdb634823faa7304565de1"
+    },
+    {
+      "file": "wicked-pixxel-exquisite-taste-trait-v2/02-27c521bf71da.webp",
+      "source": "QQ - WICKED PIXXEL - Exquisite Taste Trait v2 - 极致品味_02.png",
+      "sha256": "27c521bf71da875d918e9b15aa6b512cdd3739777c2f2233a3df96268f407032"
+    },
+    {
+      "file": "wicked-pixxel-exquisite-taste-trait-v2/03-2fa5904f26e1.webp",
+      "source": "QQ - WICKED PIXXEL - Exquisite Taste Trait v2 - 极致品味_03.png",
+      "sha256": "2fa5904f26e1459ee624b1839ca4811dcfa576b14b6ad2a5c395ab8b0f9850c4"
+    }
+  ],
+  "wicked-pixxel-romantic-tease-v2": [
+    {
+      "file": "wicked-pixxel-romantic-tease-v2/01-456b19cd19a2.webp",
+      "source": "QQ - WICKED PIXXEL - Romantic Tease V2 - 撩人精_01.png",
+      "sha256": "456b19cd19a2600e5c57ae695e8f657c4dae6a92df5c5db976495464dcb5643d"
+    },
+    {
+      "file": "wicked-pixxel-romantic-tease-v2/02-2234116b82f7.webp",
+      "source": "QQ - WICKED PIXXEL - Romantic Tease V2 - 撩人精_02.png",
+      "sha256": "2234116b82f7ea86b04745de0af63cec2bf6c309c4c2045e90672a3788cfb98a"
+    },
+    {
+      "file": "wicked-pixxel-romantic-tease-v2/03-9cc1743397de.webp",
+      "source": "QQ - WICKED PIXXEL - Romantic Tease V2 - 撩人精_03.png",
+      "sha256": "9cc1743397de33ccc832bae4b416307d95d7fc28488ee5433e7abf4ca48c7752"
     }
   ],
   "wicked-pixxel-sexy-gigs-v21-2": [
