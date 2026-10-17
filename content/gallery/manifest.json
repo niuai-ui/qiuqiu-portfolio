@@ -137,6 +137,23 @@
       "sha256": "101ec94ba8e78a1f9618e3f238329c370b959f78d118585577cb514417966250"
     }
   ],
+  "jayesims-certified-bbc": [
+    {
+      "file": "jayesims-certified-bbc/01-55b6cb6f8254.webp",
+      "source": "QQ - JayESims - Certified BBC - 定海神针认证_01.png",
+      "sha256": "55b6cb6f825480946caaea571683845087c98921faa491e14a2b86ab10d7b05f"
+    },
+    {
+      "file": "jayesims-certified-bbc/02-f52269bb8133.webp",
+      "source": "QQ - JayESims - Certified BBC - 定海神针认证_02.png",
+      "sha256": "f52269bb8133404a837d2cfb4a614a35717040ff0afed2a3c8f8d81776a87860"
+    },
+    {
+      "file": "jayesims-certified-bbc/03-f1d2471c39a2.webp",
+      "source": "QQ - JayESims - Certified BBC - 定海神针认证_03.png",
+      "sha256": "f1d2471c39a2b69f6dff2dc547ffdcec1fc6176569ded7913ea5057e2a892607"
+    }
+  ],
   "jayesims-diagnosedthechapterslupus": [
     {
       "file": "jayesims-diagnosedthechapterslupus/01-2103e71d2aa2.webp",
@@ -721,6 +738,35 @@
       "file": "wicked-pixxel-exquisite-taste-trait-v2/03-2fa5904f26e1.webp",
       "source": "QQ - WICKED PIXXEL - Exquisite Taste Trait v2 - 极致品味_03.png",
       "sha256": "2fa5904f26e1459ee624b1839ca4811dcfa576b14b6ad2a5c395ab8b0f9850c4"
+    }
+  ],
+  "wicked-pixxel-functional-lash-bar-v3": [
+    {
+      "file": "wicked-pixxel-functional-lash-bar-v3/01-465551c929c4.webp",
+      "source": "WICKED PIXXEL - Functional Lash Bar V3 - 功能性睫毛吧_01.png",
+      "sha256": "465551c929c4264d49b066eda58ad3999ff68755b97cb15c025ceb87e5028e6e"
+    },
+    {
+      "file": "wicked-pixxel-functional-lash-bar-v3/02-180934b06b02.webp",
+      "source": "WICKED PIXXEL - Functional Lash Bar V3 - 功能性睫毛吧_02.png",
+      "sha256": "180934b06b0249440d8fedf881abdc1f6b3703e3174adae78f2c80aa3aa523e6"
+    },
+    {
+      "file": "wicked-pixxel-functional-lash-bar-v3/03-567b9dae8b44.webp",
+      "source": "WICKED PIXXEL - Functional Lash Bar V3 - 功能性睫毛吧_03.png",
+      "sha256": "567b9dae8b4457b38928c8e7b6433506a54b2fa92c981216ba4cfbdfddb62814"
+    }
+  ],
+  "wicked-pixxel-peaceful-v2": [
+    {
+      "file": "wicked-pixxel-peaceful-v2/01-3a1143f33c7e.webp",
+      "source": "QQ - WICKED PIXXEL - Peaceful v2 - 调停者_01.png",
+      "sha256": "3a1143f33c7ebf4d9dba29929d3015cade0268dee3d28f812708121704608183"
+    },
+    {
+      "file": "wicked-pixxel-peaceful-v2/02-4aacbecb89ae.webp",
+      "source": "QQ - WICKED PIXXEL - Peaceful v2 - 调停者_02.png",
+      "sha256": "4aacbecb89aeb72b20e543a02547e67ca8a487e475cebc6c72f7bd3ca66773c1"
     }
   ],
   "wicked-pixxel-romantic-tease-v2": [
