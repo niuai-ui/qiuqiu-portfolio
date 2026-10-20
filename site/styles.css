@@ -155,3 +155,8 @@ dialog{width:min(960px,calc(100% - 28px),135vh);max-height:90vh;overflow:hidden}
 .author-row b{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:inherit;font-size:13px}
 .author-row span{flex:0 0 auto;white-space:nowrap;font-size:11px}
 .author-row i{font-size:12px}
+
+/* Rounded Chinese typeface; the original font and OFL license are in site/fonts. */
+@font-face{font-family:"Chill Round M";src:url("fonts/ChillRoundM.otf") format("opentype");font-style:normal;font-weight:400;font-display:swap}
+body{font-family:"Chill Round M","Microsoft YaHei","Noto Sans SC",sans-serif}
+.hero h1,.section-head h2,.updates-section .section-head h2,.authors h2,.about h2,.work-card h3,.detail-copy h2,.calendar-toolbar strong,.update-day time b,.calendar-overflow-dialog h3,.archive-card b{font-family:"Chill Round M","Microsoft YaHei","Noto Sans SC",sans-serif}
