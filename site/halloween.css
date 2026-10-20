@@ -1,0 +1,63 @@
+/* Seasonal Halloween layer: remove this stylesheet link to restore the archive palette. */
+:root{
+  --night:#1c1226;
+  --forest:#2b1b35;
+  --apricot:#e58b47;
+  --paper:#f8f0e8;
+  --ink:#2b2130;
+  --muted:#796d7a;
+  --line:rgba(62,39,69,.2);
+}
+body{background:var(--paper)}
+.topbar{background:#1b1124;border-bottom-color:rgba(244,171,101,.28)}
+.topbar nav a:hover{color:#ffc082}
+.hero{position:relative;isolation:isolate;background:radial-gradient(circle at 76% 40%,#513049 0,#2b1b35 42%,#17111f 100%)}
+.hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at 11% 15%,#f6cba1 0 1px,transparent 2px),radial-gradient(circle at 27% 77%,#f6cba1 0 1px,transparent 2px),radial-gradient(circle at 55% 18%,#f6cba1 0 1px,transparent 2px),radial-gradient(circle at 89% 74%,#f6cba1 0 1px,transparent 2px),radial-gradient(circle at 95% 23%,#f6cba1 0 1px,transparent 2px);opacity:.64}
+.hero::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(0deg,rgba(226,112,50,.15),transparent 48%)}
+.hero>*{position:relative;z-index:1}
+.hero .eyebrow{margin-bottom:12px}
+.seasonal-tag{display:inline-flex;align-items:center;min-height:34px;margin-bottom:18px;padding:6px 14px;border:1px solid rgba(245,166,93,.55);border-radius:999px;background:rgba(229,139,71,.14);color:#ffd0a2;font-size:12px;font-weight:700;letter-spacing:.12em}
+.hero-copy{min-width:0}
+.hero h1{font-size:clamp(38px,4.6vw,64px);overflow-wrap:anywhere}
+.hero h1 em{color:#f4a563}
+.primary{border-radius:999px;box-shadow:0 9px 25px rgba(16,8,19,.28)}
+.moon{background:radial-gradient(circle at 36% 33%,#fff0d1,#f3b978 62%,#df8b4b);box-shadow:0 0 0 20px rgba(241,154,80,.08),0 0 80px rgba(241,154,80,.3)}
+.moon::after{display:none}
+.halloween-bats{position:absolute;z-index:2;left:-3%;top:15%;width:230px;height:140px;fill:#f1af82;overflow:visible}
+.hero-art::after{content:"\1F383";position:absolute;z-index:2;left:14%;bottom:17px;font-size:64px;line-height:1;transform:rotate(-12deg);filter:drop-shadow(0 10px 11px rgba(0,0,0,.28))}
+.archive-card{border-radius:18px;background:#fff1e3;box-shadow:18px 18px 0 rgba(15,9,20,.43)}
+.archive-card::before{content:"✦ HALLOWEEN ✦";position:absolute;top:24px;left:30px;color:#b5673e;font-size:10px;font-weight:700;letter-spacing:.18em}
+.daily-section{background:#e9dce5}
+.updates-section{background:#f0e5eb}
+.works-section{background:#faf2e9}
+.about{background:#f3e8e8}
+.authors{background:#24162d}
+footer{background:#180f20;color:#d5c6d5}
+.work-card{background:#fffaf4;box-shadow:0 8px 24px rgba(47,27,49,.12);transition:transform .2s ease,box-shadow .2s ease}
+.work-card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(47,27,49,.18)}
+.cover{background:#e9dce4}
+.badge{background:#3b2542;color:#fff2df;border:1px solid rgba(244,165,99,.72)}
+.search,.filter,select,.pagination button{border-radius:10px}
+.search{background:#fffaf4;box-shadow:inset 0 0 0 1px rgba(62,39,69,.12)}
+.filter,select,.pagination button{background:#fffaf4}
+.update-day{border-color:rgba(84,53,91,.22);background:rgba(255,250,244,.4)}
+.update-day.is-empty{background:rgba(77,48,85,.055);border-color:rgba(84,53,91,.1)}
+.update-day.has-events{background:#fff9f3}
+.update-day.has-events:hover{background:#fff1df;border-color:var(--apricot)}
+.calendar-weekdays{color:#634d69}
+.calendar-toolbar button{background:#fffaf4;border-color:rgba(84,53,91,.32)}
+.calendar-more{color:#8e4b2d}
+.calendar-overflow-dialog{background:#fff9f3;border:1px solid #cf9d78;box-shadow:0 20px 50px rgba(28,18,38,.28)}
+dialog{border-radius:18px;background:#fff9f3}
+.detail-image,.detail-gallery{background:#ede2e8}
+.tags span{border-radius:999px;background:#e9dce9}
+.action-entry-original{background:#ebe4ee;border-color:#c7b7d1}
+.action-entry-download{background:#f9e5d2;border-color:#e0b18b}
+.author-row{background:#382540;border-color:rgba(244,165,99,.35)}
+.author-row:hover{background:#503050;border-color:#f4a563}
+@media(max-width:760px){
+  .hero{background:radial-gradient(circle at 85% 12%,#503047 0,#2b1b35 45%,#17111f 100%)}
+  .seasonal-tag{font-size:11px}
+  .hero h1{font-size:clamp(31px,9.4vw,38px)}
+}
+@media(prefers-reduced-motion:reduce){.work-card{transition:none}}
