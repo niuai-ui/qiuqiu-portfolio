@@ -1,63 +1,103 @@
-/* Seasonal Halloween layer: remove this stylesheet link to restore the archive palette. */
+/* Halloween collage inspired by the user's vintage poster reference. */
 :root{
-  --night:#1c1226;
-  --forest:#2b1b35;
-  --apricot:#e58b47;
-  --paper:#f8f0e8;
-  --ink:#2b2130;
-  --muted:#796d7a;
-  --line:rgba(62,39,69,.2);
+  --night:#171414;
+  --forest:#211a19;
+  --moss:#73956f;
+  --apricot:#ef863d;
+  --paper:#f7ead2;
+  --ink:#25201c;
+  --muted:#71645b;
+  --line:rgba(47,31,22,.2);
 }
 body{background:var(--paper)}
-.topbar{background:#1b1124;border-bottom-color:rgba(244,171,101,.28)}
-.topbar nav a:hover{color:#ffc082}
-.hero{position:relative;isolation:isolate;background:radial-gradient(circle at 76% 40%,#513049 0,#2b1b35 42%,#17111f 100%)}
-.hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at 11% 15%,#f6cba1 0 1px,transparent 2px),radial-gradient(circle at 27% 77%,#f6cba1 0 1px,transparent 2px),radial-gradient(circle at 55% 18%,#f6cba1 0 1px,transparent 2px),radial-gradient(circle at 89% 74%,#f6cba1 0 1px,transparent 2px),radial-gradient(circle at 95% 23%,#f6cba1 0 1px,transparent 2px);opacity:.64}
-.hero::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(0deg,rgba(226,112,50,.15),transparent 48%)}
+.topbar{background:#171414;border-bottom:2px solid #da7136;color:#f8e7cb}
+.topbar nav a:hover,.brand small{color:#ef9a53}
+.brand-seal{filter:drop-shadow(0 2px 4px #0008)}
+.hero{position:relative;isolation:isolate;min-height:660px;grid-template-columns:minmax(0,1fr) minmax(360px,.95fr);gap:35px;padding-block:72px;background:#171414;color:#f8e8ce;border-bottom:8px solid #dc7434}
+.hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.52;background-image:radial-gradient(circle at 8% 12%,#f5d5aa 0 1px,transparent 1.8px),radial-gradient(circle at 26% 69%,#ef863d 0 1.3px,transparent 2px),radial-gradient(circle at 52% 28%,#f5d5aa 0 1px,transparent 1.8px),radial-gradient(circle at 74% 76%,#f5d5aa 0 1px,transparent 1.8px),radial-gradient(circle at 91% 22%,#ef863d 0 1.3px,transparent 2px);background-size:175px 147px,211px 183px,239px 201px,193px 155px,277px 197px}
+.hero::after{content:"✦  ✧  ✦";position:absolute;right:4%;bottom:15px;color:#e98c48;font-size:20px;letter-spacing:1em;opacity:.75}
 .hero>*{position:relative;z-index:1}
-.hero .eyebrow{margin-bottom:12px}
-.seasonal-tag{display:inline-flex;align-items:center;min-height:34px;margin-bottom:18px;padding:6px 14px;border:1px solid rgba(245,166,93,.55);border-radius:999px;background:rgba(229,139,71,.14);color:#ffd0a2;font-size:12px;font-weight:700;letter-spacing:.12em}
-.hero-copy{min-width:0}
-.hero h1{font-size:clamp(38px,4.6vw,64px);overflow-wrap:anywhere}
-.hero h1 em{color:#f4a563}
-.primary{border-radius:999px;box-shadow:0 9px 25px rgba(16,8,19,.28)}
-.moon{background:radial-gradient(circle at 36% 33%,#fff0d1,#f3b978 62%,#df8b4b);box-shadow:0 0 0 20px rgba(241,154,80,.08),0 0 80px rgba(241,154,80,.3)}
-.moon::after{display:none}
-.halloween-bats{position:absolute;z-index:2;left:-3%;top:15%;width:230px;height:140px;fill:#f1af82;overflow:visible}
-.hero-art::after{content:"\1F383";position:absolute;z-index:2;left:14%;bottom:17px;font-size:64px;line-height:1;transform:rotate(-12deg);filter:drop-shadow(0 10px 11px rgba(0,0,0,.28))}
-.archive-card{border-radius:18px;background:#fff1e3;box-shadow:18px 18px 0 rgba(15,9,20,.43)}
-.archive-card::before{content:"✦ HALLOWEEN ✦";position:absolute;top:24px;left:30px;color:#b5673e;font-size:10px;font-weight:700;letter-spacing:.18em}
-.daily-section{background:#e9dce5}
-.updates-section{background:#f0e5eb}
-.works-section{background:#faf2e9}
-.about{background:#f3e8e8}
-.authors{background:#24162d}
-footer{background:#180f20;color:#d5c6d5}
-.work-card{background:#fffaf4;box-shadow:0 8px 24px rgba(47,27,49,.12);transition:transform .2s ease,box-shadow .2s ease}
-.work-card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(47,27,49,.18)}
-.cover{background:#e9dce4}
-.badge{background:#3b2542;color:#fff2df;border:1px solid rgba(244,165,99,.72)}
-.search,.filter,select,.pagination button{border-radius:10px}
-.search{background:#fffaf4;box-shadow:inset 0 0 0 1px rgba(62,39,69,.12)}
-.filter,select,.pagination button{background:#fffaf4}
-.update-day{border-color:rgba(84,53,91,.22);background:rgba(255,250,244,.4)}
-.update-day.is-empty{background:rgba(77,48,85,.055);border-color:rgba(84,53,91,.1)}
-.update-day.has-events{background:#fff9f3}
-.update-day.has-events:hover{background:#fff1df;border-color:var(--apricot)}
-.calendar-weekdays{color:#634d69}
-.calendar-toolbar button{background:#fffaf4;border-color:rgba(84,53,91,.32)}
-.calendar-more{color:#8e4b2d}
-.calendar-overflow-dialog{background:#fff9f3;border:1px solid #cf9d78;box-shadow:0 20px 50px rgba(28,18,38,.28)}
-dialog{border-radius:18px;background:#fff9f3}
-.detail-image,.detail-gallery{background:#ede2e8}
-.tags span{border-radius:999px;background:#e9dce9}
-.action-entry-original{background:#ebe4ee;border-color:#c7b7d1}
-.action-entry-download{background:#f9e5d2;border-color:#e0b18b}
-.author-row{background:#382540;border-color:rgba(244,165,99,.35)}
-.author-row:hover{background:#503050;border-color:#f4a563}
+.hero-copy{max-width:680px}
+.hero .eyebrow{color:#f3a365;letter-spacing:.22em}
+.seasonal-tag{display:inline-block;margin-bottom:22px;padding:9px 16px;border:2px dashed #ef8a45;border-radius:999px;color:#f7bd7e;background:#3b261e;font-size:12px;font-weight:700;letter-spacing:.13em;transform:rotate(-2deg)}
+.hero h1{font-size:clamp(40px,4.2vw,60px);line-height:1.17;letter-spacing:.015em;text-shadow:3px 4px 0 #3a211b}
+.hero h1 em{color:#f48e40}
+.lead{color:#e4d0b3;line-height:1.9}
+.primary{border:2px solid #171414;border-radius:14px;background:#f18a3f;color:#211715;box-shadow:5px 5px 0 #f6d5a0;padding:15px 21px}
+.primary:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 #f6d5a0}
+.hero-art{height:555px;min-width:0}
+.halloween-illustration{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 12px 15px #0005)}
+.archive-card{right:3%;bottom:5%;width:157px;height:146px;padding:17px;border:3px solid #211715;border-radius:12px;background:#f6e3be;color:#271b17;box-shadow:7px 8px 0 #e47b37;transform:rotate(5deg)}
+.archive-card::before{content:"✦ SPOOKY FILES ✦";position:absolute;top:13px;left:16px;color:#9d4e2a;font-size:9px;font-weight:700;letter-spacing:.06em}
+.archive-card span{margin-top:14px}
+.archive-card b{font-size:66px;line-height:.85;margin:9px 0 4px;color:#d9662e}
+.archive-card small{font-size:8px}
+.daily-section{background:#e8cda8;border-bottom:3px dashed #9c572e}
+.updates-section{background:#f5e8d0;border-bottom:8px solid #d97235}
+.works-section{position:relative;background:#211a19;color:#f6e8d0}
+.works-section::before{content:"✦  ✧  ✦  ✧  ✦  ✧  ✦  ✧  ✦";display:block;margin:-53px 0 32px;color:#e6853d;font-size:20px;letter-spacing:.6em;white-space:nowrap;overflow:hidden}
+.section-head h2,.authors h2,.about h2{font-weight:700}
+.eyebrow{color:#c36b35}
+.works-section .eyebrow{color:#ef9b57}
+.works-section .section-head>p{color:#d2bda2}
+.works-section .toolbar{border-color:#a2775480}
+.search{border:1px solid #a76f47;border-radius:10px;background:#f8ecd5;color:#31241d}
+.search input{color:#31241d}
+.filter,select,.pagination button{border:1px solid #ab7750;border-radius:10px;background:#f8ecd5;color:#33241d}
+.filter.active,.filter:hover,.pagination button:hover,.pagination button.active{background:#e87936;color:#1b1513;border-color:#f5b273}
+.work-card{border:2px solid #d69a61;border-radius:16px;background:#f7e8cd;color:#261d19;box-shadow:5px 5px 0 #0d0a0a}
+.work-card:hover{transform:translate(-2px,-3px);box-shadow:8px 9px 0 #e87936}
+.cover{background:#ddc6a6}
+.badge{border:1px solid #2c1c17;border-radius:7px;background:#f1a45f;color:#211715}
+.featured{background:#ef8c3e}
+.work-card .card-meta{color:#765f50}
+.work-card .english{color:#746153}
+.update-legend{border-color:#a7704a}
+.event-new{background:#ef863d}
+.event-mod{background:#73956f}
+.event-translation{background:#a77fc0}
+.calendar-toolbar strong{font-weight:700}
+.calendar-toolbar button{border:2px solid #9f714e;border-radius:9px;background:#fff4de}
+.calendar-toolbar button:hover:not(:disabled){background:#e87936;color:#211715}
+.calendar-weekdays{color:#594738;font-weight:700}
+.update-day{border:1px solid #c3986e;border-radius:12px;background:#fbf1df}
+.update-day.is-empty{background:#ebd9bd;border-color:#d6b995}
+.update-day.has-events{background:#fff8e9}
+.update-day.has-events:hover{background:#ffedcc;border-color:#d46d32}
+.update-day time{border-color:#dfc4a5}
+.update-preview .update-work-link,.calendar-more{border-radius:6px}
+.update-preview .calendar-chip-new{border-color:#e6843b;background:#f9dfbc}
+.update-preview .calendar-chip-mod{border-color:#73956f;background:#e4eedf}
+.update-preview .calendar-chip-translation{border-color:#a77fc0;background:#f0e2f5}
+.update-preview .calendar-chip-mixed{border-color:#73956f;background:linear-gradient(135deg,#e4eedf 0 50%,#f0e2f5 50% 100%);box-shadow:inset 0 -2px 0 #a77fc0}
+.update-preview .update-work-link:hover,.update-preview .update-work-link:focus-visible{background:#31221d;border-color:#31221d;color:#fff5e0}
+.calendar-overflow-dialog{border:2px solid #d48349;border-radius:15px;background:#fff6e6;box-shadow:8px 8px 0 #281a15}
+dialog{border-radius:18px;background:#fff6e6}
+dialog::backdrop{background:#100d0dd9}
+.detail-image,.detail-gallery{background:#e6d2b5}
+.tags span{border-radius:999px;background:#f0dfc5}
+.action-entry-original{background:#ebdfc6;border-color:#b39a74}
+.action-entry-download{background:#f6d6ab;border-color:#d3935f}
+.authors{background:#32201b;color:#f6e8ce;border-top:7px solid #e78139}
+.author-list{border-top:0}
+.author-row{border:1px solid #a86a43;border-radius:10px;background:#4a2b20}
+.author-row:hover{border-color:#f0a45e;background:#653921}
+.author-row span{color:#e0c7a8}
+.about{background:#f2ddba}
+.about::after{opacity:.07}
+.brand-mark.large{background:#ec873d;color:#271b17}
+footer{background:#171414;color:#d9c1a2;border-top:3px solid #df7e38}
+@media(max-width:1100px){.hero{grid-template-columns:1fr .78fr;gap:12px}.hero-art{height:460px}.archive-card{width:130px;height:130px;padding:12px}.archive-card b{font-size:54px}}
 @media(max-width:760px){
-  .hero{background:radial-gradient(circle at 85% 12%,#503047 0,#2b1b35 45%,#17111f 100%)}
-  .seasonal-tag{font-size:11px}
-  .hero h1{font-size:clamp(31px,9.4vw,38px)}
+  .hero{display:block;min-height:0;padding:58px 22px 40px}
+  .hero h1{font-size:clamp(34px,8.5vw,48px)}
+  .hero .lead{font-size:14px;margin:20px 0 26px}
+  .hero-art{display:block;width:min(100%,430px);height:300px;margin:28px auto 0}
+  .archive-card{right:1%;bottom:0;width:106px;height:107px;padding:10px;box-shadow:4px 5px 0 #e47b37}
+  .archive-card::before{font-size:6px;top:9px;left:10px}
+  .archive-card span{font-size:7px;margin-top:10px}
+  .archive-card b{font-size:44px;margin:5px 0}
+  .archive-card small{font-size:6px}
+  .works-section::before{margin:-30px 0 26px}
 }
-@media(prefers-reduced-motion:reduce){.work-card{transition:none}}
+@media(prefers-reduced-motion:reduce){.work-card,.primary{transition:none}}
