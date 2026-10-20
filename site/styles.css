@@ -147,3 +147,11 @@ dialog{width:min(960px,calc(100% - 28px),135vh);max-height:90vh;overflow:hidden}
 .update-preview .update-work-link,.calendar-more{border-radius:6px}
 .calendar-toolbar button{border-radius:8px}
 .calendar-overflow-dialog{border-radius:14px}
+
+/* Compact author index */
+.author-list{display:flex;flex-wrap:wrap;align-content:flex-start;align-items:flex-start;gap:10px;border-top:0}
+.author-row{display:inline-flex;align-items:center;gap:9px;width:auto;max-width:100%;min-height:42px;padding:9px 13px;border:1px solid rgba(239,233,221,.25);border-radius:10px;background:rgba(239,233,221,.07);line-height:1.3}
+.author-row:hover{border-color:var(--apricot);background:rgba(217,154,114,.14)}
+.author-row b{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:inherit;font-size:13px}
+.author-row span{flex:0 0 auto;white-space:nowrap;font-size:11px}
+.author-row i{font-size:12px}
