@@ -33,6 +33,7 @@ body{background:var(--paper)}
 .archive-card b{font-size:66px;line-height:.85;margin:9px 0 4px;color:#d9662e}
 .archive-card small{font-size:8px}
 .daily-section{background:#e8cda8;border-bottom:3px dashed #9c572e}
+.daily-section .daily-viewport{width:calc(100% + 20px);margin:-5px -10px -14px;padding:5px 10px 14px}
 .updates-section{background:#f5e8d0;border-bottom:8px solid #d97235}
 .works-section{position:relative;background:#211a19;color:#f6e8d0}
 .works-section::before{content:"✦  ✧  ✦  ✧  ✦  ✧  ✦  ✧  ✦";display:block;margin:-53px 0 32px;color:#e6853d;font-size:20px;letter-spacing:.6em;white-space:nowrap;overflow:hidden}
