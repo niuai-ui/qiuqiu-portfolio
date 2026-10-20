@@ -137,3 +137,13 @@ dialog{width:min(960px,calc(100% - 28px),135vh);max-height:90vh;overflow:hidden}
 @media(max-width:1020px){.grid{--grid-columns:4}}
 @media(max-width:820px){.grid{--grid-columns:3}}
 @media(max-width:650px){.grid{--grid-columns:2;gap:25px 12px}}
+
+/* 日历和作品卡片使用统一的圆角。 */
+.work-card{border-radius:14px;overflow:hidden;background:rgba(255,255,255,.45)}
+.work-card .card-meta,.work-card h3,.work-card .english{margin-left:12px;margin-right:12px}
+.work-card .english{padding-bottom:14px}
+.work-card .badge{border-radius:6px}
+.update-day{border-radius:12px}
+.update-preview .update-work-link,.calendar-more{border-radius:6px}
+.calendar-toolbar button{border-radius:8px}
+.calendar-overflow-dialog{border-radius:14px}
