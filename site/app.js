@@ -1,4 +1,4 @@
-const state={works:[],category:'全部',author:'全部',query:'',sort:'launched',page:1,updateMonthIndex:0,galleryIndex:0,galleryImages:[]};
+const state={works:[],category:'全部',author:'全部',query:'',sort:'launched',page:1,updateMonthIndex:null,galleryIndex:0,galleryImages:[]};
 const $=selector=>document.querySelector(selector);
 const esc=value=>String(value??'').replace(/[&<>'"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
 const dateText=value=>value?value.replaceAll('-','.'):'日期待补充';
@@ -66,10 +66,11 @@ function updateEvents(){
   return [...byDate.entries()].sort((a,b)=>b[0].localeCompare(a[0]));
 }
 
-function calendarMonths(groups){
-  if(!groups.length)return [];
-  const [maxYear,maxMonth]=groups[0][0].slice(0,7).split('-').map(Number);
-  const [minYear,minMonth]=groups.at(-1)[0].slice(0,7).split('-').map(Number);
+function calendarMonths(groups,currentMonth){
+  const latest=groups[0]?.[0].slice(0,7)||currentMonth;
+  const earliest=groups.at(-1)?.[0].slice(0,7)||currentMonth;
+  const [maxYear,maxMonth]=(latest>currentMonth?latest:currentMonth).split('-').map(Number);
+  const [minYear,minMonth]=(earliest<currentMonth?earliest:currentMonth).split('-').map(Number);
   const months=[];
   let year=maxYear,month=maxMonth;
   while(year>minYear||(year===minYear&&month>=minMonth)){
@@ -84,8 +85,10 @@ function renderUpdates(){
   const board=$('#updates-board');
   if(!board)return;
   const groups=updateEvents();
-  const months=calendarMonths(groups);
-  state.updateMonthIndex=Math.min(state.updateMonthIndex,Math.max(0,months.length-1));
+  const today=new Date();
+  const currentMonth=`${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}`;
+  const months=calendarMonths(groups,currentMonth);
+  state.updateMonthIndex=state.updateMonthIndex===null?months.indexOf(currentMonth):Math.max(0,Math.min(state.updateMonthIndex,months.length-1));
   const selected=months[state.updateMonthIndex];
   if(!selected){board.innerHTML='';return;}
   const [year,month]=selected.split('-').map(Number);
