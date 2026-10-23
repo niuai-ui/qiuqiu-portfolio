@@ -274,6 +274,23 @@
       "sha256": "d6de20a156f21644a24dd903c63b2d90a1dfbae1e1660f2da8868bce5cd77f99"
     }
   ],
+  "jayesims-our-sims-our-stories-part-1": [
+    {
+      "file": "jayesims-our-sims-our-stories-part-1/01-e2e7a827ef7e.webp",
+      "source": "QQ - JayESims - Our Sims, Our Stories Part 1 - 我们的故事_01.png",
+      "sha256": "e2e7a827ef7eef78030be4817a431d23ac2cfb898d82afb4064bed8d3128f3dc"
+    },
+    {
+      "file": "jayesims-our-sims-our-stories-part-1/02-710527b4dfd7.webp",
+      "source": "QQ - JayESims - Our Sims, Our Stories Part 1 - 我们的故事_02.png",
+      "sha256": "710527b4dfd7792dc56669e88dcfd10758e34088b8b09c4f3f36c45e4cf6c058"
+    },
+    {
+      "file": "jayesims-our-sims-our-stories-part-1/03-fabaf2a029d6.webp",
+      "source": "QQ - JayESims - Our Sims, Our Stories Part 1 - 我们的故事_03.png",
+      "sha256": "fabaf2a029d63e7c0ce4d31aecaf160486cba16221d19402c5166e26ef4278b3"
+    }
+  ],
   "jayesims-siblingbusiness": [
     {
       "file": "jayesims-siblingbusiness/01-43db9fe8ebad.webp",
@@ -330,6 +347,23 @@
       "file": "jayesims-the-sneaky-link-energy/03-2b257785fefb.webp",
       "source": "QQ - JayESims - The Sneaky Link Energy - 地下情人_03.png",
       "sha256": "2b257785fefbf26ab9f84c95839be0e1f44b0080a1e9bddbf56ab91a3367ce5e"
+    }
+  ],
+  "jayesims-we-cant-be-friends-2": [
+    {
+      "file": "jayesims-we-cant-be-friends-2/01-9d4bfb582583.webp",
+      "source": "QQ - JayESims - We Can’t Be Friends 2 - 我们做不成朋友2_01.png",
+      "sha256": "9d4bfb582583063f6d429bdab8408fe8f9317cbbe134c4307f3ab02026ebf848"
+    },
+    {
+      "file": "jayesims-we-cant-be-friends-2/02-c10ddb8a229a.webp",
+      "source": "QQ - JayESims - We Can’t Be Friends 2 - 我们做不成朋友2_02.png",
+      "sha256": "c10ddb8a229a6f7ecdf0d377e2ab9e05a5145a49226600aa25dd66e34fed3a18"
+    },
+    {
+      "file": "jayesims-we-cant-be-friends-2/03-5490a944df74.webp",
+      "source": "QQ - JayESims - We Can’t Be Friends 2 - 我们做不成朋友2_03.png",
+      "sha256": "5490a944df741896cf809ad91762fac18cfb1bcbebc510eb711972afe53f5cd1"
     }
   ],
   "jayesims-xoxogossipgirlrichtearumors": [
@@ -738,6 +772,18 @@
       "file": "wicked-pixxel-exquisite-taste-trait-v2/03-2fa5904f26e1.webp",
       "source": "QQ - WICKED PIXXEL - Exquisite Taste Trait v2 - 极致品味_03.png",
       "sha256": "2fa5904f26e1459ee624b1839ca4811dcfa576b14b6ad2a5c395ab8b0f9850c4"
+    }
+  ],
+  "wicked-pixxel-forgetful-v2": [
+    {
+      "file": "wicked-pixxel-forgetful-v2/01-c16bcb6acc4e.webp",
+      "source": "QQ - WICKED PIXXEL - Forgetful v2 - 健忘者_01.png",
+      "sha256": "c16bcb6acc4e8e6a65d9b3b483a0c3be8383da335163789c1a2d1530a85053b1"
+    },
+    {
+      "file": "wicked-pixxel-forgetful-v2/02-1d46b2a81bb3.webp",
+      "source": "QQ - WICKED PIXXEL - Forgetful v2 - 健忘者_02.png",
+      "sha256": "1d46b2a81bb33869647b56660d932902d1ec982844717e7d550cc6d88e978881"
     }
   ],
   "wicked-pixxel-functional-lash-bar-v3": [
