@@ -177,7 +177,7 @@ body{font-family:"Chill Round M","Microsoft YaHei","Noto Sans SC",sans-serif}
   position:absolute;
   inset:31px 3px 3px;
   z-index:0;
-  background:url("images/decor/holidays/halloween-stickers.webp") center 45%/190% auto no-repeat;
+  background:url("images/decor/holidays/halloween-stickers.webp") center bottom/contain no-repeat;
   opacity:.22;
   pointer-events:none;
 }
