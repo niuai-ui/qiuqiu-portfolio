@@ -160,3 +160,33 @@ dialog{width:min(960px,calc(100% - 28px),135vh);max-height:90vh;overflow:hidden}
 @font-face{font-family:"Chill Round M";src:url("fonts/ChillRoundM.otf") format("opentype");font-style:normal;font-weight:400;font-display:swap}
 body{font-family:"Chill Round M","Microsoft YaHei","Noto Sans SC",sans-serif}
 .hero h1,.section-head h2,.updates-section .section-head h2,.authors h2,.about h2,.work-card h3,.detail-copy h2,.calendar-toolbar strong,.update-day time b,.calendar-overflow-dialog h3,.archive-card b{font-family:"Chill Round M","Microsoft YaHei","Noto Sans SC",sans-serif}
+
+/* Holiday cards keep the fixed calendar cell size and the update chips clickable. */
+.updates-board .update-day.is-holiday{
+  --holiday-accent:#bd7135;
+  --holiday-bg:#fbe7d4;
+  border:2px solid var(--holiday-accent);
+  background:linear-gradient(145deg,rgba(255,255,255,.8),transparent 90%),var(--holiday-bg);
+  box-shadow:inset 0 4px 0 var(--holiday-accent);
+}
+.updates-board .update-day.is-holiday:hover{background:linear-gradient(145deg,rgba(255,255,255,.9),transparent 90%),var(--holiday-bg)}
+.update-day.is-holiday time,.update-day.is-holiday.no-updates time{border-bottom:1px solid color-mix(in srgb,var(--holiday-accent) 35%,transparent)}
+.update-day time .holiday-label{display:inline-flex;align-items:center;justify-content:center;gap:3px;max-width:calc(100% - 28px);padding:3px 6px;border-radius:999px;background:var(--holiday-accent);color:#fff;font-size:10px;font-weight:700;line-height:1.25;white-space:nowrap}
+.holiday-label>span{font-size:12px;line-height:1}
+.holiday-greeting{display:flex;align-items:flex-end;justify-content:space-between;gap:3px;min-height:65px;color:var(--holiday-accent)}
+.holiday-greeting>span{font-size:35px;line-height:1}
+.holiday-greeting small{max-width:64px;font-size:10px;font-weight:700;line-height:1.3;text-align:right}
+.update-day.holiday-new-year{--holiday-accent:#a76a25;--holiday-bg:#fff0ce}
+.update-day.holiday-spring-festival{--holiday-accent:#bd4539;--holiday-bg:#ffe1d6}
+.update-day.holiday-valentine{--holiday-accent:#ae5570;--holiday-bg:#fbe2e9}
+.update-day.holiday-dragon-boat{--holiday-accent:#4e7958;--holiday-bg:#e4f1e3}
+.update-day.holiday-mid-autumn{--holiday-accent:#6e5b9e;--holiday-bg:#e9e5f4}
+.update-day.holiday-halloween{--holiday-accent:#d26a2e;--holiday-bg:#ffdfbd}
+.update-day.holiday-christmas{--holiday-accent:#447554;--holiday-bg:#e1eee3}
+@media(max-width:760px){
+  .update-day time .holiday-label{padding:2px 4px;font-size:9px}
+  .holiday-label>span{font-size:11px}
+  .holiday-greeting{min-height:69px;flex-direction:column;align-items:flex-start;justify-content:flex-end;gap:0}
+  .holiday-greeting>span{font-size:29px}
+  .holiday-greeting small{max-width:none;font-size:9px;text-align:left;white-space:nowrap}
+}

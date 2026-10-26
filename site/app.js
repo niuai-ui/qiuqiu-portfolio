@@ -66,11 +66,64 @@ function updateEvents(){
   return [...byDate.entries()].sort((a,b)=>b[0].localeCompare(a[0]));
 }
 
+const FIXED_HOLIDAYS=new Map([
+  ['01-01',{id:'new-year',name:'元旦',icon:'✦',message:'新年快乐'}],
+  ['02-14',{id:'valentine',name:'情人节',icon:'♥',message:'爱意满满'}],
+  ['10-31',{id:'halloween',name:'万圣节',icon:'🎃',message:'不给糖就捣蛋'}],
+  ['12-25',{id:'christmas',name:'圣诞节',icon:'🎄',message:'圣诞快乐'}],
+]);
+const LUNAR_HOLIDAYS=new Map([
+  ['1/1',{id:'spring-festival',name:'春节',icon:'福',message:'新春快乐'}],
+  ['5/5',{id:'dragon-boat',name:'端午节',icon:'✿',message:'端午安康'}],
+  ['8/15',{id:'mid-autumn',name:'中秋节',icon:'☾',message:'月圆人团圆'}],
+]);
+// Civil dates checked against Hong Kong Observatory Gregorian-Lunar tables (2025–2040).
+// https://www.hko.gov.hk/en/gts/time/conversion.htm
+const HKO_LUNAR_DATES={
+  2025:['2025-01-29','2025-05-31','2025-10-06'],
+  2026:['2026-02-17','2026-06-19','2026-09-25'],
+  2027:['2027-02-06','2027-06-09','2027-09-15'],
+  2028:['2028-01-26','2028-05-28','2028-10-03'],
+  2029:['2029-02-13','2029-06-16','2029-09-22'],
+  2030:['2030-02-03','2030-06-05','2030-09-12'],
+  2031:['2031-01-23','2031-06-24','2031-10-01'],
+  2032:['2032-02-11','2032-06-12','2032-09-19'],
+  2033:['2033-01-31','2033-06-01','2033-09-08'],
+  2034:['2034-02-19','2034-06-20','2034-09-27'],
+  2035:['2035-02-08','2035-06-10','2035-09-16'],
+  2036:['2036-01-28','2036-05-30','2036-10-04'],
+  2037:['2037-02-15','2037-06-18','2037-09-24'],
+  2038:['2038-02-04','2038-06-07','2038-09-13'],
+  2039:['2039-01-24','2039-05-27','2039-10-02'],
+  2040:['2040-02-12','2040-06-14','2040-09-20'],
+};
+const lunarFormatter=(()=>{
+  try{
+    const formatter=new Intl.DateTimeFormat('en-u-ca-chinese',{month:'numeric',day:'numeric',timeZone:'Asia/Shanghai'});
+    return formatter.resolvedOptions().calendar==='chinese'?formatter:null;
+  }catch{return null;}
+})();
+function holidayForDate(date){
+  const fixed=FIXED_HOLIDAYS.get(date.slice(5));
+  if(fixed)return fixed;
+  const [year,month,day]=date.split('-').map(Number);
+  const verified=HKO_LUNAR_DATES[year];
+  if(verified){
+    const index=verified.indexOf(date);
+    return index<0?null:LUNAR_HOLIDAYS.get(['1/1','5/5','8/15'][index]);
+  }
+  if(!lunarFormatter)return null;
+  // Fallback outside the official table range.
+  const parts=Object.fromEntries(lunarFormatter.formatToParts(new Date(Date.UTC(year,month-1,day,15,59,59))).map(part=>[part.type,part.value]));
+  return LUNAR_HOLIDAYS.get(`${Number(parts.month)}/${Number(parts.day)}`)||null;
+}
+
 function calendarMonths(groups,currentMonth){
+  const nextYearEnd=`${Number(currentMonth.slice(0,4))+1}-12`;
   const latest=groups[0]?.[0].slice(0,7)||currentMonth;
-  const earliest=groups.at(-1)?.[0].slice(0,7)||currentMonth;
-  const [maxYear,maxMonth]=(latest>currentMonth?latest:currentMonth).split('-').map(Number);
-  const [minYear,minMonth]=(earliest<currentMonth?earliest:currentMonth).split('-').map(Number);
+  const earliestYear=groups.at(-1)?.[0].slice(0,4)||currentMonth.slice(0,4);
+  const [maxYear,maxMonth]=(latest>nextYearEnd?latest:nextYearEnd).split('-').map(Number);
+  const minYear=Math.min(Number(earliestYear),Number(currentMonth.slice(0,4))),minMonth=1;
   const months=[];
   let year=maxYear,month=maxMonth;
   while(year>minYear||(year===minYear&&month>=minMonth)){
@@ -100,15 +153,22 @@ function renderUpdates(){
     const day=index-firstWeekday+1;
     if(day<1||day>daysInMonth){cells.push('<div class="update-day is-empty" aria-hidden="true"></div>');continue;}
     const date=`${selected}-${String(day).padStart(2,'0')}`;
+    const holiday=holidayForDate(date);
+    const holidayClass=holiday?` is-holiday holiday-${holiday.id}`:'';
+    const holidayLabel=holiday?`<span class="holiday-label"><span aria-hidden="true">${holiday.icon}</span>${holiday.name}</span>`:'';
     const events=eventsByDate.get(date)||[];
-    if(!events.length){cells.push(`<article class="update-day no-updates"><time datetime="${date}"><b>${day}</b></time></article>`);continue;}
+    if(!events.length){
+      const greeting=holiday?`<div class="holiday-greeting"><span aria-hidden="true">${holiday.icon}</span><small>${holiday.message}</small></div>`:'';
+      cells.push(`<article class="update-day no-updates${holidayClass}"><time datetime="${date}"><b>${day}</b>${holidayLabel}</time>${greeting}</article>`);
+      continue;
+    }
     const counts=Object.keys(EVENT_TYPES).map(type=>({type,count:events.filter(event=>event.type===type).length})).filter(item=>item.count);
     const dayWorks=[...new Map(events.map(event=>[event.work.id,event.work])).values()].map(work=>{
       const types=events.filter(event=>event.work.id===work.id).map(event=>event.type);
       const chipType=types.includes('new')?'new':types.includes('mod')&&types.includes('translation')?'mixed':types[0];
       return {work,chipType};
     });
-    cells.push(`<article class="update-day has-events"><time datetime="${date}"><b>${day}</b><span>${dayWorks.length} 项</span></time><div class="update-counts">${counts.map(item=>`<span title="${EVENT_TYPES[item.type].label}"><i class="event-dot ${EVENT_TYPES[item.type].className}"></i>${item.count}</span>`).join('')}</div><div class="update-preview">${dayWorks.map(item=>`<button type="button" class="update-work-link calendar-chip-${item.chipType}" data-update-work="${esc(item.work.id)}">${esc(item.work.title)}</button>`).join('')}<button type="button" class="calendar-more" data-calendar-more aria-haspopup="dialog" aria-controls="calendar-overflow" aria-expanded="false" hidden>更多</button></div></article>`);
+    cells.push(`<article class="update-day has-events${holidayClass}"><time datetime="${date}"><b>${day}</b>${holidayLabel||`<span>${dayWorks.length} 项</span>`}</time><div class="update-counts">${counts.map(item=>`<span title="${EVENT_TYPES[item.type].label}"><i class="event-dot ${EVENT_TYPES[item.type].className}"></i>${item.count}</span>`).join('')}</div><div class="update-preview">${dayWorks.map(item=>`<button type="button" class="update-work-link calendar-chip-${item.chipType}" data-update-work="${esc(item.work.id)}">${esc(item.work.title)}</button>`).join('')}<button type="button" class="calendar-more" data-calendar-more aria-haspopup="dialog" aria-controls="calendar-overflow" aria-expanded="false" hidden>更多</button></div></article>`);
   }
   board.innerHTML=cells.join('');
   $('#calendar-month').textContent=`${year}年${month}月`;
