@@ -67,15 +67,15 @@ function updateEvents(){
 }
 
 const FIXED_HOLIDAYS=new Map([
-  ['01-01',{id:'new-year',name:'元旦',icon:'✦',message:'新年快乐'}],
-  ['02-14',{id:'valentine',name:'情人节',icon:'♥',message:'爱意满满'}],
-  ['10-31',{id:'halloween',name:'万圣节',icon:'🎃',message:'不给糖就捣蛋'}],
-  ['12-25',{id:'christmas',name:'圣诞节',icon:'🎄',message:'圣诞快乐'}],
+  ['01-01',{id:'new-year',name:'元旦',icon:'✦'}],
+  ['02-14',{id:'valentine',name:'情人节',icon:'♥'}],
+  ['10-31',{id:'halloween',name:'万圣节',icon:'🎃'}],
+  ['12-25',{id:'christmas',name:'圣诞节',icon:'🎄'}],
 ]);
 const LUNAR_HOLIDAYS=new Map([
-  ['1/1',{id:'spring-festival',name:'春节',icon:'福',message:'新春快乐'}],
-  ['5/5',{id:'dragon-boat',name:'端午节',icon:'✿',message:'端午安康'}],
-  ['8/15',{id:'mid-autumn',name:'中秋节',icon:'☾',message:'月圆人团圆'}],
+  ['1/1',{id:'spring-festival',name:'春节',icon:'福'}],
+  ['5/5',{id:'dragon-boat',name:'端午节',icon:'✿'}],
+  ['8/15',{id:'mid-autumn',name:'中秋节',icon:'☾'}],
 ]);
 // Civil dates checked against Hong Kong Observatory Gregorian-Lunar tables (2025–2040).
 // https://www.hko.gov.hk/en/gts/time/conversion.htm
@@ -158,8 +158,7 @@ function renderUpdates(){
     const holidayLabel=holiday?`<span class="holiday-label"><span aria-hidden="true">${holiday.icon}</span>${holiday.name}</span>`:'';
     const events=eventsByDate.get(date)||[];
     if(!events.length){
-      const greeting=holiday?`<div class="holiday-greeting"><span aria-hidden="true">${holiday.icon}</span><small>${holiday.message}</small></div>`:'';
-      cells.push(`<article class="update-day no-updates${holidayClass}"><time datetime="${date}"><b>${day}</b>${holidayLabel}</time>${greeting}</article>`);
+      cells.push(`<article class="update-day no-updates${holidayClass}"><time datetime="${date}"><b>${day}</b>${holidayLabel}</time></article>`);
       continue;
     }
     const counts=Object.keys(EVENT_TYPES).map(type=>({type,count:events.filter(event=>event.type===type).length})).filter(item=>item.count);
