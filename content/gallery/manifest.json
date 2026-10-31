@@ -291,6 +291,23 @@
       "sha256": "fabaf2a029d63e7c0ce4d31aecaf160486cba16221d19402c5166e26ef4278b3"
     }
   ],
+  "jayesims-periodt": [
+    {
+      "file": "jayesims-periodt/01-225f6c7e299e.webp",
+      "source": "QQ - JayESims - Periodt - 来例假了_01.png",
+      "sha256": "225f6c7e299e67315c5ec0b282066b8fb9f2dd306e013fdbbdd42b8ef1fbc5f6"
+    },
+    {
+      "file": "jayesims-periodt/02-36d96c443a46.webp",
+      "source": "QQ - JayESims - Periodt - 来例假了_02.png",
+      "sha256": "36d96c443a4617ce609ba3a26781dae8272a9bf6fedd6c952780d76380c90fab"
+    },
+    {
+      "file": "jayesims-periodt/03-fa17aee5c8cf.webp",
+      "source": "QQ - JayESims - Periodt - 来例假了_03.png",
+      "sha256": "fa17aee5c8cfae339d8b29b2784d1314d1b7f4aa48029def7b678a8824b069e1"
+    }
+  ],
   "jayesims-siblingbusiness": [
     {
       "file": "jayesims-siblingbusiness/01-43db9fe8ebad.webp",
@@ -529,6 +546,23 @@
       "sha256": "5a288e2f2e6a50ecba61fda97be1d905f9a779559e15a67bd1fecb849825cc79"
     }
   ],
+  "klimter-lovebombertrait": [
+    {
+      "file": "klimter-lovebombertrait/01-61ff1da2a5bf.webp",
+      "source": "QQ - klimter - LoveBomberTrait - 先甜后渣_01.png",
+      "sha256": "61ff1da2a5bf95f34a7b3256625c0b033848cad8a1cbbd08f77a67f9ca6694e1"
+    },
+    {
+      "file": "klimter-lovebombertrait/02-1342d17b8de7.webp",
+      "source": "QQ - klimter - LoveBomberTrait - 先甜后渣_02.png",
+      "sha256": "1342d17b8de71864b58ad6059cef98aa1c3da18c3c8e089b46bb9d42cbf66e87"
+    },
+    {
+      "file": "klimter-lovebombertrait/03-8cac18f8b6f6.webp",
+      "source": "QQ - klimter - LoveBomberTrait - 先甜后渣_03.png",
+      "sha256": "8cac18f8b6f6668bb44c720f48a399627a20defc1edff50212e0e1fc9727e85f"
+    }
+  ],
   "klimter-malicioustrait": [
     {
       "file": "klimter-malicioustrait/01-ddb8134cc51b.webp",
@@ -755,6 +789,23 @@
       "file": "wicked-pixxel-dark-emotions-trait-v2/03-e8224118c90f.webp",
       "source": "QQ - WICKED PIXXEL - Dark Emotions Trait v2 - 黑暗情绪_03.png",
       "sha256": "e8224118c90f6a0bf1544d283f262368d47c20dcddd0386c97d7b4a39eb4579f"
+    }
+  ],
+  "wicked-pixxel-deep-sleeper-v2": [
+    {
+      "file": "wicked-pixxel-deep-sleeper-v2/01-3601ee7bcef4.webp",
+      "source": "QQ - WICKED PIXXEL - Deep Sleeper V2 - 深度睡眠者_01.png",
+      "sha256": "3601ee7bcef460e78be68d307747b51a87b4b0800f0f99f7bb73c3b12acce2dd"
+    },
+    {
+      "file": "wicked-pixxel-deep-sleeper-v2/02-40f6fd42cd69.webp",
+      "source": "QQ - WICKED PIXXEL - Deep Sleeper V2 - 深度睡眠者_02.png",
+      "sha256": "40f6fd42cd69fb67a417372dc809032b57e5b000d39f121b6780cc1cca1905e1"
+    },
+    {
+      "file": "wicked-pixxel-deep-sleeper-v2/03-ab5408230603.webp",
+      "source": "QQ - WICKED PIXXEL - Deep Sleeper V2 - 深度睡眠者_03.png",
+      "sha256": "ab54082306035feaad257c91e5d693fe1e422ddc750061a2418e0449d1a740c1"
     }
   ],
   "wicked-pixxel-exquisite-taste-trait-v2": [
