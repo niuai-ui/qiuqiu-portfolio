@@ -28,6 +28,27 @@ def parse_folder_name(name: str) -> tuple[str, str]:
     if len(parts) == 2 and "_" in parts[0]:
         author, english_name = parts[0].split("_", 1)
         return author.strip(), english_name.strip()
+    if len(parts) == 2:
+        # 简化目录名只含作者和中文名；从唯一数据源精确解析英文名。
+        workbook = load_workbook(WORKBOOK, read_only=True, data_only=True)
+        try:
+            rows = workbook["作品信息"].iter_rows(values_only=True)
+            headers = list(next(rows))
+            author_index = headers.index("原作者名字")
+            english_index = headers.index("模组英文名")
+            chinese_index = headers.index("模组中文名")
+            matches = [
+                (str(row[author_index]).strip(), str(row[english_index]).strip())
+                for row in rows
+                if str(row[author_index] or "").strip().casefold() == parts[0].casefold()
+                and str(row[chinese_index] or "").strip() == parts[1]
+                and row[english_index]
+            ]
+        finally:
+            workbook.close()
+        if len(matches) == 1:
+            return matches[0]
+        raise ValueError(f"日志文件夹需在 Excel 中唯一匹配作者和中文名：{name}（匹配 {len(matches)} 条）")
     raise ValueError(f"无法识别日志文件夹名称：{name}")
 
 
