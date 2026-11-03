@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import shutil
@@ -271,6 +272,18 @@ def build():
     (DIST / "gallery" / "manifest.json").unlink()
     original_bytes, optimized_bytes = build_responsive_covers(works)
     (DIST / "data.json").write_text(json.dumps(works, ensure_ascii=False, indent=2), encoding="utf-8")
+    # 随首页提供同一份构建数据，避免额外的数据请求卡住整页内容。
+    index_path = DIST / "index.html"
+    html = index_path.read_text(encoding="utf-8")
+    marker = '<script id="portfolio-data" type="application/json"></script>'
+    if html.count(marker) != 1:
+        raise ValueError("首页必须包含唯一的作品数据嵌入位置")
+    payload = json.dumps(works, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c")
+    html = html.replace(marker, f'<script id="portfolio-data" type="application/json">{payload}</script>')
+    for asset in ("app.js", "styles.css"):
+        version = hashlib.sha256((DIST / asset).read_bytes()).hexdigest()[:12]
+        html = html.replace(f'"{asset}"', f'"{asset}?v={version}"')
+    index_path.write_text(html, encoding="utf-8")
     (DIST / ".nojekyll").write_text("", encoding="utf-8")
     print(f"网站已生成：{len(works)} 个已发布作品 → {DIST}")
     print(f"封面体积：{original_bytes / 1024 / 1024:.2f} MB → {optimized_bytes / 1024 / 1024:.2f} MB（480/960 WebP 合计）")

@@ -348,7 +348,33 @@ $('#details').addEventListener('click',event=>{if(event.target===$('#details'))$
 $('#calendar-overflow-close').addEventListener('click',closeCalendarOverflow);
 $('#calendar-overflow').addEventListener('click',event=>{if(event.target===$('#calendar-overflow'))closeCalendarOverflow();});
 
-fetch('data.json').then(response=>{if(!response.ok)throw new Error('读取失败');return response.json();}).then(works=>{state.works=works;$('#hero-count').textContent=works.length;setupFilters();render();}).catch(()=>{$('#result-count').textContent='作品数据读取失败，请稍后再试';$('#empty').hidden=false;});
+async function loadPortfolio(){
+  try{
+    const embedded=$('#portfolio-data')?.textContent.trim();
+    let works;
+    if(embedded){
+      works=JSON.parse(embedded);
+    }else{
+      const controller=new AbortController();
+      const timeout=setTimeout(()=>controller.abort(),15000);
+      try{
+        const response=await fetch('data.json',{cache:'no-store',signal:controller.signal});
+        if(!response.ok)throw new Error('读取失败');
+        works=await response.json();
+      }finally{clearTimeout(timeout);}
+    }
+    if(!Array.isArray(works))throw new Error('作品数据格式错误');
+    state.works=works;
+    $('#hero-count').textContent=works.length;
+    setupFilters();
+    render();
+  }catch(error){
+    console.error('作品档案加载失败',error);
+    $('#result-count').textContent='作品数据读取失败，请刷新页面重试';
+    $('#empty').hidden=false;
+  }
+}
+loadPortfolio();
 $('#year').textContent=new Date().getFullYear();
 let lastGridColumns=gridColumns();
 window.addEventListener('resize',()=>{const columns=gridColumns();if(columns!==lastGridColumns){lastGridColumns=columns;state.page=1;render();}});
