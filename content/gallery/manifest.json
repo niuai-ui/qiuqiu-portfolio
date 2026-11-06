@@ -89,6 +89,23 @@
       "sha256": "ad03459adb4d65617a1383b4201e9ed1a1990d3073a66e057a64a32b99bcb7e6"
     }
   ],
+  "jayesims-alcoholic-functional-but-fading": [
+    {
+      "file": "jayesims-alcoholic-functional-but-fading/01-9a0528764596.webp",
+      "source": "QQ - JayESims - Alcoholic (Functional But Fading) - 酗酒成瘾_01.png",
+      "sha256": "9a0528764596dcf1840f8c36b7ae4b026362d0602a8ed23bf0ab4be288f5068b"
+    },
+    {
+      "file": "jayesims-alcoholic-functional-but-fading/02-eba20a1393a9.webp",
+      "source": "QQ - JayESims - Alcoholic (Functional But Fading) - 酗酒成瘾_02.png",
+      "sha256": "eba20a1393a950c41d0cdbb3d2ab631edc6127378e7018f1fffa2f25e3f3a358"
+    },
+    {
+      "file": "jayesims-alcoholic-functional-but-fading/03-742b899ab469.webp",
+      "source": "QQ - JayESims - Alcoholic (Functional But Fading) - 酗酒成瘾_03.png",
+      "sha256": "742b899ab469c012e480a0e1080d485f29a4179a6e220527a7c73e757fc98c51"
+    }
+  ],
   "jayesims-brosgonedeep": [
     {
       "file": "jayesims-brosgonedeep/01-1ec6f642f9e7.webp",
@@ -774,6 +791,18 @@
       "sha256": "e5f253dede3d0e17574554e854104b4fe43fa31643d0644bf2581a8d67fe29c7"
     }
   ],
+  "wicked-pixxel-dance-instructor-career-v2": [
+    {
+      "file": "wicked-pixxel-dance-instructor-career-v2/01-6e52c34cc606.webp",
+      "source": "QQ - Wicked Pixxel - Dance Instructor Career v2 - 舞蹈教练_01.png",
+      "sha256": "6e52c34cc606bf97bf5b075642764a1e0c6a5ff644ef32c775de94f8fff851f8"
+    },
+    {
+      "file": "wicked-pixxel-dance-instructor-career-v2/02-c2d033b61c16.webp",
+      "source": "QQ - Wicked Pixxel - Dance Instructor Career v2 - 舞蹈教练_02.png",
+      "sha256": "c2d033b61c163bede0bdc17f144d22b0fa7d3d0a03e6a480d19ee83ee7749ab0"
+    }
+  ],
   "wicked-pixxel-dark-emotions-trait-v2": [
     {
       "file": "wicked-pixxel-dark-emotions-trait-v2/01-9d7ee104d9cd.webp",
@@ -869,6 +898,23 @@
       "file": "wicked-pixxel-halloween-trick-or-treat-mod-collection/03-8505a6ac1c32.webp",
       "source": "QQ - Wicked Pixxel - Halloween Trick Or Treat Mod Collection - 万圣节不给糖就捣蛋合集_03.png",
       "sha256": "8505a6ac1c32ed3284d5a6125794a06def2a963161b8d0ba48782969789fef94"
+    }
+  ],
+  "wicked-pixxel-medieval-kingdom-quest": [
+    {
+      "file": "wicked-pixxel-medieval-kingdom-quest/01-7e3db009d981.webp",
+      "source": "QQ - Wicked Pixxel - Medieval Kingdom Quest - 中世纪王国任务_01.png",
+      "sha256": "7e3db009d98150ac51182718529e15fc6e20aa3f312f6b71fd46528f5f778f3c"
+    },
+    {
+      "file": "wicked-pixxel-medieval-kingdom-quest/02-cf1d8245fc49.webp",
+      "source": "QQ - Wicked Pixxel - Medieval Kingdom Quest - 中世纪王国任务_02.png",
+      "sha256": "cf1d8245fc49266f11bd992c0821ed52d1eeb32e417d2f4bacdaacf77782d256"
+    },
+    {
+      "file": "wicked-pixxel-medieval-kingdom-quest/03-acd4357d80e3.webp",
+      "source": "QQ - Wicked Pixxel - Medieval Kingdom Quest - 中世纪王国任务_03.png",
+      "sha256": "acd4357d80e3530a431bed005f58efa11fb4b941cfaa05b1ac7e8b2bac112bb2"
     }
   ],
   "wicked-pixxel-peaceful-v2": [
