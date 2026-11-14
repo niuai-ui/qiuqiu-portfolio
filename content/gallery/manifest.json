@@ -106,6 +106,40 @@
       "sha256": "742b899ab469c012e480a0e1080d485f29a4179a6e220527a7c73e757fc98c51"
     }
   ],
+  "jayesims-astrotalk-the-zodiac-chronicles-part-1": [
+    {
+      "file": "jayesims-astrotalk-the-zodiac-chronicles-part-1/01-43e1732707f0.webp",
+      "source": "QQ - JayESims - 星座系列（摩羯座·天秤座·金牛座）_01.png",
+      "sha256": "43e1732707f086c83d5d8be65a721a0afc49752535bca58bb9bae526e987fc1a"
+    },
+    {
+      "file": "jayesims-astrotalk-the-zodiac-chronicles-part-1/02-44f9371ca34a.webp",
+      "source": "QQ - JayESims - 星座系列（摩羯座·天秤座·金牛座）_02.png",
+      "sha256": "44f9371ca34a0de120308133d7a556b670010d9dbee1033e60fc4b989e8649b3"
+    },
+    {
+      "file": "jayesims-astrotalk-the-zodiac-chronicles-part-1/03-2c8644f8734d.webp",
+      "source": "QQ - JayESims - 星座系列（摩羯座·天秤座·金牛座）_03.png",
+      "sha256": "2c8644f8734db62dd8835884bb825e3838d52eb1b34ac8d08e3c2b0ca33e4d95"
+    }
+  ],
+  "jayesims-astrotalk-the-zodiac-chronicles-part-2": [
+    {
+      "file": "jayesims-astrotalk-the-zodiac-chronicles-part-2/01-ebf9648c0142.webp",
+      "source": "QQ - JayESims - 星座系列（白羊座·水瓶座）_01.png",
+      "sha256": "ebf9648c0142b85082b6598f2e7e236c8498306b0affa0588f7835d7234a16eb"
+    },
+    {
+      "file": "jayesims-astrotalk-the-zodiac-chronicles-part-2/02-acd9cc2e3ae4.webp",
+      "source": "QQ - JayESims - 星座系列（白羊座·水瓶座）_02.png",
+      "sha256": "acd9cc2e3ae4ddeb05815025cbe6bd83a2d25fd498d25f2ce8d0221646b3e251"
+    },
+    {
+      "file": "jayesims-astrotalk-the-zodiac-chronicles-part-2/03-8a9e4ddf9869.webp",
+      "source": "QQ - JayESims - 星座系列（白羊座·水瓶座）_03.png",
+      "sha256": "8a9e4ddf986981da9f721d256ab3ad13af725f0cbf717c453ad6e073a1061842"
+    }
+  ],
   "jayesims-brosgonedeep": [
     {
       "file": "jayesims-brosgonedeep/01-1ec6f642f9e7.webp",
@@ -335,6 +369,23 @@
       "file": "jayesims-siblingbusiness/02-090405620ef4.webp",
       "source": "QQ - JayESims - SiblingBusiness - 手足羁绊_02.png",
       "sha256": "090405620ef4b60b3e6acfaf8019c2166f74fd0e67b1d3c43d98c61470b23056"
+    }
+  ],
+  "jayesims-tales-of-the-baddest-vixen": [
+    {
+      "file": "jayesims-tales-of-the-baddest-vixen/01-75ec7e7a03fc.webp",
+      "source": "QQ - JayESims - 狐狸精气场_01.png",
+      "sha256": "75ec7e7a03fc627dcc0f183392c7238c2bd26ae2df49bb06f7d9579beb60814a"
+    },
+    {
+      "file": "jayesims-tales-of-the-baddest-vixen/02-b38e95815be8.webp",
+      "source": "QQ - JayESims - 狐狸精气场_02.png",
+      "sha256": "b38e95815be860ca676ee381883bbca149f45e71c5934d2a672c78f6a56c4662"
+    },
+    {
+      "file": "jayesims-tales-of-the-baddest-vixen/03-2a62d6529166.webp",
+      "source": "QQ - JayESims - 狐狸精气场_03.png",
+      "sha256": "2a62d65291662b8fb7ebec3174d12f4f4d055d9794af402686444748897f99ba"
     }
   ],
   "jayesims-teen-mom-reality": [
