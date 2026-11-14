@@ -35,9 +35,11 @@ function depHtml(text){
   return `<span class="dep-list">${chips.join('')}</span>`;
 }
 
+const authorKey=value=>String(value??'').trim().toLowerCase();
+
 function filtered(){
   const q=state.query.toLowerCase();
-  const list=state.works.filter(work=>(state.category==='全部'||work.category===state.category)&&(state.author==='全部'||work.author===state.author)&&(!q||[work.title,work.englishTitle,work.author,work.category].join(' ').toLowerCase().includes(q)));
+  const list=state.works.filter(work=>(state.category==='全部'||work.category===state.category)&&(state.author==='全部'||authorKey(work.author)===authorKey(state.author))&&(!q||[work.title,work.englishTitle,work.author,work.category].join(' ').toLowerCase().includes(q)));
   const dateField=state.sort==='mod-updated'?'modUpdated':state.sort==='translation-updated'?'translationUpdated':'launched';
   return list.sort((a,b)=>state.sort==='title'?a.title.localeCompare(b.title,'zh-CN'):b[dateField].localeCompare(a[dateField])||a.title.localeCompare(b.title,'zh-CN'));
 }
@@ -321,9 +323,14 @@ function setupFilters(){
   renderUpdates();
   const categories=['人物特征','用地特征','职业','覆盖替换','游戏玩法','其他'];
   $('#category-buttons').innerHTML=categories.map(item=>`<button class="filter" data-category="${esc(item)}">${esc(item)}</button>`).join('');
-  const authors=[...new Set(state.works.map(work=>work.author))].sort();
+  const authorNames=new Map();
+  state.works.map(work=>work.author.trim()).sort().forEach(author=>{
+    const key=authorKey(author);
+    if(!authorNames.has(key))authorNames.set(key,author);
+  });
+  const authors=[...authorNames.values()];
   $('#author-filter').innerHTML='<option value="全部">全部作者</option>'+authors.map(item=>`<option value="${esc(item)}">${esc(item)}</option>`).join('');
-  $('#author-list').innerHTML=authors.map(author=>{const count=state.works.filter(work=>work.author===author).length;return `<button class="author-row" type="button" data-author="${esc(author)}"><b>${esc(author)}</b><span>${count} 份作品</span><i aria-hidden="true">→</i></button>`}).join('');
+  $('#author-list').innerHTML=authors.map(author=>{const count=state.works.filter(work=>authorKey(work.author)===authorKey(author)).length;return `<button class="author-row" type="button" data-author="${esc(author)}"><b>${esc(author)}</b><span>${count} 份作品</span><i aria-hidden="true">→</i></button>`}).join('');
 }
 
 document.addEventListener('click',event=>{
