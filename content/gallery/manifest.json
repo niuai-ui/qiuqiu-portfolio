@@ -371,23 +371,6 @@
       "sha256": "090405620ef4b60b3e6acfaf8019c2166f74fd0e67b1d3c43d98c61470b23056"
     }
   ],
-  "jayesims-tales-of-the-baddest-vixen": [
-    {
-      "file": "jayesims-tales-of-the-baddest-vixen/01-75ec7e7a03fc.webp",
-      "source": "QQ - JayESims - 狐狸精气场_01.png",
-      "sha256": "75ec7e7a03fc627dcc0f183392c7238c2bd26ae2df49bb06f7d9579beb60814a"
-    },
-    {
-      "file": "jayesims-tales-of-the-baddest-vixen/02-b38e95815be8.webp",
-      "source": "QQ - JayESims - 狐狸精气场_02.png",
-      "sha256": "b38e95815be860ca676ee381883bbca149f45e71c5934d2a672c78f6a56c4662"
-    },
-    {
-      "file": "jayesims-tales-of-the-baddest-vixen/03-2a62d6529166.webp",
-      "source": "QQ - JayESims - 狐狸精气场_03.png",
-      "sha256": "2a62d65291662b8fb7ebec3174d12f4f4d055d9794af402686444748897f99ba"
-    }
-  ],
   "jayesims-teen-mom-reality": [
     {
       "file": "jayesims-teen-mom-reality/01-60f1aee6e59b.webp",
@@ -461,6 +444,28 @@
       "file": "jayesims-xoxogossipgirlrichtearumors/02-7bd866a8e037.webp",
       "source": "QQ - JayESims - XOXOGossipGirlRichTeaRumors - 绯闻女孩：劲爆八卦与传闻_02.png",
       "sha256": "7bd866a8e0376530e0d39f05050123074c18c6333b9082410a4aaaeb323696a1"
+    }
+  ],
+  "khlas-khlas-males-interactions": [
+    {
+      "file": "khlas-khlas-males-interactions/01-0b062b9e6054.webp",
+      "source": "QQ - khlas - 男性互动及动画_01.png",
+      "sha256": "0b062b9e6054501644dea3f81a5d8e7aa95fff1cf42d80054e018c897a4a61e0"
+    },
+    {
+      "file": "khlas-khlas-males-interactions/02-2199d1d6f9a4.webp",
+      "source": "QQ - khlas - 男性互动及动画_02.png",
+      "sha256": "2199d1d6f9a43998eaffaf31cf70a70f089afbf09a3bbe5c18b3f2197932023c"
+    },
+    {
+      "file": "khlas-khlas-males-interactions/03-1ef1ee989b11.webp",
+      "source": "QQ - khlas - 男性互动及动画_03.png",
+      "sha256": "1ef1ee989b111804105fea41534b74e9d933a78f48cb032d194ba79c6a33bc13"
+    },
+    {
+      "file": "khlas-khlas-males-interactions/04-134d675eaaa5.webp",
+      "source": "QQ - khlas - 男性互动及动画_04.png",
+      "sha256": "134d675eaaa5a845f462b6c941cc508e6599f73fb32898c038dd0b4da4237dfa"
     }
   ],
   "klimter-airheadtrait": [
