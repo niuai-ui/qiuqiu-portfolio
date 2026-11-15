@@ -36,10 +36,11 @@ function depHtml(text){
 }
 
 const authorKey=value=>String(value??'').trim().toLowerCase();
+const categoryLabel=value=>value==='其他'?'💜':value;
 
 function filtered(){
   const q=state.query.toLowerCase();
-  const list=state.works.filter(work=>(state.category==='全部'||work.category===state.category)&&(state.author==='全部'||authorKey(work.author)===authorKey(state.author))&&(!q||[work.title,work.englishTitle,work.author,work.category].join(' ').toLowerCase().includes(q)));
+  const list=state.works.filter(work=>(state.category==='全部'||work.category===state.category)&&(state.author==='全部'||authorKey(work.author)===authorKey(state.author))&&(!q||[work.title,work.englishTitle,work.author,work.category,categoryLabel(work.category)].join(' ').toLowerCase().includes(q)));
   const dateField=state.sort==='mod-updated'?'modUpdated':state.sort==='translation-updated'?'translationUpdated':'launched';
   return list.sort((a,b)=>state.sort==='title'?a.title.localeCompare(b.title,'zh-CN'):b[dateField].localeCompare(a[dateField])||a.title.localeCompare(b.title,'zh-CN'));
 }
@@ -239,7 +240,7 @@ function dailyPicks(works,count=10){
 
 function dailyCardHtml(work,isClone=false){
   const tabIndex=isClone?'-1':'0';
-  return `<article class="work-card daily-card" tabindex="${tabIndex}" data-id="${esc(work.id)}"><div class="cover"><img src="${esc(work.imageSmall||work.image)}" srcset="${esc(work.imageSmall||work.image)} 480w, ${esc(work.imageLarge||work.image)} 960w" sizes="(max-width:760px) 64vw, 220px" width="3" height="4" alt="${esc(work.title)}&#x5C01;&#x9762;" loading="lazy" decoding="async"><span class="badge">${esc(work.category)}</span></div><div class="card-meta"><span>${esc(work.author)}</span><time>${dateText(work.modUpdated)}</time></div><h3>${esc(work.title)}</h3><div class="english">${esc(work.englishTitle)}</div></article>`;
+  return `<article class="work-card daily-card" tabindex="${tabIndex}" data-id="${esc(work.id)}"><div class="cover"><img src="${esc(work.imageSmall||work.image)}" srcset="${esc(work.imageSmall||work.image)} 480w, ${esc(work.imageLarge||work.image)} 960w" sizes="(max-width:760px) 64vw, 220px" width="3" height="4" alt="${esc(work.title)}&#x5C01;&#x9762;" loading="lazy" decoding="async"><span class="badge">${esc(categoryLabel(work.category))}</span></div><div class="card-meta"><span>${esc(work.author)}</span><time>${dateText(work.modUpdated)}</time></div><h3>${esc(work.title)}</h3><div class="english">${esc(work.englishTitle)}</div></article>`;
 }
 
 function renderDailyPicks(){
@@ -265,7 +266,7 @@ function render(){
   const works=allWorks.slice(start,start+pageSize);
   $('#result-count').textContent=allWorks.length?`显示 ${start+1}–${start+works.length} / ${allWorks.length} 份作品`:`显示 0 / ${state.works.length} 份作品`;
   $('#empty').hidden=allWorks.length>0;
-  $('#work-grid').innerHTML=works.map(work=>`<article class="work-card" tabindex="0" data-id="${esc(work.id)}"><div class="cover"><img src="${esc(work.imageSmall||work.image)}" srcset="${esc(work.imageSmall||work.image)} 480w, ${esc(work.imageLarge||work.image)} 960w" sizes="(max-width:760px) 50vw, (max-width:1100px) 33vw, 17vw" width="3" height="4" alt="${esc(work.title)}封面" loading="lazy" decoding="async"><span class="badge">${esc(work.category)}</span></div><div class="card-meta"><span>${esc(work.author)}</span><time>${dateText(cardDate(work))}</time></div><h3>${esc(work.title)}</h3><div class="english">${esc(work.englishTitle)}</div></article>`).join('');
+  $('#work-grid').innerHTML=works.map(work=>`<article class="work-card" tabindex="0" data-id="${esc(work.id)}"><div class="cover"><img src="${esc(work.imageSmall||work.image)}" srcset="${esc(work.imageSmall||work.image)} 480w, ${esc(work.imageLarge||work.image)} 960w" sizes="(max-width:760px) 50vw, (max-width:1100px) 33vw, 17vw" width="3" height="4" alt="${esc(work.title)}封面" loading="lazy" decoding="async"><span class="badge">${esc(categoryLabel(work.category))}</span></div><div class="card-meta"><span>${esc(work.author)}</span><time>${dateText(cardDate(work))}</time></div><h3>${esc(work.title)}</h3><div class="english">${esc(work.englishTitle)}</div></article>`).join('');
   renderPagination(pageCount);
 }
 
@@ -299,7 +300,7 @@ function openDetails(id){
   const author=work.originalUrl?`<a class="author-link" href="${esc(work.originalUrl)}" target="_blank" rel="noopener">${esc(work.author)} →</a>`:esc(work.author);
   const modLink=work.modUrl?`<a class="original" href="${esc(work.modUrl)}" target="_blank" rel="noopener">查看模组本体 →</a>`:'<span class="original disabled">模组本体链接待补充</span>';
   const galleryControls=state.galleryImages.length>1?'<button class="gallery-nav gallery-prev" type="button" data-gallery-step="-1" aria-label="上一张介绍图">←</button><button class="gallery-nav gallery-next" type="button" data-gallery-step="1" aria-label="下一张介绍图">→</button>':'';
-  $('#dialog-content').innerHTML=`<div class="detail-layout"><div class="detail-image detail-gallery"><img id="gallery-image" src="${esc(state.galleryImages[0])}" decoding="async" alt="${esc(work.title)}封面"><span class="gallery-count">1 / ${state.galleryImages.length}</span>${galleryControls}</div><div class="detail-copy"><p class="eyebrow">${esc(work.category)} · ${dateText(work.launched)}</p><h2>${esc(work.title)}</h2><div class="english">${esc(work.englishTitle)}</div><div class="facts"><div><small>原作者</small><b>${author}</b></div><div><small>汉化支持</small><b>${esc(work.localization||'繁简汉化')}</b></div><div><small>前置说明</small><b>${depHtml(work.dependency)}</b></div><div><small>放置说明</small><b>${esc(work.placement||'无需放第一层')}</b></div><div><small>上新日期</small><b>${dateText(work.launched)}</b></div><div><small>模组更新日期</small><b>${dateText(work.modUpdated)}</b></div><div><small>汉化更新日期</small><b>${dateText(work.translationUpdated)}</b></div></div><div class="actions" aria-label="相关链接"><div class="action-entry action-entry-original"><div class="action-label"><strong>模组本体</strong></div>${modLink}</div><div class="action-entry action-entry-download"><div class="action-label"><strong>汉化文件</strong><span>百度网盘下载</span></div><div class="action-controls">${download}</div></div></div></div></div>`;
+  $('#dialog-content').innerHTML=`<div class="detail-layout"><div class="detail-image detail-gallery"><img id="gallery-image" src="${esc(state.galleryImages[0])}" decoding="async" alt="${esc(work.title)}封面"><span class="gallery-count">1 / ${state.galleryImages.length}</span>${galleryControls}</div><div class="detail-copy"><p class="eyebrow">${esc(categoryLabel(work.category))} · ${dateText(work.launched)}</p><h2>${esc(work.title)}</h2><div class="english">${esc(work.englishTitle)}</div><div class="facts"><div><small>原作者</small><b>${author}</b></div><div><small>汉化支持</small><b>${esc(work.localization||'繁简汉化')}</b></div><div><small>前置说明</small><b>${depHtml(work.dependency)}</b></div><div><small>放置说明</small><b>${esc(work.placement||'无需放第一层')}</b></div><div><small>上新日期</small><b>${dateText(work.launched)}</b></div><div><small>模组更新日期</small><b>${dateText(work.modUpdated)}</b></div><div><small>汉化更新日期</small><b>${dateText(work.translationUpdated)}</b></div></div><div class="actions" aria-label="相关链接"><div class="action-entry action-entry-original"><div class="action-label"><strong>模组本体</strong></div>${modLink}</div><div class="action-entry action-entry-download"><div class="action-label"><strong>汉化文件</strong><span>百度网盘下载</span></div><div class="action-controls">${download}</div></div></div></div></div>`;
   if(!work.download){$('.actions .download').innerHTML='&#x5C0F;&#x7EA2;&#x4E66;&#x9996;&#x53D1;&#x4E2D;&#xFF0C;&#x4E0B;&#x8F7D;&#x94FE;&#x63A5;&#x5F85;&#x8865;&#x5145;';}
   $('#details').showModal();
   requestAnimationFrame(()=>{fitDetailTitle();document.fonts?.ready.then(fitDetailTitle);});
@@ -322,7 +323,7 @@ function setupFilters(){
   renderDailyPicks();
   renderUpdates();
   const categories=['人物特征','用地特征','职业','覆盖替换','游戏玩法','其他'];
-  $('#category-buttons').innerHTML=categories.map(item=>`<button class="filter" data-category="${esc(item)}">${esc(item)}</button>`).join('');
+  $('#category-buttons').innerHTML=categories.map(item=>`<button class="filter" data-category="${esc(item)}">${esc(categoryLabel(item))}</button>`).join('');
   const authorNames=new Map();
   state.works.map(work=>work.author.trim()).sort().forEach(author=>{
     const key=authorKey(author);
