@@ -197,14 +197,17 @@ body{font-family:"Chill Round M","Microsoft YaHei","Noto Sans SC",sans-serif}
   .holiday-label>span{font-size:11px}
 }
 
-/* 分类入口使用固定色相，选中后加深同一颜色。 */
-#category-buttons .filter[data-category="人物特征"]{--category-color:#9b4361;--category-tint:#f3dfe6;--category-ink:#763047}
-#category-buttons .filter[data-category="用地特征"]{--category-color:#47704b;--category-tint:#dfead9;--category-ink:#315638}
-#category-buttons .filter[data-category="职业"]{--category-color:#3c6890;--category-tint:#dce9f5;--category-ink:#274f73}
-#category-buttons .filter[data-category="覆盖替换"]{--category-color:#a35530;--category-tint:#f7dfcf;--category-ink:#803b1b}
-#category-buttons .filter[data-category="游戏玩法"]{--category-color:#82651f;--category-tint:#f2e7be;--category-ink:#66501a}
-#category-buttons .filter[data-category="其他"]{--category-color:#765093;--category-tint:#eadff4;--category-ink:#57366f}
+/* 分类入口与卡片标签共用配色，选中按钮加深同一颜色。 */
+[data-category-theme="人物特征"]{--category-color:#9b4361;--category-tint:#f3dfe6;--category-ink:#763047}
+[data-category-theme="用地特征"]{--category-color:#47704b;--category-tint:#dfead9;--category-ink:#315638}
+[data-category-theme="职业"]{--category-color:#3c6890;--category-tint:#dce9f5;--category-ink:#274f73}
+[data-category-theme="覆盖替换"]{--category-color:#a35530;--category-tint:#f7dfcf;--category-ink:#803b1b}
+[data-category-theme="游戏玩法"]{--category-color:#82651f;--category-tint:#f2e7be;--category-ink:#66501a}
+[data-category-theme="其他"]{--category-color:#765093;--category-tint:#eadff4;--category-ink:#57366f}
 #category-buttons .filter{background:var(--category-tint);border-color:var(--category-color);color:var(--category-ink)}
 #category-buttons .filter:hover{box-shadow:inset 0 0 0 1px var(--category-color)}
 #category-buttons .filter.active{background:var(--category-color);color:#fff;box-shadow:inset 0 -3px 0 rgba(0,0,0,.2)}
 #category-buttons .filter:focus-visible{outline-color:var(--category-color)}
+
+.work-card .badge[data-category-theme]{background:var(--category-tint);border:1px solid var(--category-color);color:var(--category-ink)}
+.toolbar .search,.toolbar .filter,.toolbar select{border-radius:10px}

@@ -240,7 +240,7 @@ function dailyPicks(works,count=10){
 
 function dailyCardHtml(work,isClone=false){
   const tabIndex=isClone?'-1':'0';
-  return `<article class="work-card daily-card" tabindex="${tabIndex}" data-id="${esc(work.id)}"><div class="cover"><img src="${esc(work.imageSmall||work.image)}" srcset="${esc(work.imageSmall||work.image)} 480w, ${esc(work.imageLarge||work.image)} 960w" sizes="(max-width:760px) 64vw, 220px" width="3" height="4" alt="${esc(work.title)}&#x5C01;&#x9762;" loading="lazy" decoding="async"><span class="badge">${esc(categoryLabel(work.category))}</span></div><div class="card-meta"><span>${esc(work.author)}</span><time>${dateText(work.modUpdated)}</time></div><h3>${esc(work.title)}</h3><div class="english">${esc(work.englishTitle)}</div></article>`;
+  return `<article class="work-card daily-card" tabindex="${tabIndex}" data-id="${esc(work.id)}"><div class="cover"><img src="${esc(work.imageSmall||work.image)}" srcset="${esc(work.imageSmall||work.image)} 480w, ${esc(work.imageLarge||work.image)} 960w" sizes="(max-width:760px) 64vw, 220px" width="3" height="4" alt="${esc(work.title)}&#x5C01;&#x9762;" loading="lazy" decoding="async"><span class="badge" data-category-theme="${esc(work.category)}">${esc(categoryLabel(work.category))}</span></div><div class="card-meta"><span>${esc(work.author)}</span><time>${dateText(work.modUpdated)}</time></div><h3>${esc(work.title)}</h3><div class="english">${esc(work.englishTitle)}</div></article>`;
 }
 
 function renderDailyPicks(){
@@ -266,7 +266,7 @@ function render(){
   const works=allWorks.slice(start,start+pageSize);
   $('#result-count').textContent=allWorks.length?`显示 ${start+1}–${start+works.length} / ${allWorks.length} 份作品`:`显示 0 / ${state.works.length} 份作品`;
   $('#empty').hidden=allWorks.length>0;
-  $('#work-grid').innerHTML=works.map(work=>`<article class="work-card" tabindex="0" data-id="${esc(work.id)}"><div class="cover"><img src="${esc(work.imageSmall||work.image)}" srcset="${esc(work.imageSmall||work.image)} 480w, ${esc(work.imageLarge||work.image)} 960w" sizes="(max-width:760px) 50vw, (max-width:1100px) 33vw, 17vw" width="3" height="4" alt="${esc(work.title)}封面" loading="lazy" decoding="async"><span class="badge">${esc(categoryLabel(work.category))}</span></div><div class="card-meta"><span>${esc(work.author)}</span><time>${dateText(cardDate(work))}</time></div><h3>${esc(work.title)}</h3><div class="english">${esc(work.englishTitle)}</div></article>`).join('');
+  $('#work-grid').innerHTML=works.map(work=>`<article class="work-card" tabindex="0" data-id="${esc(work.id)}"><div class="cover"><img src="${esc(work.imageSmall||work.image)}" srcset="${esc(work.imageSmall||work.image)} 480w, ${esc(work.imageLarge||work.image)} 960w" sizes="(max-width:760px) 50vw, (max-width:1100px) 33vw, 17vw" width="3" height="4" alt="${esc(work.title)}封面" loading="lazy" decoding="async"><span class="badge" data-category-theme="${esc(work.category)}">${esc(categoryLabel(work.category))}</span></div><div class="card-meta"><span>${esc(work.author)}</span><time>${dateText(cardDate(work))}</time></div><h3>${esc(work.title)}</h3><div class="english">${esc(work.englishTitle)}</div></article>`).join('');
   renderPagination(pageCount);
 }
 
@@ -323,7 +323,7 @@ function setupFilters(){
   renderDailyPicks();
   renderUpdates();
   const categories=['人物特征','用地特征','职业','覆盖替换','游戏玩法','其他'];
-  $('#category-buttons').innerHTML=categories.map(item=>`<button class="filter" data-category="${esc(item)}">${esc(categoryLabel(item))}</button>`).join('');
+  $('#category-buttons').innerHTML=categories.map(item=>`<button class="filter" data-category="${esc(item)}" data-category-theme="${esc(item)}">${esc(categoryLabel(item))}</button>`).join('');
   const authorNames=new Map();
   state.works.map(work=>work.author.trim()).sort().forEach(author=>{
     const key=authorKey(author);
