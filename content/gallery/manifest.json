@@ -371,6 +371,23 @@
       "sha256": "090405620ef4b60b3e6acfaf8019c2166f74fd0e67b1d3c43d98c61470b23056"
     }
   ],
+  "jayesims-tales-of-the-baddest-vixen": [
+    {
+      "file": "jayesims-tales-of-the-baddest-vixen/01-75ec7e7a03fc.webp",
+      "source": "QQ - JayESims - 狐狸精气场_01.png",
+      "sha256": "75ec7e7a03fc627dcc0f183392c7238c2bd26ae2df49bb06f7d9579beb60814a"
+    },
+    {
+      "file": "jayesims-tales-of-the-baddest-vixen/02-b38e95815be8.webp",
+      "source": "QQ - JayESims - 狐狸精气场_02.png",
+      "sha256": "b38e95815be860ca676ee381883bbca149f45e71c5934d2a672c78f6a56c4662"
+    },
+    {
+      "file": "jayesims-tales-of-the-baddest-vixen/03-2a62d6529166.webp",
+      "source": "QQ - JayESims - 狐狸精气场_03.png",
+      "sha256": "2a62d65291662b8fb7ebec3174d12f4f4d055d9794af402686444748897f99ba"
+    }
+  ],
   "jayesims-teen-mom-reality": [
     {
       "file": "jayesims-teen-mom-reality/01-60f1aee6e59b.webp",
@@ -381,6 +398,18 @@
       "file": "jayesims-teen-mom-reality/02-847dd668ce9a.webp",
       "source": "QQ - JayESims - TeenMomReality - 年轻妈妈实录_02.png",
       "sha256": "847dd668ce9a2d906e59ff9bf18811860eb2159684757c4ba82b501584d8631e"
+    }
+  ],
+  "jayesims-that-1-fine-uncle": [
+    {
+      "file": "jayesims-that-1-fine-uncle/01-4a0571daf886.webp",
+      "source": "QQ - JayESims - 帅叔叔_01.png",
+      "sha256": "4a0571daf886ca1531ac3fad4ed0d4ba99974de35575e43978c0a41322cdaacc"
+    },
+    {
+      "file": "jayesims-that-1-fine-uncle/02-f9bf9db7312e.webp",
+      "source": "QQ - JayESims - 帅叔叔_02.png",
+      "sha256": "f9bf9db7312e3823096d27e8f4257dc70b18b86960d52a5c29f8ac4e63e905d9"
     }
   ],
   "jayesims-the-luxury-estate-lot-trait-mod": [
@@ -415,6 +444,18 @@
       "file": "jayesims-the-sneaky-link-energy/03-2b257785fefb.webp",
       "source": "QQ - JayESims - The Sneaky Link Energy - 地下情人_03.png",
       "sha256": "2b257785fefbf26ab9f84c95839be0e1f44b0080a1e9bddbf56ab91a3367ce5e"
+    }
+  ],
+  "jayesims-the-step-mother-from-hell": [
+    {
+      "file": "jayesims-the-step-mother-from-hell/01-7166bdd8f10a.webp",
+      "source": "QQ - JayESims - 邪恶继母_01.png",
+      "sha256": "7166bdd8f10a546af25f596306ce999cf748d4518ed01394c86858e8e69a1e7a"
+    },
+    {
+      "file": "jayesims-the-step-mother-from-hell/02-78d0d802fa34.webp",
+      "source": "QQ - JayESims - 邪恶继母_02.png",
+      "sha256": "78d0d802fa34871debe421048533f80a364dda54317cfe78fcd1ed27c893776a"
     }
   ],
   "jayesims-we-cant-be-friends-2": [
