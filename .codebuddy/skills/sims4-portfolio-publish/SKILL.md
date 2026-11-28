@@ -6,7 +6,7 @@ agent_created: true
 
 # 湫湫 Sims 汉化档案馆发布
 
-项目根：`E:\模拟人生4 湫湫Sims日志作品集网站`
+项目根：`D:\湫湫Sims日志作品集网站`
 仓库：`https://github.com/niuai-ui/qiuqiu-portfolio.git`（`main`）
 线上：`https://niuai-ui.github.io/qiuqiu-portfolio/`
 
@@ -28,7 +28,7 @@ agent_created: true
 逐项执行 `AGENTS.md` 第 2 节：检查并同步 Git、修改目标、同步画廊、完整预检、精确暂存、提交推送、等待 Pages、线上核对和确认工作区状态。任一检查失败时停止提交或推送。
 
 - WorkBuddy 可使用 `C:\Users\Administrator\.workbuddy\binaries\python\envs\default\Scripts\python.exe`；Git 可使用 `C:\Program Files\Git\cmd\git.exe`。
-- 仅在旧 `dist/` 被 safe-delete 钩子误拦截、且确认路径是本项目输出目录时，运行 `python tools/purge_dist.py "E:\模拟人生4 湫湫Sims日志作品集网站\dist"`，随后重新运行完整预检。该脚本拒绝其他目标及重解析点。
+- 仅在旧 `dist/` 被 safe-delete 钩子误拦截、且确认路径是本项目输出目录时，运行 `python tools/purge_dist.py "D:\湫湫Sims日志作品集网站\dist"`，随后重新运行完整预检。该脚本拒绝其他目标及重解析点。
 - 线上数据使用 Python `urllib` 或等效程序化请求，给 `data.json` 加时间戳查询参数，核对目标字段与总数。不要只依据浏览器缓存或网页抓取摘要判定成功。
 
 ## 交付口径

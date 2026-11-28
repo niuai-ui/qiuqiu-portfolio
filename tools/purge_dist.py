@@ -12,7 +12,7 @@ from ctypes import wintypes
 from pathlib import Path
 
 
-PROJECT_ROOT = Path(r"E:\模拟人生4 湫湫Sims日志作品集网站")
+PROJECT_ROOT = Path(r"D:\湫湫Sims日志作品集网站")
 ALLOWED_TARGET = PROJECT_ROOT / "dist"
 FILE_ATTRIBUTE_REPARSE_POINT = 0x0400
 INVALID_FILE_ATTRIBUTES = 0xFFFFFFFF

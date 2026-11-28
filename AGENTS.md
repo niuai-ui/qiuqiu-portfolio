@@ -179,7 +179,7 @@ Codex 决定问题应修改规则、修补脚本、更新现有 Skill，还是�
 
 如 WorkBuddy 的 safe-delete 钩子误拦截旧 `dist/`，只允许执行：
 
-`python tools/purge_dist.py "E:\模拟人生4 湫湫Sims日志作品集网站\dist"`
+`python tools/purge_dist.py "D:\湫湫Sims日志作品集网站\dist"`
 
 随后必须重新运行完整 preflight。该脚本不得用于其他路径，也不得复制后用于清理其他目录。
 
