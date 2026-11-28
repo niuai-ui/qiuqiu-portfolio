@@ -13,6 +13,15 @@ from check_sync import check_sync
 from sync_gallery import check_gallery_sync
 
 
+def check_workbook_backups() -> None:
+    misplaced = sorted(path.name for path in ROOT.glob("_bak_作品信息_*.xlsx") if path.is_file())
+    if misplaced:
+        raise ValueError(
+            "项目根目录发现工作簿备份，请将其原样移入 .workbuddy/backups/workbook/ 后重试："
+            + "、".join(misplaced)
+        )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="统一执行作品集发布前检查和静态构建。")
     parser.add_argument(
@@ -24,6 +33,7 @@ def main() -> None:
 
     for source in sorted((ROOT / "tools").glob("*.py")):
         compile(source.read_bytes(), str(source), "exec")
+    check_workbook_backups()
     if not args.skip_sync:
         check_sync()
         check_gallery_sync()

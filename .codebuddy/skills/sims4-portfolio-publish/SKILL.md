@@ -20,14 +20,10 @@ agent_created: true
 
 ## 数据操作
 
-- PowerShell 下需要创建修改前快照时，用以下命令。重试同一次编辑时，使用之前记录的快照路径。
+- 从仓库根目录运行以下命令并记录输出的快照路径，再用表格工具或脚本写入 Excel。重试同一次编辑时，使用之前记录的快照路径。
 
-  ```powershell
-  $backupDir = New-Item -ItemType Directory -Force -Path '.workbuddy/backups/workbook'
-  $snapshot = Join-Path $backupDir.FullName "_bak_作品信息_$(Get-Date -Format yyyyMMdd_HHmmss).xlsx"
-  if (Test-Path -LiteralPath $snapshot) { throw "快照已存在，换一个时间戳：$snapshot" }
-  Copy-Item -LiteralPath '作品信息.xlsx' -Destination $snapshot -ErrorAction Stop
-  $snapshot
+  ```text
+  python tools/backup_workbook.py
   ```
 
 - 新增行时可复制工作表第 2 行的格式与行高，再填入新值。程序化编辑后重新打开保存的文件核对。
