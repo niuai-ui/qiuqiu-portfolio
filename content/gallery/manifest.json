@@ -876,6 +876,18 @@
       "sha256": "5948eb22e728664ce02e899d1aa71d7ebe2836a12c66541f4b96b8304dd77a76"
     }
   ],
+  "wicked-pixxel-approval-seeker-v2": [
+    {
+      "file": "wicked-pixxel-approval-seeker-v2/01-8b0559cbd3be.webp",
+      "source": "QQ - WICKED PIXXEL - Approval Seeker v2 - 渴望认可_01.png",
+      "sha256": "8b0559cbd3beaad34c5cf7d92f71cdd3d384fd4d9fdf882eebdc2565330b2dd8"
+    },
+    {
+      "file": "wicked-pixxel-approval-seeker-v2/02-5606426a5700.webp",
+      "source": "QQ - WICKED PIXXEL - Approval Seeker v2 - 渴望认可_02.png",
+      "sha256": "5606426a5700d4dfe1620bb710ac83032e4a0b8e7e415785490cac11beddcad8"
+    }
+  ],
   "wicked-pixxel-can-t-buy-love-v2": [
     {
       "file": "wicked-pixxel-can-t-buy-love-v2/01-805284fb1c75.webp",
@@ -932,6 +944,23 @@
       "file": "wicked-pixxel-deep-sleeper-v2/03-ab5408230603.webp",
       "source": "QQ - WICKED PIXXEL - Deep Sleeper V2 - 深度睡眠者_03.png",
       "sha256": "ab54082306035feaad257c91e5d693fe1e422ddc750061a2418e0449d1a740c1"
+    }
+  ],
+  "wicked-pixxel-emotional-sponge-v2": [
+    {
+      "file": "wicked-pixxel-emotional-sponge-v2/01-be38c4ef19fe.webp",
+      "source": "QQ - WICKED PIXXEL - Emotional Sponge v2 - 会传染的情绪_01.png",
+      "sha256": "be38c4ef19fe89d6c8a283487c9fb054c3949155b9df4cce027acd4a39f7a485"
+    },
+    {
+      "file": "wicked-pixxel-emotional-sponge-v2/02-5d70fec734b7.webp",
+      "source": "QQ - WICKED PIXXEL - Emotional Sponge v2 - 会传染的情绪_02.png",
+      "sha256": "5d70fec734b70fa33585ff669ff45e6d1f05b8deb0c00b95c345b78933828d62"
+    },
+    {
+      "file": "wicked-pixxel-emotional-sponge-v2/03-ef43fa81d480.webp",
+      "source": "QQ - WICKED PIXXEL - Emotional Sponge v2 - 会传染的情绪_03.png",
+      "sha256": "ef43fa81d4804af49fd66f17c303a1b639532771c373a3ba40d79240b7b28d3f"
     }
   ],
   "wicked-pixxel-exquisite-taste-trait-v2": [
@@ -1024,6 +1053,23 @@
       "file": "wicked-pixxel-peaceful-v2/02-4aacbecb89ae.webp",
       "source": "QQ - WICKED PIXXEL - Peaceful v2 - 调停者_02.png",
       "sha256": "4aacbecb89aeb72b20e543a02547e67ca8a487e475cebc6c72f7bd3ca66773c1"
+    }
+  ],
+  "wicked-pixxel-random-teen-buffs-v2": [
+    {
+      "file": "wicked-pixxel-random-teen-buffs-v2/01-d58002a760b8.webp",
+      "source": "QQ - WICKED PIXXEL - Random Teen Buffs v2 - 随机青少年情绪_01.png",
+      "sha256": "d58002a760b8c2358ebd704d985136de0cd8c4f49beebaaf23c2005d6f180545"
+    },
+    {
+      "file": "wicked-pixxel-random-teen-buffs-v2/02-bdf14c46c37a.webp",
+      "source": "QQ - WICKED PIXXEL - Random Teen Buffs v2 - 随机青少年情绪_02.png",
+      "sha256": "bdf14c46c37a7d2358b969837eda5f60d24cf337575e19c6cbaee262622082d4"
+    },
+    {
+      "file": "wicked-pixxel-random-teen-buffs-v2/03-26717a1ce0e3.webp",
+      "source": "QQ - WICKED PIXXEL - Random Teen Buffs v2 - 随机青少年情绪_03.png",
+      "sha256": "26717a1ce0e316c6d6a58910e480be37b2d4f8716c2501401d952978cefeb7b4"
     }
   ],
   "wicked-pixxel-romantic-tease-v2": [
