@@ -1,5 +1,6 @@
 dist/
 ~$*.xlsx
+/_bak_作品信息_*.xlsx
 *.inspect.ndjson
 __pycache__/
 .workbuddy/

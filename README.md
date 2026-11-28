@@ -13,12 +13,15 @@
 
 Codex 与 WorkBuddy 共用根目录的 `AGENTS.md` 作为唯一项目规则入口。网站发布 Skill 位于 WorkBuddy 官方项目级目录 `.codebuddy/skills/sims4-portfolio-publish/`，会被自动发现，不应移到普通根目录 `skills/`。
 
+历史 Excel 快照可以在本机的 `.workbuddy/backups/workbook/` 找到。平时编辑项目最外层的 `作品信息.xlsx`。
+
 只有状态为“已发布”的作品会出现在网站。“模组本体链接”填写模组自己的官方发布页；百度网盘链接可以随时在 Excel 中更新。尚无地址时保留空白，不得编造。“上新日期”只记录作品首次加入网站，之后保持不变；“模组更新日期”记录原版模组更新；“汉化更新日期”只在汉化文件变化时更新。新增记录的三个日期初始相同，并且必须复制标准数据行格式、保持行高 36，预检会拦截格式不一致的行。
 
 ## 手动检查
 
 ```text
 python -m pip install -r requirements.txt
+python tools/check_sync.py
 python tools/sync_gallery.py
 python tools/preflight.py
 ```
